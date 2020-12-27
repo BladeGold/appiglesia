@@ -76,6 +76,8 @@
                                 button: true,
                             })
                         });
+                    }else{
+                        swal("¡Acción cancelada");
                     }
 
                 });

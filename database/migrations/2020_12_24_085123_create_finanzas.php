@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFinanzaActivo extends Migration
+class CreateFinanzas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFinanzaActivo extends Migration
      */
     public function up()
     {
-        Schema::create('finanza_activo', function (Blueprint $table) {
+        Schema::create('finanzas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('iglesia_id');
             $table->foreign('iglesia_id')
@@ -22,6 +22,7 @@ class CreateFinanzaActivo extends Migration
                 ->onDelete('cascade');
             $table->unsignedInteger('monto');
             $table->dateTime('fecha');
+            $table->enum('tipo', ['Activo', 'Pasivo']);
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreateFinanzaActivo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('finanza_activo');
+        Schema::dropIfExists('finanzas');
     }
 }
