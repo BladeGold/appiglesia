@@ -78,6 +78,7 @@ class IglesiaController extends Controller
 
         $miembros=Iglesia::findOrFail($id)->Miembros;
         
+        
 
       return view('iglesias.show', compact('iglesia','pastor','miembros'));
     }

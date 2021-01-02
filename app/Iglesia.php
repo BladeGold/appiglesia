@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Iglesia extends Model
 {
     protected $primaryKey = 'id';
@@ -20,6 +21,10 @@ class Iglesia extends Model
         return $this->belongsToMany(User::class)->withTimestamps();
     }
 
+    public function Finanzas(){
+        return $this->hasMany(Finanza::class);
+    }
+
     public function asignarIglesia($id){
         $this->Miembros()->sync($id, false);
 
@@ -29,5 +34,7 @@ class Iglesia extends Model
         $this->Miembros()->detach($id);
 
     }
+
+    
     
 }

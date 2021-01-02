@@ -57,44 +57,7 @@
 
     
 
-    function tipo_finanza(id) {
-        if(id == "activo"){
-            document.getElementById("activo").removeAttribute("hidden");
-            document.getElementById("fecha_activo").disabled=false;
-           document.getElementById("monto_activo").disabled=false;
-           document.getElementById("pasivo").hidden=true;
-           document.getElementById("fecha_pasivo").disabled=true;
-           document.getElementById("monto_pasivo").disabled=true;
-           document.getElementById("boton").removeAttribute("hidden");
-        }
-        if(id == "pasivo"){
-            document.getElementById("pasivo").removeAttribute("hidden");
-            document.getElementById("fecha_pasivo").disabled=false;
-           document.getElementById("monto_pasivo").disabled=false;
-            document.getElementById("activo").hidden=true;
-            document.getElementById("fecha_activo").disabled=true;
-           document.getElementById("monto_activo").disabled=true;
-            document.getElementById("boton").removeAttribute("hidden");
-        }
-        if(id== "ambos"){
-            document.getElementById("activo").removeAttribute("hidden");
-            document.getElementById("pasivo").removeAttribute("hidden");
-            document.getElementById("boton").removeAttribute("hidden");
-            document.getElementById("fecha_pasivo").disabled=false;
-           document.getElementById("monto_pasivo").disabled=false;
-           document.getElementById("fecha_activo").disabled=false;
-           document.getElementById("monto_activo").disabled=false;
-        }
-        if(id == "select"){
-            document.getElementById("activo").hidden= true;
-            document.getElementById("fecha_activo").disabled=true;
-           document.getElementById("monto_activo").disabled=true;
-            document.getElementById("pasivo").hidden= true;
-            document.getElementById("fecha_pasivo").disabled=true;
-           document.getElementById("monto_pasivo").disabled=true;
-            document.getElementById("boton").hidden = true;
-        }
-    }
+    
     
     
 $(document).ready(function()

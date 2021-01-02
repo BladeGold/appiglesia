@@ -250,7 +250,7 @@
                                 @endcan
                                 @can('finanzas.show')
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('finanzas.show', Auth::user()->Pertenece->pluck('id')->last() )}}" class="nav-link">
                                       <i class="far fa-circle nav-icon"></i>
                                       <p>Ver Registro Financiero</p>
                                     </a>
