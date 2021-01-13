@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'role'       => \Caffeinated\Shinobi\Middleware\UserHasRole::class,
         
         'ValidateDate' => \App\Http\Middleware\ValidateDate::class,
+        'ValidateFinanza' => \App\Http\Middleware\ValidateFinanza::class,
         'sweetalert' => \UxWeb\SweetAlert\ConvertMessagesIntoSweetAlert::class,
         
     ];

@@ -48,12 +48,48 @@
 $(document).ready(function(){
     $('#tipo_select').change(function(){
         var  tipo =  $(this).val();
-        if(tipo == 'activo' || 'pasivo'){
+        if(tipo == 'activo'){
+            
             $('#categorias').removeAttr('hidden');
             $('#boton').removeAttr('hidden');
-            $('#title').html('Finanzas de tipo '+tipo);
+            $('#title').html('Finanzas de tipo '+tipo+ ' (ingresos)');
+
+            var  activos = document.querySelectorAll('.finanza');
+            var  pasivos = document.querySelectorAll('.pasivo');
+
+            pasivos.forEach(element=>{
+                element.hidden=true;
+            });
+
+            activos.forEach(element=>{
+                element.hidden=false;
+            });
+
+            
+
+           
         }
+        if(tipo == 'pasivo'){
+            $('#categorias').removeAttr('hidden');
+            $('#boton').removeAttr('hidden');
+            $('#title').html('Finanzas de tipo '+tipo+ ' (egresos)' );
+
+            var  activos = document.querySelectorAll('.finanza');
+            var  pasivos = document.querySelectorAll('.pasivo');
+
+            activos.forEach(element=>{
+                element.hidden=true;
+            });
+            pasivos.forEach(element=>{
+                element.hidden=false;
+            });
+        }
+       
         if(tipo == 'null'){
+            var label = document.querySelectorAll('.finanza');
+            label.forEach(element=>{
+                element.hidden=true;
+            });
             document.getElementById('categorias').hidden=true;
             document.getElementById('boton').hidden=true;
             $('#title').html(''); 
@@ -76,8 +112,8 @@ $(document).ready(function(){
             element.disabled=true;
             });
 
-        document.getElementById($(this).val()).hidden=true;
-        document.getElementById($(this).val()).disabled=true;
+        
+        
         
     }
     });

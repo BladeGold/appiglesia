@@ -7,7 +7,7 @@
         <a type="button" class="btn btn-sm btn-success float-right" href="{{route('roles.create')}}">Crear Rol</a>
             <h2>Lista de usuarios registrados</h2> 
 
-      
+            <div class="row justify-content-center">
             
 
         <table class="table table-bordered  dt-responsive nowrap" id="data_table" style="" >
@@ -33,7 +33,7 @@
                    
                 </tbody>
             </table>
-
+            </div>
     </div>
 
 

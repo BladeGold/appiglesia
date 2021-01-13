@@ -126,7 +126,7 @@ class AdminController extends Controller
                 
                 $user->syncRoles($rol->slug);
                 alert()->success('', '¡Actualización Exitosa!');
-            return redirect()->route('admin.edit', ['users', $id]);
+            return redirect()->route('users.index');
             
             case '':
                 

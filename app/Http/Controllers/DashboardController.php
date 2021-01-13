@@ -43,11 +43,9 @@ class DashboardController extends Controller
         else{
             
             $iglesia=Auth::user()->Pertenece->last();
-            $iglesia_id= $iglesia->id;
-            $id=Auth::user()->id;
-            
-            $pastor=User::whereHas('Pertenece', function($query) use($iglesia_id) {
-                $query->where('iglesia_id', $iglesia_id);
+        
+            $pastor=User::whereHas('Pertenece', function($query) use($iglesia) {
+                $query->where('iglesia_id', $iglesia->id);
             })->whereHas('roles', function($query){
                     $query->where('name','Pastor');
                  })->get()->last();

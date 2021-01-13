@@ -16,7 +16,7 @@
             
             
         <div class="card border-primary mb-3" >
-            <div class="card-header">Usted es Miembro en <strong> Iglesia de Dios de la Profecía en  </strong></div>
+            <div class="card-header">Usted es Miembro en <strong> Iglesia de Dios de la Profecía en  {{$iglesia->name}}</strong></div>
          
 
                 <div class="card-body text-primary">
@@ -65,7 +65,7 @@
                         <div class="inner">
                             <h3>44</h3>
 
-                            <p>User Registrations</p>
+                            <p>Notificaciones</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>

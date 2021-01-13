@@ -108,6 +108,12 @@ Route::middleware(['auth'])->group(function(){
     Route::get('finanzas/create', 'FinanzaController@create')->name('finanzas.create')
         ->middleware('can:finanzas.create');
 
+    Route::get('finanzas/inicial', 'FinanzaController@inicial')->name('finanzas.inicial')
+        ->middleware('can:finanzas.create');
+
+    Route::get('finanzas/balance', 'FinanzaController@balance')->name('finanzas.balance')
+        ->middleware('can:finanzas.create');
+
     Route::put('finanzas/{finanza}', 'FinanzaController@update')->name('finanzas.update')
         ->middleware('can:finanzas.edit');
 

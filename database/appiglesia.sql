@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3307
--- Tiempo de generación: 24-12-2020 a las 04:26:53
+-- Tiempo de generación: 13-01-2021 a las 12:48:11
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.4.7
 
@@ -24,6 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `balance`
+--
+
+CREATE TABLE `balance` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `iglesia_id` bigint(20) UNSIGNED NOT NULL,
+  `monto` int(10) UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `failed_jobs`
 --
 
@@ -39,32 +54,29 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `finanza_activo`
+-- Estructura de tabla para la tabla `finanzas`
 --
 
-CREATE TABLE `finanza_activo` (
+CREATE TABLE `finanzas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `iglesia_id` bigint(20) UNSIGNED NOT NULL,
+  `categoria` enum('Diezmo_Total','Diezmo_Pastor','Diezmo_Ministro','Damas','Jovenes','Niños','DLD','Caballeros','Patrimonio_Historico','Domingo_2','Domingo_3','Domingo_4','Impulso_Mundial','Impulso_Nacional','Tabernaculo_Nacional','Pago_Prestamos','Otros_Propositos','Diezmo_Restante','Fondo_Local') COLLATE utf8mb4_unicode_ci NOT NULL,
   `monto` int(10) UNSIGNED NOT NULL,
-  `fecha` datetime NOT NULL,
+  `fecha` date NOT NULL,
+  `descripcion` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo` enum('Activo','Pasivo','Inicial') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `finanza_pasivo`
+-- Volcado de datos para la tabla `finanzas`
 --
 
-CREATE TABLE `finanza_pasivo` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `iglesia_id` bigint(20) UNSIGNED NOT NULL,
-  `monto` int(10) UNSIGNED NOT NULL,
-  `fecha` datetime NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `finanzas` (`id`, `iglesia_id`, `categoria`, `monto`, `fecha`, `descripcion`, `tipo`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Damas', 5000, '2020-12-10', NULL, 'Activo', NULL, NULL),
+(2, 1, 'Damas', 1000, '2020-12-10', NULL, 'Pasivo', NULL, NULL),
+(3, 1, 'Damas', 2000, '2021-05-13', NULL, 'Inicial', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -140,8 +152,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (24, '2020_12_16_052506_create_users_date', 1),
 (25, '2020_12_16_052638_create_iglesias', 1),
 (26, '2020_12_16_052739_create_iglesia_user', 1),
-(27, '2020_12_16_052829_create_finanza_activo', 1),
-(28, '2020_12_16_052909_create_finanza_pasivo', 1);
+(32, '2020_12_24_085123_create_finanzas', 2),
+(33, '2021_01_13_090743_create_balance', 3);
 
 -- --------------------------------------------------------
 
@@ -326,7 +338,7 @@ CREATE TABLE `role_user` (
 INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (3, 1, 10, '2020-12-18 02:13:18', '2020-12-18 02:13:18'),
 (15, 4, 14, '2020-12-22 08:51:51', '2020-12-22 08:51:51'),
-(16, 2, 16, '2020-12-24 04:27:25', '2020-12-24 04:27:25');
+(17, 3, 16, '2021-01-09 00:26:12', '2021-01-09 00:26:12');
 
 -- --------------------------------------------------------
 
@@ -357,7 +369,7 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `email_verified_at`, `i
 (12, 'Ing. lidia cavazos segundo', 'Manuel pedroza', 'hvillalba@example.org', '2020-12-20 03:53:20', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1YyhayGEFc', '2020-12-20 03:53:20', '2020-12-20 03:53:20'),
 (14, 'Ainara', 'De la cruz', 'montalvo.omar@example.org', '2020-12-20 04:04:21', 'default.png', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'lvSeWoaRO4', '2020-12-20 04:04:22', '2020-12-20 04:04:22'),
 (15, 'Miguel', 'Robles', 'asisneros@example.net', '2020-12-20 04:04:21', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6jYUGVFln8', '2020-12-20 04:04:22', '2020-12-20 04:04:22'),
-(16, 'Eduardoo', 'Fonsecaaa', 'eduardo@mail.com', NULL, 'default.png', '$2y$10$VsTPFxXF3AbmoogszUoePeW0z/9zIzXdGJ.thT2lnlyjSKN.uo1EO', 'mrqlM8ojeEYTPxrDDFkOkw57MDFBDT5ueVdCtUkXVynqOyRgjbfAxvgK7n7l', '2020-12-24 04:27:25', '2020-12-24 06:13:29');
+(16, 'Eduardoo', 'Fonsecaaa', 'eduardo@mail.com', NULL, 'default.png', '$2y$10$VsTPFxXF3AbmoogszUoePeW0z/9zIzXdGJ.thT2lnlyjSKN.uo1EO', 'omRZ3xTRj2GZqVExFJMTXzoNMnUFEvxXNleRpkIOlMRVJPkXFSBRPOqkyeMm', '2020-12-24 04:27:25', '2020-12-24 06:13:29');
 
 -- --------------------------------------------------------
 
@@ -394,24 +406,24 @@ INSERT INTO `users_date` (`user_id`, `fecha_nacimiento`, `lugar_nacimiento`, `te
 --
 
 --
+-- Indices de la tabla `balance`
+--
+ALTER TABLE `balance`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `balance_iglesia_id_foreign` (`iglesia_id`);
+
+--
 -- Indices de la tabla `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `finanza_activo`
+-- Indices de la tabla `finanzas`
 --
-ALTER TABLE `finanza_activo`
+ALTER TABLE `finanzas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `finanza_activo_iglesia_id_foreign` (`iglesia_id`);
-
---
--- Indices de la tabla `finanza_pasivo`
---
-ALTER TABLE `finanza_pasivo`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `finanza_pasivo_iglesia_id_foreign` (`iglesia_id`);
+  ADD KEY `finanzas_iglesia_id_foreign` (`iglesia_id`);
 
 --
 -- Indices de la tabla `iglesias`
@@ -497,28 +509,28 @@ ALTER TABLE `users_date`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `balance`
+--
+ALTER TABLE `balance`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `finanza_activo`
+-- AUTO_INCREMENT de la tabla `finanzas`
 --
-ALTER TABLE `finanza_activo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `finanza_pasivo`
---
-ALTER TABLE `finanza_pasivo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `finanzas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `iglesias`
 --
 ALTER TABLE `iglesias`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `iglesia_user`
@@ -530,7 +542,7 @@ ALTER TABLE `iglesia_user`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `permissions`
@@ -554,13 +566,13 @@ ALTER TABLE `permission_user`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -573,16 +585,16 @@ ALTER TABLE `users`
 --
 
 --
--- Filtros para la tabla `finanza_activo`
+-- Filtros para la tabla `balance`
 --
-ALTER TABLE `finanza_activo`
-  ADD CONSTRAINT `finanza_activo_iglesia_id_foreign` FOREIGN KEY (`iglesia_id`) REFERENCES `iglesias` (`id`) ON DELETE CASCADE;
+ALTER TABLE `balance`
+  ADD CONSTRAINT `balance_iglesia_id_foreign` FOREIGN KEY (`iglesia_id`) REFERENCES `iglesias` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `finanza_pasivo`
+-- Filtros para la tabla `finanzas`
 --
-ALTER TABLE `finanza_pasivo`
-  ADD CONSTRAINT `finanza_pasivo_iglesia_id_foreign` FOREIGN KEY (`iglesia_id`) REFERENCES `iglesias` (`id`) ON DELETE CASCADE;
+ALTER TABLE `finanzas`
+  ADD CONSTRAINT `finanzas_iglesia_id_foreign` FOREIGN KEY (`iglesia_id`) REFERENCES `iglesias` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `iglesia_user`

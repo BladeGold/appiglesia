@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFinanzas extends Migration
+class CreateBalance extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateFinanzas extends Migration
      */
     public function up()
     {
-        Schema::create('finanzas', function (Blueprint $table) {
+        Schema::create('balance', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('iglesia_id');
             $table->foreign('iglesia_id')
                 ->references('id')
                 ->on('iglesias')
                 ->onDelete('cascade');
-            $table->enum('categoria', ['Diezmo_Total','Diezmo_Pastor','Diezmo_Ministro' ,'Damas','Jovenes','Niños','DLD','Caballeros', 'Patrimonio_Historico','Domingo_2','Domingo_3','Domingo_4','Impulso_Mundial','Impulso_Nacional','Tabernaculo_Nacional','Pago_Prestamos','Otros_Propositos','Diezmo_Restante','Fondo_Local']);    
             $table->unsignedInteger('monto');
             $table->date('fecha');
-            $table->string('descripcion')->nullable();
-            $table->enum('tipo', ['Activo', 'Pasivo','Inicial']);
             $table->timestamps();
         });
     }
@@ -36,6 +33,6 @@ class CreateFinanzas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('finanzas');
+        Schema::dropIfExists('balance');
     }
 }

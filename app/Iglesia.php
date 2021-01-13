@@ -24,6 +24,9 @@ class Iglesia extends Model
     public function Finanzas(){
         return $this->hasMany(Finanza::class);
     }
+    public function Balances(){
+        return $this->hasMany(Balance::class);
+    }
 
     public function asignarIglesia($id){
         $this->Miembros()->sync($id, false);

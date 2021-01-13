@@ -8,7 +8,7 @@
             <h2>Lista de usuarios registrados</h2> 
 
       
-
+            <div class="row justify-content-center">
         <table class="table table-bordered  dt-responsive nowrap" id="data_table" style="" >
                 <thead class="thead-dark">
                 <tr>
@@ -33,7 +33,7 @@
                    
                 </tbody>
             </table>
-
+            </div>
     </div>
 
 
