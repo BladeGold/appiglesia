@@ -141,16 +141,43 @@ class FinanzaController extends Controller
         $date = Carbon::now()->subMonth(1);
         $mes = $date->format('m');
         
-        
-        $pasivos = $iglesia->Finanzas()->where('tipo','=','pasivo')->whereMonth('fecha','=',$mes)->get();
-        $activos = $iglesia->Finanzas()->where('tipo','=','activo')->whereMonth('fecha','=',$mes)->get();
-        $inicial = $iglesia->Finanzas()->where('tipo', '=', 'inicial')->get();
+        $finanzas=[
+            'pasivos'=>[],
+            'activos' =>[],
+            'inicial'=>[],
+        ];
+        $pasivos = $iglesia->Finanzas()->where('tipo','=','pasivo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria');
+        $activos = $iglesia->Finanzas()->where('tipo','=','activo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria');
+        $inicial = $iglesia->Finanzas()->where('tipo', '=', 'inicial')->pluck('monto','categoria');
+
        
-        foreach ($pasivos as $value) {
-            echo $value->id;
+       
+        foreach ($pasivos as $key => $value) {
+            
+            $finanzas['pasivos'][$key] = $value;
 
         };
        
+        foreach ($activos as $key => $value) {
+            $finanzas['activos'][$key] = $value;
+
+        };
+       
+        foreach ($inicial as $key => $value) {
+            $finanzas['inicial'][$key] = $value;
+
+        };
+
+        foreach ($finanzas as $key => $value) {
+            
+            //dd($value);
+        }
+        
+
+        //seguir buscando en las funciones array
+        echo "<pre>";
+       print_r($finanzas);
+       echo "<pre>";
 
         
         
