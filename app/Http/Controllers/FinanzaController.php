@@ -127,8 +127,8 @@ class FinanzaController extends Controller
      */
     public function show($id)
     {
-        $iglesia = Iglesia::find($id);
-        $finanzas = $iglesia->Finanzas;
+        $iglesia = $this->getUserIglesia();
+        $finanzas = $iglesia->Finanzas();
         $categorias = $this->categorias;
 
         
@@ -136,52 +136,48 @@ class FinanzaController extends Controller
         return view('finanzas.show', compact('finanzas', 'categorias','iglesia') );
     }
 
-    public function balance()
-    {   $iglesia = $this->getUserIglesia();
-        $date = Carbon::now()->subMonth(1);
-        $mes = $date->format('m');
+    public function balanceInicial()
+    {   
+        $categorias= $this->categorias;
+        $iglesia = $this->getUserIglesia();
+        $mes = Carbon::now()->subMonth(1)->format('m');
         
-        $finanzas=[
-            'pasivos'=>[],
-            'activos' =>[],
-            'inicial'=>[],
-        ];
-        $pasivos = $iglesia->Finanzas()->where('tipo','=','pasivo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria');
-        $activos = $iglesia->Finanzas()->where('tipo','=','activo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria');
-        $inicial = $iglesia->Finanzas()->where('tipo', '=', 'inicial')->pluck('monto','categoria');
+           
 
-       
-       
-        foreach ($pasivos as $key => $value) {
+        foreach ( $iglesia->Finanzas()->where('tipo','=','pasivo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria') as $key => $value) {
             
-            $finanzas['pasivos'][$key] = $value;
-
-        };
-       
-        foreach ($activos as $key => $value) {
-            $finanzas['activos'][$key] = $value;
-
-        };
-       
-        foreach ($inicial as $key => $value) {
-            $finanzas['inicial'][$key] = $value;
-
-        };
-
-        foreach ($finanzas as $key => $value) {
-            
-            //dd($value);
+            $finanzas['pasivos'][$key] = $value;    
         }
-        
 
-        //seguir buscando en las funciones array
-        echo "<pre>";
-       print_r($finanzas);
-       echo "<pre>";
+        foreach ($iglesia->Finanzas()->where('tipo','=','activo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria') as $key => $value) {
+            
+            $finanzas['activos'][$key] = $value;    
+        }
 
-        
-        
+        foreach ($iglesia->Finanzas()->where('tipo', '=', 'inicial')->pluck('monto','categoria') as $key => $value) {
+            
+            $finanzas['iniciales'][$key] = $value;    
+        }
+
+     foreach ($categorias as $key => $value) {
+        if(isset($finanzas['pasivos'][$key])){
+            if (isset($finanzas['activos'][$key])){
+                
+                if(isset($finanzas['iniciales'][$key])){
+                    $balanceInicial[$key]= $finanzas['activos'][$key] * 0.5 + $finanzas['iniciales'][$key] -  $finanzas['pasivos'][$key];
+
+
+                    echo $finanzas['activos'][$key] .'* 0.5 +'. $finanzas['iniciales'][$key].'-'.  $finanzas['pasivos'][$key]."=". $balanceInicial[$key] ."<br>";
+
+                }
+            }
+
+        } 
+     }
+
+     print_r($balanceInicial);
     }
+
 
     /**
      * Show the form for editing the specified resource.
