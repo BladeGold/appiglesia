@@ -20,7 +20,7 @@ class CreateFinanzas extends Migration
                 ->references('id')
                 ->on('iglesias')
                 ->onDelete('cascade');
-            $table->enum('categoria', ['Diezmo_Total','Diezmo_Pastor','Diezmo_Ministro' ,'Damas','Jovenes','Niños','DLD','Caballeros', 'Patrimonio_Historico','Domingo_2','Domingo_3','Domingo_4','Impulso_Mundial','Impulso_Nacional','Tabernaculo_Nacional','Pago_Prestamos','Otros_Propositos','Diezmo_Restante','Fondo_Local']);    
+            $table->enum('categoria', ['Diezmo_Total','Diezmo_Pastor','Diezmo_Ministros' ,'Damas','Jovenes','Ninos','DLD','Caballeros', 'Patrimonio_Historico','Domingo_2','Domingo_3','Domingo_4','Impulso_Mundial','Impulso_Nacional','Tabernaculo_Nacional','Pago_Prestamos','Otros_Propositos','Diezmo_Restante','Fondo_Local']);    
             $table->unsignedInteger('monto');
             $table->date('fecha');
             $table->string('descripcion')->nullable();

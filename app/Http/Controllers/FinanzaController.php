@@ -29,7 +29,7 @@ class FinanzaController extends Controller
         "Diezmo_Ministros" => "Diezmo otros ministros licenciados",
         "Damas" => "Ofrenda ministerio de Damas",
         "Jovenes" => "Ofrendas ministerio de Jovenes",
-        "Niños" => "Ofrenda ministerio de Niños",
+        "Ninos" => "Ofrenda ministerio de Niños",
         "DLD" => "Ofrenda Dept. de Liderazgo y Discipulado",
         "Caballeros" => "Ofrenda ministerio de Caballeros",
         "Patrimonio_Historico" =>"Ofrenda ministerio Patrimonio Historico",
@@ -80,7 +80,7 @@ class FinanzaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   //dd($request->all());
         $iglesia= $this->getUserIglesia();     
         foreach ($request->get('categorias') as  $categoria) {
             
@@ -99,16 +99,31 @@ class FinanzaController extends Controller
             }
 
             else{
+                if($request->get('tipo')=='inicial')
+                {
+                    $balanceini= $iglesia->Balances()->create([
                 
-                $finanzas= $iglesia->Finanzas()->create([
-            
-                    "fecha" => $request->get("fecha_".$categoria),
-                    "monto" => $request->get("monto_".$categoria),
+                        
+                        "monto" => $request->get("monto_".$categoria),
+                        "categoria" => $categoria,
+                        "inicial" => '01',
+                        
+                    ]);
+
                     
-                    "categoria" => $categoria,
-                    "tipo" => $request->get("tipo"),
-                    
-                ]);
+                }
+                else
+                {
+                    $finanzas= $iglesia->Finanzas()->create([
+                
+                        "fecha" => $request->get("fecha_".$categoria),
+                        "monto" => $request->get("monto_".$categoria),
+                        
+                        "categoria" => $categoria,
+                        "tipo" => $request->get("tipo"),
+                        
+                    ]);
+                 }
             }
             
         
@@ -128,21 +143,26 @@ class FinanzaController extends Controller
     public function show($id)
     {
         $iglesia = $this->getUserIglesia();
-        $finanzas = $iglesia->Finanzas();
+        $finanzas = $iglesia->Finanzas;
         $categorias = $this->categorias;
+        $balances = $iglesia->Balances;
 
-        
+       // dd($balances);
 
-        return view('finanzas.show', compact('finanzas', 'categorias','iglesia') );
+        return view('finanzas.show', compact('finanzas', 'categorias','iglesia','balances') );
     }
 
-    public function balanceInicial()
+    public function balance()
     {   
         $categorias= $this->categorias;
         $iglesia = $this->getUserIglesia();
-        $mes = Carbon::now()->subMonth(1)->format('m');
+        $date = Carbon::now();
+        $mes = $date->subMonth(1)->format('m');
         
            
+        $pruebo= $iglesia->Finanzas()->orderby('created_at','DESC')->take(1)->get();
+
+        print_r($pruebo);
 
         foreach ( $iglesia->Finanzas()->where('tipo','=','pasivo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria') as $key => $value) {
             
@@ -159,23 +179,38 @@ class FinanzaController extends Controller
             $finanzas['iniciales'][$key] = $value;    
         }
 
+        
+
      foreach ($categorias as $key => $value) {
-        if(isset($finanzas['pasivos'][$key])){
-            if (isset($finanzas['activos'][$key])){
-                
-                if(isset($finanzas['iniciales'][$key])){
-                    $balanceInicial[$key]= $finanzas['activos'][$key] * 0.5 + $finanzas['iniciales'][$key] -  $finanzas['pasivos'][$key];
-
-
-                    echo $finanzas['activos'][$key] .'* 0.5 +'. $finanzas['iniciales'][$key].'-'.  $finanzas['pasivos'][$key]."=". $balanceInicial[$key] ."<br>";
-
-                }
+        if(isset($finanzas['activos'][$key]))
+        {
+            if ($key === 'Diezmo_Total')
+            {   
+               $finanzas['activos'][$key]= $finanzas['activos'][$key] * 0.85;
             }
+            if( ($key !== 'Diezmo_Total') && ($key !== 'Domingo_2') && ($key !==  'Domingo_3')
+            && ($key !== 'Domingo_4') && ($key !== 'Diezmo_Pastor') && ($key !== 'Diezmo_Ministros')&& ($key !== 'Impulso_Mundial')
+            && ($key !== 'Impulso_Nacional') && ($key !== 'Tabernaculo_Nacional')&& ($key !== 'Pago_Prestamos')&& ($key !== 'Otros_Propositos') )
+            {  
+                $finanzas['activos'][$key]= $finanzas['activos'][$key] * 0.50; 
+            }
+            if($key === 'Impulso_Mundial')
+            {
+               $finanzas['activos'][$key] = $finanzas['activos'][$key] * 0.25;
+            }
+
+            if(isset($finanzas['balances'][$key]))
+            {
+
+            }
+           
 
         } 
      }
-
-     print_r($balanceInicial);
+     /* echo "despues <pre>";
+     print_r($finanzas);
+     echo "<pre>";
+    */
     }
 
 

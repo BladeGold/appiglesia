@@ -14,17 +14,12 @@
                     <div class="card-body box-profile">
                         <form method="POST" action="{{ route('finanzas.store'), $iglesia->id }}">                            
                             @csrf
-                            <input name="tipo" value="Inicial" type="hidden">
+                            <input name="tipo" value="inicial" type="hidden">
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item Damas" id="" >
                                     <div class="row">
                                         <label class="col-sm-12"><u>  Ministerio de Damas  </u> </label>
-                                        <div class="col-sm-6">
-                                            <p>Fecha</p>
-                                            <div class="form-group">
-                                                <input  required  type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control Damas" name="fecha_Damas">
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-sm-6">
                                             <p>Monto</p>
                                             <div class="form-group">
@@ -39,12 +34,7 @@
                                 <li class="list-group-item Jovenes" id="" >
                                     <div class="row">
                                         <label class="col-sm-12"><u>  Ministerio de Jovenes  </u></label>
-                                        <div class="col-sm-6">
-                                            <p>Fecha</p>
-                                            <div class="form-group">
-                                                <input  required  type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control Jovenes" name="fecha_Jovenes">
-                                            </div>
-                                        </div>
+                                       
                                         <div class="col-sm-6">
                                             <p>Monto</p>
                                             <div class="form-group">
@@ -58,12 +48,7 @@
                                 <li class="list-group-item Niños" id="" >
                                     <div class="row">
                                         <label class="col-sm-12"><u>  Ministerio de Niños  </u></label>
-                                        <div class="col-sm-6">
-                                            <p>Fecha</p>
-                                            <div class="form-group">
-                                                <input  required  type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control Niños" name="fecha_Niños">
-                                            </div>
-                                        </div>
+                                       
                                         <div class="col-sm-6">
                                             <p>Monto</p>
                                             <div class="form-group">
@@ -78,12 +63,7 @@
                                 <li class="list-group-item DLD" id="" >
                                     <div class="row">
                                         <label class="col-sm-12"><u>  Dept. de Liderazgo y Discipulado   </u></label>
-                                        <div class="col-sm-6">
-                                            <p>Fecha</p>
-                                            <div class="form-group">
-                                                <input  required  type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control DLD" name="fecha_DLD">
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-sm-6">
                                             <p>Monto</p>
                                             <div class="form-group">
@@ -98,12 +78,7 @@
                                 <li class="list-group-item Caballeros" id="" >
                                     <div class="row">
                                         <label class="col-sm-12"><u>  Ministerio de Caballeros  </u></label>
-                                        <div class="col-sm-6">
-                                            <p>Fecha</p>
-                                            <div class="form-group">
-                                                <input  required  type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control Caballeros" name="fecha_Caballeros">
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-sm-6">
                                             <p>Monto</p>
                                             <div class="form-group">
@@ -118,12 +93,7 @@
                                 <li class="list-group-item Patrimonio_Historico" id="" >
                                     <div class="row">
                                     <label class="col-sm-12"><u> Ministerio Patrimonio Historico  </u></label>
-                                    <div class="col-sm-6">
-                                        <p>Fecha</p>
-                                        <div class="form-group">
-                                            <input  required  type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control Patrimonio_Historico" name="fecha_Patrimonio_Historico">
-                                        </div>
-                                    </div>
+                                    
                                     <div class="col-sm-6">
                                         <p>Monto</p>
                                         <div class="form-group">
@@ -137,12 +107,7 @@
                                 <li class="list-group-item Fondo_Local" id="" >
                                     <div class="row">
                                     <label class="col-sm-12"><u> Fondo Local  </u></label>
-                                    <div class="col-sm-6">
-                                        <p>Fecha</p>
-                                        <div class="form-group">
-                                            <input  required  type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control " name="fecha_Fondo_Local">
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-sm-6">
                                         <p>Monto</p>
                                         <div class="form-group">
@@ -156,12 +121,7 @@
                                 <li class="list-group-item Diezmo_Restante" id="" >
                                     <div class="row">
                                     <label class="col-sm-12"><u> Diezmo Restante  </u></label>
-                                    <div class="col-sm-6">
-                                        <p>Fecha</p>
-                                        <div class="form-group">
-                                            <input  required  type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control " name="fecha_Diezmo_Restante">
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-sm-6">
                                         <p>Monto</p>
                                         <div class="form-group">

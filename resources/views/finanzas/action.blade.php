@@ -11,7 +11,7 @@
 <button type="button"  class="btn btn-sm btn-danger btn-delete"><i class="far fa-trash-alt"></i></button>
 <form action="#"  method="POST" id="form-delete"> 
     @csrf
-    @method('DELETE')
+    @method('DELETE') 
     
 </form>
 @endcan

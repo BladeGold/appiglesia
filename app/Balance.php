@@ -8,7 +8,7 @@ class Balance extends Model
 {
     protected $primaryKey = 'id';
     protected $fillable = [
-        'monto','fecha', 
+        'monto','fecha', 'inicial', 'categoria' 
     ];
 
 

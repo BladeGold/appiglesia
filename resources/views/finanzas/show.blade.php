@@ -51,21 +51,26 @@
                 <tr>
                    
                     <th scope="col"  >Fecha</th>
+                    <th scope="col"  >Categoria</th>
                     <th scope="col" >Monto</th>
+                    <th scope="col" >Inicial</th>
                     <th scope="col"  >Opciones</th>
 
                 </tr>
                 </thead>
                 <tbody>                                
-                
+                    @foreach ($balances as $balance)
                 <tr data-id="">
-                    <th></th>
-                    <th></th>
+                    <th>{{$balance->created_at->format('Y-m-d')}}</th>
+                    <th>{{$categorias[$balance->categoria]}}</th>
+                    <th>{{$balance->monto}}</th>
+                    <th>{{$balance->inicial ? 'X' : ''}}</th>
+                    
                     
                     <th>@include('finanzas.action')</th>
 
                 </tr>
-                    
+                @endforeach
                
                 </tbody>
             </table>

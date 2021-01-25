@@ -13,14 +13,14 @@ class CreateBalance extends Migration
      */
     public function up()
     {
-        Schema::create('balance', function (Blueprint $table) {
+        Schema::create('balances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('iglesia_id');
             $table->foreign('iglesia_id')
                 ->references('id')
                 ->on('iglesias')
                 ->onDelete('cascade');
-            $table->enum('categoria', ['Diezmo_Total','Diezmo_Pastor','Diezmo_Ministro' ,'Damas','Jovenes','Niños','DLD','Caballeros', 'Patrimonio_Historico','Domingo_2','Domingo_3','Domingo_4','Impulso_Mundial','Impulso_Nacional','Tabernaculo_Nacional','Pago_Prestamos','Otros_Propositos','Diezmo_Restante','Fondo_Local']);
+            $table->enum('categoria', ['Diezmo_Total','Diezmo_Pastor','Diezmo_Ministros' ,'Damas','Jovenes','Ninos','DLD','Caballeros', 'Patrimonio_Historico','Domingo_2','Domingo_3','Domingo_4','Impulso_Mundial','Impulso_Nacional','Tabernaculo_Nacional','Pago_Prestamos','Otros_Propositos','Diezmo_Restante','Fondo_Local']);
             $table->unsignedInteger('monto');
             $table->date('fecha');
             $table->unsignedInteger('inicial')->nullable();

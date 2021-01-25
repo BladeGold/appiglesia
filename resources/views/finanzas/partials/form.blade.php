@@ -461,19 +461,19 @@
             <div class="col-sm-4">
                 <p>Fecha</p>
                 <div class="form-group">
-                    <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->fecha }}"  @endif @endforeach @endisset type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control Pago_Prestamos" name="fecha_Pagos_Prestamos">
+                    <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->fecha }}"  @endif @endforeach @endisset type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control Pago_Prestamos" name="fecha_Pago_Prestamos">
                 </div>
             </div>
             <div class="col-sm-4">
                 <p>Monto</p>
                 <div class="form-group">
-                    <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->monto }}"  @endif @endforeach @endisset type="number" class="form-control Pago_Prestamos" name="monto_Pagos_Prestamos">
+                    <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->monto }}"  @endif @endforeach @endisset type="number" class="form-control Pago_Prestamos" name="monto_Pago_Prestamos">
                 </div>
             </div>
             <div class="col-sm-4">
                 <p>Descripción</p>
                 <div class="form-group">
-                    <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->descripcion ?? 'Sin Descripción'}}"  @endif @endforeach @endisset type="text" class="form-control Pago_Prestamos" name="descripcion_Pagos_Prestamos">
+                    <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->descripcion ?? 'Sin Descripción'}}"  @endif @endforeach @endisset type="text" class="form-control Pago_Prestamos" name="descripcion_Pago_Prestamos">
                 </div>
             </div>
             </div>

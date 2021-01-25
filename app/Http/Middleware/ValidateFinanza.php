@@ -3,7 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Finanza;
+
+use App\Balance;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use UxWeb\SweetAlert\SweetAlert;
@@ -22,11 +23,11 @@ class ValidateFinanza
         if(Auth::user()->hasRole('pastor')){
             $iglesia = User::find(Auth::id())->Pertenece->last();
 
-            $finanza = Finanza::WhereHas('iglesia', function($query) use($iglesia){
+            $BalanceIni = Balance::WhereHas('iglesia', function($query) use($iglesia){
                 $query->where('iglesia_id', $iglesia->id);
-            })->where('tipo','=','inicial')->get()->last();
+            })->where('inicial','=','1')->get()->last();
 
-            if(empty($finanza)){
+            if(empty($BalanceIni)){
                 
                 alert()->warning('Aun no ha registrado las finanzas iniciales','Atención')->persistent("Cerrar");
                 return redirect()->route('finanzas.inicial');
