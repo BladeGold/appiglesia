@@ -1,0 +1,58 @@
+        $categorias= $this->categorias;
+        $iglesia = $this->getUserIglesia();
+        $date = CarbonImmutable::now();
+        
+        $mes = $date->subMonth(1)->format('m');
+        
+           
+        $pruebo= $iglesia->Balances()->orderby('created_at','DESC')->get()->last();
+
+        echo $date->diffForHumans($pruebo->created_at);
+
+        foreach ( $iglesia->Finanzas()->where('tipo','=','pasivo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria') as $key => $value) {
+            
+            $finanzas['pasivos'][$key] = $value;    
+        }
+
+        foreach ($iglesia->Finanzas()->where('tipo','=','activo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria') as $key => $value) {
+            
+            $finanzas['activos'][$key] = $value;    
+        }
+
+        foreach ($iglesia->Finanzas()->where('tipo', '=', 'inicial')->pluck('monto','categoria') as $key => $value) {
+            
+            $finanzas['iniciales'][$key] = $value;    
+        }
+
+        
+
+     foreach ($categorias as $key => $value) {
+        if(isset($finanzas['activos'][$key]))
+        {
+            if ($key === 'Diezmo_Total')
+            {   
+               $finanzas['activos'][$key]= $finanzas['activos'][$key] * 0.85;
+            }
+            if( ($key !== 'Diezmo_Total') && ($key !== 'Domingo_2') && ($key !==  'Domingo_3')
+            && ($key !== 'Domingo_4') && ($key !== 'Diezmo_Pastor') && ($key !== 'Diezmo_Ministros')&& ($key !== 'Impulso_Mundial')
+            && ($key !== 'Impulso_Nacional') && ($key !== 'Tabernaculo_Nacional')&& ($key !== 'Pago_Prestamos')&& ($key !== 'Otros_Propositos') )
+            {  
+                $finanzas['activos'][$key]= $finanzas['activos'][$key] * 0.50; 
+            }
+            if($key === 'Impulso_Mundial')
+            {
+               $finanzas['activos'][$key] = $finanzas['activos'][$key] * 0.25;
+            }
+
+            if(isset($finanzas['balances'][$key]))
+            {
+
+            }
+           
+
+        } 
+     }
+     /* echo "despues <pre>";
+     print_r($finanzas);
+     echo "<pre>";
+    */

@@ -11,6 +11,7 @@ use App\Http\Traits\IglesiaTrait;
 use App\Finanza;
 use Hash;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use UxWeb\SweetAlert\SweetAlert;
 
 
@@ -156,61 +157,63 @@ class FinanzaController extends Controller
     {   
         $categorias= $this->categorias;
         $iglesia = $this->getUserIglesia();
-        $date = Carbon::now();
-        $mes = $date->subMonth(1)->format('m');
+        $date = CarbonImmutable::now();
+       
+        $ultimoBalance = $iglesia->Balances()->orderby('created_at','DESC')->get('created_at')->last()->created_at;
+        $ultimoActivo = $iglesia->Finanzas()->where('tipo','=','activo')->orderby('created_at','DESC')->get('created_at')->last()->created_at;
+        $ultimoPasivo = $iglesia->Finanzas()->where('tipo','=','pasivo')->orderby('created_at','DESC')->get('created_at')->last()->created_at;
+        $retrasoBalance = $date->diffInMonths($ultimoBalance);
+        $retrasoActivo = $date->diffInMonths($ultimoActivo);
+        $retrasoPasivo = $date->diffInMonths($ultimoPasivo);
+        $añoBalance = $ultimoBalance->format('Y');
+        $añoPasivo = $ultimoActivo->format('Y');
+        $añoActivo = $ultimoPasivo->format('Y');
+
+        if( $retrasoActivo && $retrasoPasivo >= 1){
+            alert()->warning('Posee un retraso en el registro de sus Finanzas ¡Por Favor Actualizarlas!','¡Atención!')->persistent("Cerrar");
+            return redirect()->route('finanzas.show', $iglesia->id);
+        }
+        elseif($retrasoActivo >= 1){
+            
+            alert()->warning('Posee un retraso de '.$retrasoActivo." mes con sus Activos (ingresos) ¡Por Favor Actualice sus Finanzas!",'¡Atención!')->persistent("Cerrar");
+            return redirect()->route('finanzas.show', $iglesia->id);
+        }
+        elseif($retrasoPasivo >= 1){
+            
+            alert()->warning('Posee un retraso de '.$retrasoPasivo." mes con sus Pasivos (egresos) ¡Por Favor Actualice sus Finanzas!",'¡Atención!')->persistent("Cerrar");
+            return redirect()->route('finanzas.show', $iglesia->id);
+        }elseif($retrasoBalance >=1){
+            foreach ( $iglesia->Finanzas()->where('tipo','=','pasivo')->whereMonth('created_at','=',$retrasoPasivo)->pluck('monto','categoria') as $key => $value) {
+            
+                $finanzas['pasivos'][$key] = $value;    
+            }
+    
+            foreach ($iglesia->Finanzas()->where('tipo','=','activo')->whereMonth('created_at','=',$retrasoActivo)->pluck('monto','categoria') as $key => $value) {
+                
+                $finanzas['activos'][$key] = $value;    
+            }
+    
+            foreach ($iglesia->Balances()->whereMonth('created_at','=',$retrasoBalance)->pluck('monto','categoria') as $key => $value) {
+                
+                $finanzas['balances'][$key] = $value;    
+            }
+
+           print_r($añoBalance);
+        }else{
+            alert()->success('','¡Sus Finanzas estan Actualizadas!')->persistent("Cerrar");
+            return redirect()->route('finanzas.show', $iglesia->id);
+        }
+
         
-           
-        $pruebo= $iglesia->Finanzas()->orderby('created_at','DESC')->take(1)->get();
-
-        print_r($pruebo);
-
-        foreach ( $iglesia->Finanzas()->where('tipo','=','pasivo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria') as $key => $value) {
-            
-            $finanzas['pasivos'][$key] = $value;    
-        }
-
-        foreach ($iglesia->Finanzas()->where('tipo','=','activo')->whereMonth('fecha','=',$mes)->pluck('monto','categoria') as $key => $value) {
-            
-            $finanzas['activos'][$key] = $value;    
-        }
-
-        foreach ($iglesia->Finanzas()->where('tipo', '=', 'inicial')->pluck('monto','categoria') as $key => $value) {
-            
-            $finanzas['iniciales'][$key] = $value;    
-        }
 
         
+        
+        
 
-     foreach ($categorias as $key => $value) {
-        if(isset($finanzas['activos'][$key]))
-        {
-            if ($key === 'Diezmo_Total')
-            {   
-               $finanzas['activos'][$key]= $finanzas['activos'][$key] * 0.85;
-            }
-            if( ($key !== 'Diezmo_Total') && ($key !== 'Domingo_2') && ($key !==  'Domingo_3')
-            && ($key !== 'Domingo_4') && ($key !== 'Diezmo_Pastor') && ($key !== 'Diezmo_Ministros')&& ($key !== 'Impulso_Mundial')
-            && ($key !== 'Impulso_Nacional') && ($key !== 'Tabernaculo_Nacional')&& ($key !== 'Pago_Prestamos')&& ($key !== 'Otros_Propositos') )
-            {  
-                $finanzas['activos'][$key]= $finanzas['activos'][$key] * 0.50; 
-            }
-            if($key === 'Impulso_Mundial')
-            {
-               $finanzas['activos'][$key] = $finanzas['activos'][$key] * 0.25;
-            }
-
-            if(isset($finanzas['balances'][$key]))
-            {
-
-            }
-           
-
-        } 
-     }
-     /* echo "despues <pre>";
-     print_r($finanzas);
-     echo "<pre>";
-    */
+        
+            
+        
+       
     }
 
 

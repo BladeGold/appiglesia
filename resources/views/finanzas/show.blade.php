@@ -40,13 +40,14 @@
     
         </div>
 
-
-        <h2>Lista de balances de la iglesia {{$iglesia->name}}</h2>    
-        <div class="row justify-content-center">
-
+        <div class="">
+        <h2 class="col-sm-10">Lista de balances de la iglesia {{$iglesia->name}}</h2>    
         
-
-        <table class="table table-bordered  dt-responsive nowrap" id="table_balance" style="" >
+            <a href="{{route('finanzas.balance')}}" class="btn  btn btn-success float-right col-sm-offset-2" > Generar Balance </a>
+        </div>
+        <div class="row justify-content-center">
+  
+        <table class="table table-bordered  dt-responsive nowrap" id="table_balance" >
                 <thead class="thead-dark">
                 <tr>
                    
