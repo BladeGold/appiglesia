@@ -40,3 +40,5 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: true
 // });
 require("sweetalert");
+window.swal = require('sweetalert2');
+

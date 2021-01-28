@@ -10,7 +10,7 @@
             <div class="row justify-content-center">
             
 
-        <table class="table table-bordered  dt-responsive nowrap" id="data_table" style="" >
+        <table class="table table-bordered  " id="table_roles" style="" >
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col" >Nombre</th>
@@ -40,46 +40,38 @@
 
 @push('scripts')
     <script>
-        $(function () {
-            $(document).ready(function() {
-                $('#data_table').DataTable();
-            } );
-        });
+        
 
         $('document').ready(function(){
+            $('#table_roles').DataTable();
             $('.btn-delete').click(function(){
                 var row= $(this).parents('tr');
                 var id= row.data('id');
                 var form= $('#form-delete');
-                var url= form.attr('action').replace(':ROLE-ID', id);
+                var url= form.attr('action').replace(':IGLESIA-ID', id);
                 var data= form.serialize();
 
-                swal({
+               Swal.fire({
                     title: "¿Estás seguro?",
-                    text: "Una vez eliminado, no se podra recuperar la informacion!",
+                    text: "Una vez eliminado, no se podra recuperar la informacion! ",
                     icon: "warning",
-                    buttons: ["Cancelar", "Eliminar"],
-                    dangerMode: true,
-                })
-                .then((willDelete)=>{
-                    if(willDelete){
-                        
-                        $.post(url, data, function(result){
+                    showCancelButton: true,
+                    confirmButtonText: `Si`,
+               }).then((result)=>{
+                    if(result.isConfirmed){
+                        $.post(url,data, function(result){
                             row.fadeOut();
-                            swal({
-                                title: "¡El rol "+result.name+" ha sido eliminado con exito!",
+                            Swal.fire({
+                                title: "¡El iglesia "+result.name+" ha sido eliminado con exito!",
                                 icon: "success",
                                 button: true,
-                            })
-                        });
-                    }else{
-                        swal("¡Acción Cancelada!");
+                           })
+                       });
+
+                   }else{
+                        Swal.fire("¡Acción Cancelada!");
                     }
-
-                });
-
-                
-                
+               });
             });
         });
     </script>

@@ -30,7 +30,7 @@ class ValidateFinanza
             if(empty($BalanceIni)){
                 
                 alert()->warning('Aun no ha registrado las finanzas iniciales','Atención')->persistent("Cerrar");
-                return redirect()->route('finanzas.inicial');
+                return redirect()->route('balances.inicial');
             }
 
             else{

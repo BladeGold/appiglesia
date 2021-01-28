@@ -7,7 +7,7 @@
 
             <h2>Lista de usuarios registrados</h2>
             <div class="row justify-content-center">
-        <table class="table table-bordered  dt-responsive nowrap" id="data_table" style="" >
+        <table class="table table-bordered  " id="table_users" style="" >
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col" >Nombre</th>
@@ -42,51 +42,47 @@
 
 @push('scripts')
     <script>
-        $(function () {
-            $(document).ready(function() {
-                $('#data_table').DataTable({
-                    
-                    
-                });
-            } );
-        });
+       
 
+        
         $('document').ready(function(){
+            $('#table_users').DataTable();
             $('.btn-delete').click(function(){
                 var row= $(this).parents('tr');
                 var id= row.data('id');
                 var form= $('#form-delete');
                 var url= form.attr('action').replace(':USER-ID', id);
-                var data= form.serialize();
-
-                swal({
+                var datos= form.serialize();
+               
+                Swal.fire({
                     title: "¿Estás seguro?",
-                    text: "Una vez eliminado, no se podra recuperar la informacion!",
+                    text: "Una vez eliminado, no se podra recuperar la informacion! ",
                     icon: "warning",
-                    buttons: ["Cancelar", "Eliminar"],
-                    dangerMode: true,
-                })
-                .then((willDelete)=>{
-                    if(willDelete){
-                        $.post(url,data, function(result){
+                    showCancelButton: true,
+                    confirmButtonText: `Si`,
+                   
+                }) .then((result)=>{
+                    if(result.isConfirmed){
+                        $.post(url,datos, function(result){
                             row.fadeOut();
-                            swal({
+                            Swal.fire({
                                 title: "¡El usuario "+result.name+" "+result.last_name+" ha sido eliminado con exito!",
                                 icon: "success",
                                 button: true,
                             })
                         });
                     }else{
-                        swal("¡Acción cancelada");
+                        Swal.fire("¡Acción cancelada");
                     }
 
                 });
+                    
+                
+            }); //Fin del Alert
 
+            
                 
-                
-            });
         });
-
         
         
 

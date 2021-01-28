@@ -137,7 +137,7 @@ class UserController extends Controller
     public function destroy(Request $request, $id)
     {  
         $user=User::findOrFail($id);
-        //$user->delete();
+        $user->delete();
         if($request->ajax()){
             
             return response()->json($user);

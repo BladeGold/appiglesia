@@ -161,7 +161,7 @@
                 <div class="col-sm-4">
                     <p>Descripción</p>
                     <div class="form-group">
-                        <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->descripcion ?? 'Sin Descripción'}}"  @endif @endforeach @endisset type="text" class="form-control Diezmo_Ministros" name="descripcion_Diezmo_Ministro">
+                        <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->descripcion ?? 'Sin Descripción'}}"  @endif @endforeach @endisset type="text" class="form-control Diezmo_Ministros" name="descripcion_Diezmo_Ministros">
                     </div>
                 </div>
             </div>

@@ -108,12 +108,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('finanzas/create', 'FinanzaController@create')->name('finanzas.create')
         ->middleware('can:finanzas.create');
 
-    Route::get('finanzas/inicial', 'FinanzaController@inicial')->name('finanzas.inicial')
-        ->middleware('can:finanzas.create');
-
-    Route::get('finanzas/balance', 'FinanzaController@balance')->name('finanzas.balance')
-        ->middleware('can:finanzas.create');
-
+    
     Route::put('finanzas/{finanza}', 'FinanzaController@update')->name('finanzas.update')
         ->middleware('can:finanzas.edit');
 
@@ -193,6 +188,35 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('admin/{modulo}/{id}/edit', 'AdminController@edit')->name('admin.edit')
         ->middleware('can:admin.edit');
+
+         
+    //Balances
+    Route::post('balances/store', 'BalanceController@store')->name('balances.store')
+    ->middleware('can:finanzas.create');
+
+    Route::get('balances', 'BalanceController@index')->name('balances.index')
+    ->middleware('can:finanzas.index');
+
+    Route::get('balances/create', 'BalanceController@create')->name('balances.create')
+    ->middleware('can:finanzas.create');
+
+    Route::get('balances/inicial', 'BalanceController@inicial')->name('balances.inicial')
+    ->middleware('can:finanzas.create');
+
+    Route::any('balances/balance', 'BalanceController@balance')->name('balances.balance')
+    ->middleware('can:finanzas.create');
+
+    Route::put('balances/{finanza}', 'BalanceController@update')->name('balances.update')
+    ->middleware('can:finanzas.edit');
+
+    Route::get('balances/{finanza}', 'BalanceController@show')->name('balances.show')
+    ->middleware('can:finanzas.show');
+
+    Route::delete('balances/{finanza}', 'BalanceController@destroy')->name('balances.destroy')
+    ->middleware('can:finanzas.destroy');
+
+    Route::get('balances/{finanza}/edit', 'BalanceController@edit')->name('balances.edit')
+    ->middleware('can:finanzas.edit');
 
     
 
