@@ -2,11 +2,7 @@
 
 @section('content')
 
-<form action="{{route('balances.store')}}" method="post">
-@csrf
-<input type="hidden" name="tipo" value="mensual">
-<button type="submit">Gene</button>
-</form>
+
     <div class="container-fluid">
        
         <div class="">
