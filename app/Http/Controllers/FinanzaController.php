@@ -29,8 +29,18 @@ class FinanzaController extends Controller
     }
 
     public function index()
-    {
+    {   $date= CarbonImmutable::now();
+        $mes= $date->subMonth(1);
+        $activos= Finanza::Where('tipo','=','activo')->count();
+        $activosmes= Finanza::Where('tipo','=','activo')->whereBetween('fecha',[$date->startOfMonth(),$date])->count();
+        $activosanterior= Finanza::Where('tipo','=','activo')->whereBetween('fecha',[$mes->startOfMonth(),$mes->endOfMonth()])->count();
+        $pasivos= Finanza::Where('tipo','=','pasivo')->count();
+        $pasivosmes= Finanza::Where('tipo','=','pasivo')->whereBetween('fecha',[$date->startOfMonth(),$date])->count();
+        $pasivosanterior= Finanza::Where('tipo','=','pasivo')->whereBetween('fecha',[$mes->startOfMonth(),$mes->endOfMonth()])->count();
         
+       
+        return view('finanzas.index', compact('activos','pasivos','activosmes','pasivosmes','activosanterior',
+        'pasivosanterior'));
     }
 
     
@@ -170,8 +180,13 @@ class FinanzaController extends Controller
     }
 
     
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+         $finanza=Finanza::find($id);
+         Finanza::Where('fecha','=',$finanza->fecha)->delete();
+
+         if($request->ajax()){
+             return response()->Json($finanza);
+         }
     }
 }

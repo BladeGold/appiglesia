@@ -21,11 +21,11 @@
                 <tbody>                                
                    @foreach ($users as $user)
                    <tr data-id="{{$user->id}}">
-                       <th>{{$user->name}}</th>
-                       <th>{{$user->last_name}}</th>
-                       <th>{{$user->email}}</th>
-                       <th>{{$user->roles->pluck('name')->last()}}</th>
-                       <th>@include('users.action')</th>
+                       <td>{{$user->name}}</td>
+                       <td>{{$user->last_name}}</td>
+                       <td>{{$user->email}}</td>
+                       <td>{{$user->roles->pluck('name')->last()}}</td>
+                       <td>@include('users.action')</td>
 
                    </tr>
                        

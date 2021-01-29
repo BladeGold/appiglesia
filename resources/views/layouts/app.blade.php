@@ -22,7 +22,9 @@
     <script src="{{asset('dist/js/responsive.bootstrap.min.js')}}"> </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
     <script src="{{asset('sweetalert2/dist/sweetalert2.min.js')}}"></script>
-    @stack('scripts')
+    <script src="{{asset('chartjs/Chart.js')}}"></script>
+    
+   
    
     <!-- Scripts online -->
     
@@ -46,6 +48,7 @@
     <!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 
     <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="{{asset('chartjs//Chart.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <link rel="stylesheet" href="{{asset('sweetalert2/dist/sweetalert2.min.css')}}">
     <link href="{{ asset('dist/css/adminlte.css') }}" rel="stylesheet">
@@ -270,6 +273,30 @@
                               
                         </li>
                         @endif
+                        @can('admin')
+                        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        </div>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                  <i class="nav-icon fas fa-edit"></i>
+                                  <p>
+                                    Configuraciones Web
+                                    <i class="fas fa-angle-left right"></i>
+                                  </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="{{route('backup')}}" class="nav-link">
+                                            <i class="fas fa-database"></i>
+                                          <p class="text">Respaldo Base de Datos</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                              </li>
+                              @endcan
+                           
+                        
+                        
                         
                        
 
@@ -287,13 +314,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            
+            @if(Request::url() !== route('index'))
+            <button  onclick="history.back()" class="btn btn-info btn-sm "><i class="fas fa-arrow-circle-left"></i> Atrás</button>
+            @endif
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Layout</a></li>
-              <li class="breadcrumb-item active">Fixed Layout</li>
+              
               
             </ol>
           </div>
@@ -352,7 +379,7 @@
 
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
-
+@stack('scripts')
 </body>
 </html>
 

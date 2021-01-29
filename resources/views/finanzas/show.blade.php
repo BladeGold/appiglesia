@@ -8,7 +8,7 @@
 
         
 
-        <table class="table table-bordered  dt-responsive nowrap" id="table_finanzas" style="" >
+        <table class="table table-bordered " id="table_finanzas" style="" >
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col" >Categoria</th>
@@ -24,7 +24,7 @@
                                                
                 @foreach ($finanzas as $finanza)
 
-                <tr data-id="{{$finanza->id ?? ''}}">
+                <tr data-id="{{$finanza->id ?? ''}}" value="{{$finanza->fecha ?? ''}}" class="{{$finanza->fecha ?? ''}}">
                     <th>{{$categorias[$finanza->categoria]}}</th>
                     <th>{{$finanza->monto}}</th>
                     <th>{{$finanza->fecha}}</th>
@@ -56,14 +56,45 @@
         
 
 
-        $(function () {
+        
             $(document).ready(function() {
-                $('#table_finanzas').DataTable({
-                    
-                    
+                $('#table_finanzas').DataTable();
+
+                $('.btn-delete').click(function(){
+                var row= $(this).parents('tr');
+                var id= row.data('id');
+                var balance= row.attr('value');
+                var form= $('#form-delete');
+                var url= form.attr('action').replace(':FINANZA-ID', id);
+                var datos= form.serialize();
+               
+                Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "Una vez eliminado, no se podra recuperar la informacion! ",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: `Si`,
+                   
+                }) .then((result)=>{
+                    if(result.isConfirmed){
+                        $.post(url,datos, function(result){
+                            $("tr[value="+balance+"]").fadeOut();
+                            Swal.fire({
+                                title: "¡Los Registros correspondientes a la fecha "+result.fecha+" ha sido eliminado con exito!",
+                                icon: "success",
+                                button: true,
+                            })
+                        });
+                    }else{
+                        Swal.fire("¡Acción cancelada");
+                    }
+
                 });
-            } );
-        });
+                    
+                
+            })
+            });
+        
 
         
 

@@ -41,4 +41,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // });
 require("sweetalert");
 window.swal = require('sweetalert2');
-
+import Chart from 'chart.js';

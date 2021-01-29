@@ -11,7 +11,7 @@
     <title> @yield('title'){{ config('app.name') }} </title>
 
     <!-- Scripts offline-->
-
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{asset('dist/js/adminlte.min.js')}}" defer></script>
     <script src="{{asset('dist/js/bootstrap.min.js')}}" defer></script>
     <script src="{{asset('dist/js/jquery.min.js')}}"></script> 
@@ -19,10 +19,12 @@
     <script  src="{{asset('dist/js/jquery.dataTables.min.js')}}" defer></script>
     <script  src="{{asset('dist/js/dataTables.responsive.min.js')}}" defer></script>
     <script src="{{asset('dist/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('dist/js/reponsive.bootstrap.min.js')}}"> </script>
-
+    <script src="{{asset('dist/js/responsive.bootstrap.min.js')}}"> </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+    <script src="{{asset('sweetalert2/dist/sweetalert2.min.js')}}"></script>
+    <script src="path/to/chartjs/dist/Chart.js"></script>
     @stack('scripts')
-
+   
     <!-- Scripts online -->
     
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" defer></script>
@@ -32,7 +34,9 @@
     <script  src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js" defer></script>
     <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script> 
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap.min.js"> </script>
+    
 -->
+
 
 <!-- Font Awesome Icons -->
     <!--<link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">-->
@@ -43,8 +47,9 @@
     <!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 
     <!-- Styles -->
-
-
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <link rel="stylesheet" href="{{asset('sweetalert2/dist/sweetalert2.min.css')}}">
     <link href="{{ asset('dist/css/adminlte.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{asset('dist/img/favicon/favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('dist/css/jquery.dataTables.min.css')}}" >
@@ -157,7 +162,7 @@
                                 Cerrar Sesión
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                  style=display:none;">
+                                  style=display:none;>
                                 @csrf
                             </form>
                         </a>
@@ -249,9 +254,17 @@
                                 @endcan
                                 @can('finanzas.show')
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('finanzas.show', Auth::user()->Pertenece->pluck('id')->last() )}}" class="nav-link">
                                       <i class="far fa-circle nav-icon"></i>
                                       <p>Ver Registro Financiero</p>
+                                    </a>
+                                </li>
+                                @endcan
+                                @can('finanzas.show')
+                                <li class="nav-item">
+                                    <a href="{{route('balances.show', Auth::user()->Pertenece->pluck('id')->last() )}}" class="nav-link">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>Ver Balances Financiero</p>
                                     </a>
                                 </li>
                                 @endcan
@@ -276,13 +289,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            
+            @if(Request::url() !== route('index'))
+            <button  onclick="history.back()" class="btn btn-info btn-sm "><i class="fas fa-arrow-circle-left"></i> Atrás</button>
+            @endif
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Layout</a></li>
-              <li class="breadcrumb-item active">Fixed Layout</li>
+              
               
             </ol>
           </div>
@@ -298,9 +311,10 @@
           <div class="col-12">
             <!-- Default box -->
             
-            @include('mensaje')
+            
             @yield('content')
             @include('script')
+            @include('sweet::alert')
             <!-- /.card -->
           </div>
         </div>

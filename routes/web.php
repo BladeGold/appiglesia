@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 
 Auth::routes();
 
@@ -103,7 +103,7 @@ Route::middleware(['auth'])->group(function(){
            ->middleware('can:finanzas.create');
 
     Route::get('finanzas', 'FinanzaController@index')->name('finanzas.index')
-        ->middleware('can:finanzas.index');
+        ->middleware('can:admin.index');
 
     Route::get('finanzas/create', 'FinanzaController@create')->name('finanzas.create')
         ->middleware('can:finanzas.create');
@@ -218,6 +218,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('balances/{finanza}/edit', 'BalanceController@edit')->name('balances.edit')
     ->middleware('can:finanzas.edit');
 
+    //Respaldo
+    Route::get('backup', 'AdminController@backup_database')->name('backup')->middleware('can:admin');
     
 
 

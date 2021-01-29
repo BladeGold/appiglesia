@@ -12,7 +12,7 @@
         </div>
         <div class="row justify-content-center">
             @csrf
-        <table class="table table-bordered  dt-responsive nowrap" id="table_balance" >
+        <table class="table table-bordered " id="table_balance" >
                 <thead class="thead-dark">
                 <tr>
                    
@@ -27,22 +27,21 @@
                 <tbody>    
                                                
                     @foreach ($balances as $balance)
-                <tr data-id="">
-                    <th>{{$categorias[$balance->categoria]}}</th>
+                <tr data-id="{{$balance->id}}" value="{{$balance->fecha}}" class="{{$balance->fecha}}">
+                    <th data-id="">{{$categorias[$balance->categoria]}}</th>
                     <th>{{$balance->monto}}</th>
                     <th>{{$balance->fecha}}</th>
-                    <th>{{$balance->inicial ? 'X' : ''}}</th>
-                    
-                    
-                    <th>@include('finanzas.action')</th>
+                    <th>{{$balance->inicial ? 'X' : ''}}</th>                    
+                    <th>@include('balances.action')</th>
 
                 </tr>
+                
                 @endforeach
                
                 </tbody>
             </table>
 
-    
+    {}
         </div>
 
     </div>
@@ -123,6 +122,40 @@
                     
                 });
             });
+
+            $('.btn-delete').click(function(){
+                var row= $(this).parents('tr');
+                var id= row.data('id');
+                var balance= row.attr('value');
+                var form= $('#form-delete');
+                var url= form.attr('action').replace(':BALANCE-ID', id);
+                var datos= form.serialize();
+
+                Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "Una vez eliminado, no se podra recuperar la informacion! ",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: `Si`,
+                   
+                }) .then((result)=>{
+                    if(result.isConfirmed){
+                        $.post(url,datos, function(result){
+                            $("tr[value="+balance+"]").fadeOut();
+                            Swal.fire({
+                                title: "¡Los Balances correspondientes a la fecha "+result.fecha+" ha sido eliminado con exito!",
+                                icon: "success",
+                                button: true,
+                            })
+                        });
+                    }else{
+                        Swal.fire("¡Acción cancelada");
+                    }
+
+                });
+                    
+                
+            })
                 
         });
 

@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Traits\IglesiaTrait;
 use Carbon\CarbonImmutable;
+use App\Balance;
 
 class BalanceController extends Controller
 {
     use IglesiaTrait;
-    public function index()
-    {
-        //
+    public function index($fecha)
+    {   
+        $balance = Balance::where('fecha','=',$fecha);
+        print_r($balance);
+        dd($fecha);
+       
     }
 
    
@@ -449,8 +453,18 @@ class BalanceController extends Controller
     }
 
    
-    public function destroy($id)
-    {
-        //
+    public function destroy(Request $request, $id)
+    {   
+        $balance = Balance::find($id);
+    Balance::Where('fecha','=',$balance->fecha)->delete();
+    
+    if($request->ajax()){
+                                
+        return response()->Json($balance);
+        
+    }
+       
+        
+       
     }
 }
