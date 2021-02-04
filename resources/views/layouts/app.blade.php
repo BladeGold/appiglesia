@@ -12,15 +12,16 @@
 
     <!-- Scripts offline-->
     <script src="{{ asset('js/app.js') }}"></script>
+    
     <script src="{{asset('dist/js/adminlte.min.js')}}" defer></script>
-    <script src="{{asset('dist/js/bootstrap.min.js')}}" defer></script>
+    <script src="{{asset('fontawesome/js/all.min.js')}}" defer></script>
+    <script src="{{asset('bootstrap/dist/js/bootstrap.min.js')}}" defer></script>
     <script src="{{asset('dist/js/jquery.min.js')}}"></script> 
     <script src="{{asset('dist/js/popper.min.js')}}"></script>
     <script  src="{{asset('dist/js/jquery.dataTables.min.js')}}" defer></script>
     <script  src="{{asset('dist/js/dataTables.responsive.min.js')}}" defer></script>
     <script src="{{asset('dist/js/dataTables.buttons.min.js')}}"></script>
     <script src="{{asset('dist/js/responsive.bootstrap.min.js')}}"> </script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
     <script src="{{asset('sweetalert2/dist/sweetalert2.min.js')}}"></script>
     <script src="{{asset('chartjs/Chart.js')}}"></script>
     
@@ -41,17 +42,19 @@
 
 <!-- Font Awesome Icons -->
     <!--<link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">-->
-    <script src="https://kit.fontawesome.com/ada267d788.js" crossorigin="anonymous"></script>
+ 
     <!-- Fonts Online-->
     <link href="{{asset('dist/css/font.min.css')}}">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{asset('chartjs//Chart.min.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{{asset('chartjs/Chart.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('fontawesome/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('sweetalert2/dist/sweetalert2.min.css')}}">
     <link href="{{ asset('dist/css/adminlte.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{asset('dist/img/favicon/favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('dist/css/jquery.dataTables.min.css')}}" >
     <link rel="stylesheet" href="{{asset('dist/css/responsive.dataTables.min.css')}}">
@@ -314,9 +317,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            @if(Request::url() !== route('index'))
-            <button  onclick="history.back()" class="btn btn-info btn-sm "><i class="fas fa-arrow-circle-left"></i> Atrás</button>
-            @endif
+                @auth
+                    @if(Request::url() !== route('index'))
+                        <button  onclick="history.back()" class="btn btn-info btn-sm "><i class="fas fa-arrow-circle-left"></i> Atrás</button>
+                    @endif
+                @endauth
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -376,7 +381,7 @@
 <!-- overlayScrollbars -->
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
-
+<script src="{{ asset('dist/js/jquery.validate.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
 @stack('scripts')

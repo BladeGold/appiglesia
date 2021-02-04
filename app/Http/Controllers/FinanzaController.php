@@ -84,7 +84,7 @@ class FinanzaController extends Controller
                         
                     ]);
 
-                    
+                   
                 }
                 else
                 {
@@ -104,8 +104,11 @@ class FinanzaController extends Controller
 
 
        }//foreach 
-
+       if($request->get('tipo')=='inicial'){
+        return redirect()->route('balances.show', $iglesia->id );
+       }else{
        return redirect()->route('finanzas.show', $iglesia->id );
+    }
     }
 
     
@@ -114,9 +117,7 @@ class FinanzaController extends Controller
         $iglesia = $this->getUserIglesia();
         $finanzas = $iglesia->Finanzas;
         $categorias = $this->categorias;
-        $ultimoBalance = $iglesia->Balances()->latest()->get('created_at')->first()->created_at;
-        $retrasoBalance = $date->diffInMonths($ultimoBalance);
-        $dateBalance = $date->subMonths($retrasoBalance);
+       
         $balances = $iglesia->Balances()->latest()->take(8)->get();
 
      
@@ -124,12 +125,7 @@ class FinanzaController extends Controller
         return view('finanzas.show', compact('finanzas', 'categorias','iglesia','balances') );
     }
 
-    public function balance(Request $request)
-    {   
-
-        
-       
-    }
+    
 
 
 

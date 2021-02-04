@@ -26,7 +26,7 @@ class ValidateFinanza
             $BalanceIni = Balance::WhereHas('iglesia', function($query) use($iglesia){
                 $query->where('iglesia_id', $iglesia->id);
             })->where('inicial','=','1')->get()->last();
-
+    
             if(empty($BalanceIni)){
                 
                 alert()->warning('Aun no ha registrado las finanzas iniciales','Atención')->persistent("Cerrar");
@@ -35,9 +35,24 @@ class ValidateFinanza
 
             else{
                 return $next($request);
+            }            
+        }
+        elseif(Auth::user()->hasRole('admin')){
+            $iglesia = User::find(Auth::id())->Pertenece->last();
+
+            $BalanceIni = Balance::WhereHas('iglesia', function($query) use($iglesia){
+                $query->where('iglesia_id', $iglesia->id);
+            })->where('inicial','=','1')->get()->last();
+    
+            if(empty($BalanceIni)){
+                
+                alert()->warning('Aun no ha registrado las finanzas iniciales','Atención')->persistent("Cerrar");
+                return redirect()->route('balances.inicial');
             }
 
-            
+            else{
+                return $next($request);
+            }  
         }
 
         else{

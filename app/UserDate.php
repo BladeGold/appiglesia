@@ -24,31 +24,45 @@ class UserDate extends Model
 
     public function setLugarNacimientoAttribute($value)
     {
-        $this->attributes['lugar_nacimiento'] = ucfirst(strtolower($value));
+        $string= htmlentities($value);
+        $texto= preg_replace('/\&(.)[^;]*;/', '\\1', $string);
+        $this->attributes['lugar_nacimiento'] = ucfirst(strtolower($texto));
     }
     public function setCiudadAttribute($value)
     {
-        $this->attributes['ciudad'] = ucfirst(strtolower($value));
+        $string= htmlentities($value);
+        $texto= preg_replace('/\&(.)[^;]*;/', '\\1', $string);;
+        $this->attributes['ciudad'] = ucfirst(strtolower($texto));
     }
     public function setEstadoAttribute($value)
     {
-        $this->attributes['estado'] = ucfirst(strtolower($value));
+        $string= htmlentities($value);
+        $texto= preg_replace('/\&(.)[^;]*;/', '\\1', $string);
+        $this->attributes['estado'] = ucfirst(strtolower($texto));
     }
     public function setDireccionAttribute($value)
     {
-        $this->attributes['direccion'] = ucfirst(strtolower($value));
+        $string= htmlentities($value);
+        $texto= preg_replace('/\&(.)[^;]*;/', '\\1', $string);
+        $this->attributes['direccion'] = ucfirst(strtolower($texto));
     }
     public function setNacionalidadAttribute($value)
     {
-        $this->attributes['nacionalidad'] = ucfirst(strtolower($value));
+        $string= htmlentities($value);
+        $texto= preg_replace('/\&(.)[^;]*;/', '\\1', $string);
+        $this->attributes['nacionalidad'] = ucfirst(strtolower($texto));
     }
     public function setEstadoCivilAttribute($value)
     {
-        $this->attributes['estado_civil'] = ucfirst(strtolower($value));
+        $string= htmlentities($value);
+        $texto= preg_replace('/\&(.)[^;]*;/', '\\1', $string);
+        $this->attributes['estado_civil'] = ucfirst(strtolower($texto));
     }
     public function setSexoAttribute($value)
     {
-        $this->attributes['sexo'] = ucfirst(strtolower($value));
+        $string= htmlentities($value);
+        $texto= preg_replace('/\&(.)[^;]*;/', '\\1', $string);
+        $this->attributes['sexo'] = ucfirst(strtolower($texto));
     }
 
     public function esDe(){

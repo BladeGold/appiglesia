@@ -43,7 +43,22 @@
       
 
         $('document').ready(function(){
-            $('#table_iglesias').DataTable();
+
+            $('#table_iglesias').DataTable({
+                    "language": {
+                        "search": "Buscar:",
+                        "zeroRecords": "No se encontraron datos",
+                        "infoEmpty": "No hay datos para mostrar",
+                        "info": "Mostrando del _START_ al _END_, de un total de _TOTAL_ entradas",
+                        "paginate": {
+                            "first": "Primeros",
+                            "last": "Ultimos",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        },
+                    },
+                });
+
             $('.btn-delete').click(function(){
                 var row= $(this).parents('tr');
                 var id= row.data('id');

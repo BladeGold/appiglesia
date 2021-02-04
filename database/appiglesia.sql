@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-01-2021 a las 02:50:04
+-- Tiempo de generación: 29-01-2021 a las 02:51:45
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.4.7
 
@@ -409,7 +409,7 @@ CREATE TABLE `role_user` (
 --
 
 INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(3, 5, 10, '2020-12-18 06:13:18', '2020-12-18 06:13:18'),
+(3, 1, 10, '2020-12-18 06:13:18', '2020-12-18 06:13:18'),
 (15, 4, 14, '2020-12-22 12:51:51', '2020-12-22 12:51:51'),
 (17, 3, 16, '2021-01-09 04:26:12', '2021-01-09 04:26:12'),
 (18, 2, 15, '2021-01-26 18:32:53', '2021-01-26 18:32:53');

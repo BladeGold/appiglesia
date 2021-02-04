@@ -58,10 +58,15 @@ class UserController extends Controller
      */
     public function store(UserCreateFormRequest $request)
     {
-        $date= UserDate::create($request->all());
-        User::find(Auth::user()->id)->asignarIglesia($request->get('iglesia'));
-        alert()->success('', '¡Datos registrados con exito!');
-        return redirect('/dashboard');
+        //$date= UserDate::create($request->all());
+        //User::find(Auth::user()->id)->asignarIglesia($request->get('iglesia'));
+        
+        if($request->ajax()){
+            $msg= '¡Registro de datos exitoso!';
+
+            return response()->Json($msg);            
+        }
+        
     }
 
     /**
@@ -89,8 +94,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail(Auth::user()->id);
-        $user_date = UserDate::findOrFail(Auth::user()->id);
-
+        $user_date = $user->Datos;
+        
         
 
         return view('users.edit',compact('user','user_date'));
@@ -105,12 +110,14 @@ class UserController extends Controller
      */
     public function update(UserUpdateFormRequest $request, $id)
     {
-        User::findOrFail(Auth::user()->id)->update($request->all());
+        
+        $user = User::findOrFail(Auth::user()->id)->update($request->all());
         UserDate::findOrFail(Auth::user()->id)->update($request->all());
         
-        alert()->success('', '¡Actualización Exitosa!');
         
-        return redirect()->route('users.show', Auth::user()->id);
+        if($request->ajax()){
+            return response()->Json();
+        }
     }
 
     public function cambiarPassword(ChangePasswordRequest $request, $id){
@@ -122,8 +129,13 @@ class UserController extends Controller
             
             $user->password=(bcrypt($request->get('password')));
             $user->update();
-            alert()->success('', '¡Cambio de contraseña realizado con éxito!');
-            return redirect()->route('users.show', $id);
+            $msg= "¡Actualizacion Exisitosa!";
+           if($request->ajax()){
+                
+                    return response()->Json($msg);
+                    
+                }
+            
         }
 
     }

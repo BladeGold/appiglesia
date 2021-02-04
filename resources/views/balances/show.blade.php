@@ -41,7 +41,7 @@
                 </tbody>
             </table>
 
-    {}
+    
         </div>
 
     </div>
@@ -55,16 +55,25 @@
         
 
 
-        $(function () {
-            $(document).ready(function() {
-                $('#table_balance').DataTable({
-                    
-                    
-                });
-            } );
-        });
+     
 
         $('document').ready(function(){
+            $('#table_balance').DataTable({
+                    "language": {
+                        "search": "Buscar:",
+                        "zeroRecords": "No se encontraron datos",
+                        "infoEmpty": "No hay datos para mostrar",
+                        "info": "Mostrando del _START_ al _END_, de un total de _TOTAL_ entradas",
+                        "paginate": {
+                            "first": "Primeros",
+                            "last": "Ultimos",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        },
+                    },
+                    
+                });
+
             $('.btn-alert').click(function(){
                 var id= "{{$iglesia->id}}";
                 var token= $('input[name=_token]').attr('value');
@@ -156,6 +165,8 @@
                     
                 
             })
+
+            
                 
         });
 

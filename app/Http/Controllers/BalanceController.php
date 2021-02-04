@@ -10,6 +10,13 @@ use App\Balance;
 class BalanceController extends Controller
 {
     use IglesiaTrait;
+
+    public function __construct()
+    {
+        $this->middleware('ValidateFinanza')->except('inicial','store');
+        
+    }
+    
     public function index($fecha)
     {   
         $balance = Balance::where('fecha','=',$fecha);
@@ -37,8 +44,8 @@ class BalanceController extends Controller
         $keys = "Domingo_".$i;
         $categorias= $this->categorias;
         $iglesia = $this->getUserIglesia();
-        $date = CarbonImmutable::now();
-        $datee = CarbonImmutable::create(2021,02,28);
+        $datee = CarbonImmutable::now();
+        $date = CarbonImmutable::create(2021,01,28);
                 
                     
                 
@@ -93,7 +100,7 @@ class BalanceController extends Controller
         $ultimoPasivo = $iglesia->Finanzas()->where('tipo','=','pasivo')->latest()->get('fecha')->first()->fecha;
         $retrasoPasivo = $date->diffInMonths($ultimoPasivo);
         $datePasivo = $date->subMonth($retrasoPasivo);
-
+        dd($ultimoBalance);
         if( ($retrasoActivo > 1) && ($retrasoPasivo > 1) ){            
             $msg=[
                 'text' => "Posee un retraso con sus finanzas ¡Por Favor Actualizarlas!",
@@ -206,7 +213,7 @@ class BalanceController extends Controller
                                         
                                         if(array_key_exists($key, array_intersect_key($pasivos, $balanceInicial))){
                                             $total[$key] = $balanceInicial[$key] - $pasivos[$key];
-                                        
+                                            dd('stop');
                                            if (!$iglesia->Balances()->create([
                                                 'monto'=>$total[$key],
                                                 'categoria' =>$key,
@@ -238,7 +245,7 @@ class BalanceController extends Controller
                                         
                                         if(array_key_exists($key, array_intersect_key($pasivos, $balances))){
                                             $total[$key] = $balances[$key] - $pasivos[$key];
-                                        
+                                        dd('stop');
                                            if (!$iglesia->Balances()->create([
                                                 'monto'=>$total[$key],
                                                 'categoria' =>$key,
@@ -430,9 +437,6 @@ class BalanceController extends Controller
         $iglesia = $this->getUserIglesia();
     
         $categorias = $this->categorias;
-        $ultimoBalance = $iglesia->Balances()->latest()->get('created_at')->first()->created_at;
-        $retrasoBalance = $date->diffInMonths($ultimoBalance);
-        $dateBalance = $date->subMonths($retrasoBalance);
         $balances = $iglesia->Balances()->latest()->take(8)->get();
 
      

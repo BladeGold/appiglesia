@@ -46,7 +46,7 @@
                                 <div class="col-sm-3 float-left"> <a href="{{route('users.edit', Auth::id() )}} "><button type="button" class="btn btn-block btn-warning btn-sm">Editar</button></a></div>
                                 
                                     <div class="form-group" >
-                                        <button type="button" class="btn btn-sm btn-secondary float-right" data-toggle="modal" data-target="#addRole">Cambiar contraseña</button>
+                                        <button type="button" class="btn btn-sm btn-secondary float-right" data-toggle="modal" data-target="#modalPassword">Cambiar contraseña</button>
                                     </div>
                                 
                             </div>
@@ -95,7 +95,7 @@
 
 
     <!--Modal-->
-    <div class="modal fade" id="addRole" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -105,13 +105,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('users.updatePassword', $user->id ) }}" method="POST">
+                    <form action="{{ route('users.updatePassword', $user->id ) }}" method="POST" id="passwordChange">
                         @csrf
                         @method('PUT')
                         <div class="input-group mb-3">
-                            <input id="password"  required type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Contraseña">
+                            <input id="password"  required type="password" class="form-control empty @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Contraseña">
                             <div class="input-group">
-                                
+                                <span class=" invalid" role="dialog"><strong class="password text-danger fs-6 fst-italic"> </strong></span>
                             </div>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -120,33 +120,94 @@
                             @enderror
                         </div>
                         <div class="input-group mb-3">
-                            <input id="password-confirm" required type="password" class="form-control" name="password_confirmation"  autocomplete="new-password" placeholder="Repetir Contraseña">
+                            <input id="password-confirm" required type="password" class="form-control empty" name="password_confirmation"  autocomplete="new-password" placeholder="Repetir Contraseña">
                             <div class="input-group">
                                 
                             </div>
                         </div> 
                         <hr>
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Contraseña actual</label>
+                        <div class="form-group ">
+                           
 
-                            <div class="col-md-6">
-                                <input id="password-actual" type="password" class="form-control @error('password-actual') is-invalid @enderror" name="password-actual" required autocomplete="current-password">
-
+                            
+                                <input id="password-actual" type="password" class="form-control empty @error('password-actual') is-invalid @enderror" name="password-actual" required autocomplete="current-password" placeholder="Contraseña Actual">
+                                <div class="input-group">
+                                    <span class=""> <strong class="password-actual text-danger fs-6 fst-italic"> </strong> </span>
+                                </div>
                                 @error('password-actual')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            
                         </div>
                     
                 </div>                            
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cerrar">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submit">Guardar</button>
                 </div>
             </form>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+
+$('document').ready(function(){
+   
+    $('#submit').click(function(){  
+        
+        var form=$('#passwordChange');
+        var url= form.attr('action');
+        var data= form.serializeArray();
+       
+        
+      
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'PUT',
+            headers: {
+                          'X-CSRF-Token': $('input[name=_token]').attr('value'), 
+                                 },
+            success: function(result){
+                
+                $('#password').val('');
+                $('#password-actual').val('');
+                $('#password-confirm').val('');
+                $('#cerrar').click();
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+                
+               
+                Swal.fire({
+                    title : result,
+                    icon: 'success',
+                });
+            },
+            error: function(error){
+                var errors = error.responseJSON.errors;
+                for(var i in errors){
+                    if(errors.hasOwnProperty(i)){
+                        $(`input[name=${[i]}]`).addClass('is-invalid')
+                        $(`.${i}`).html(`${errors[i]}`);
+                    }
+                }
+                
+            }
+        });
+
+
+        
+
+        
+
+    });
+});
+
+    </script>
+    
+@endpush

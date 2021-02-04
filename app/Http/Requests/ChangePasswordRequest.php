@@ -25,14 +25,14 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             'password-actual' => 'required|min:8|current_password',
-            'password' => 'confirmed|min:8'
+            'password' => 'required|confirmed|min:8'
         ];
     }
 
     public function messages()
     {
         return [
-            'current_password' => 'La contraseña actual incorrecta'
+            'current_password' => 'Contraseña actual incorrecta'
             //'min' => 'Debe ingresar un minimo de 8 caracteres'
         ];
     }

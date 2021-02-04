@@ -37,7 +37,7 @@
 
         $(document).ready(function()
         {
-            $("#miModal").modal("show");
+            $("#mensajeModal").modal("show");
         });
 
 @endif

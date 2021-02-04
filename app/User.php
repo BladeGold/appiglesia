@@ -73,7 +73,7 @@ class User extends Authenticatable
 
     //Relacion Usuarios Datos
 
-    public function Tiene(){
+    public function Datos(){
         return $this->hasOne(UserDate::class);
     }
 }

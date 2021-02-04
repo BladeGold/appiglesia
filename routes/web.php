@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function(){
 
     //Usuarios
     Route::put('users/cambiarpassword/{user}', 'UserController@cambiarPassword')->name('users.updatePassword')
-        ->middleware('can:user.edit');
+        ->middleware('can:users.edit');
 
     Route::post('users/store', 'UserController@store')->name('users.store')
         ->middleware('can:users.create');
