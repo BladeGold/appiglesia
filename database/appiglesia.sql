@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-01-2021 a las 02:51:45
+-- Tiempo de generación: 05-02-2021 a las 08:54:19
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.4.7
 
@@ -43,38 +43,50 @@ CREATE TABLE `balances` (
 --
 
 INSERT INTO `balances` (`id`, `iglesia_id`, `categoria`, `monto`, `fecha`, `inicial`, `created_at`, `updated_at`) VALUES
-(43, 1, 'Damas', 3000, '2020-12-24', 1, '2020-12-25 01:44:03', '2021-01-25 01:44:03'),
-(44, 1, 'Jovenes', 3000, '2020-12-24', 1, '2020-12-25 01:44:03', '2021-01-25 01:44:03'),
-(45, 1, 'Ninos', 3000, '2020-12-24', 1, '2020-12-25 01:44:03', '2021-01-25 01:44:03'),
-(46, 1, 'DLD', 3000, '2020-12-24', 1, '2020-12-25 01:44:03', '2021-01-25 01:44:03'),
-(47, 1, 'Caballeros', 3000, '2020-12-24', 1, '2020-12-25 01:44:03', '2021-01-25 01:44:03'),
-(48, 1, 'Patrimonio_Historico', 3000, '2020-12-24', 1, '2020-12-25 01:44:04', '2021-01-25 01:44:04'),
-(49, 1, 'Fondo_Local', 3000, '2020-12-24', 1, '2020-12-25 01:44:04', '2021-01-25 01:44:04'),
-(50, 1, 'Diezmo_Restante', 2000, '2020-12-24', 1, '2020-12-01 04:24:15', '2021-01-25 01:44:04'),
-(159, 1, 'Damas', 4000, '2020-12-31', NULL, '2021-01-27 01:29:38', '2021-01-27 01:29:38'),
-(160, 1, 'Jovenes', 4000, '2020-12-31', NULL, '2021-01-27 01:29:38', '2021-01-27 01:29:38'),
-(161, 1, 'Ninos', 4000, '2020-12-31', NULL, '2021-01-27 01:29:38', '2021-01-27 01:29:38'),
-(162, 1, 'DLD', 4000, '2020-12-31', NULL, '2021-01-27 01:29:38', '2021-01-27 01:29:38'),
-(163, 1, 'Caballeros', 4000, '2020-12-31', NULL, '2021-01-27 01:29:38', '2021-01-27 01:29:38'),
-(164, 1, 'Patrimonio_Historico', 4000, '2020-12-31', NULL, '2021-01-27 01:29:38', '2021-01-27 01:29:38'),
-(165, 1, 'Fondo_Local', 8000, '2020-12-31', NULL, '2021-01-27 01:29:38', '2021-01-27 01:29:38'),
-(166, 1, 'Diezmo_Restante', 7800, '2020-12-31', NULL, '2021-01-27 01:29:38', '2021-01-27 01:29:38'),
-(175, 1, 'Damas', 5000, '2021-01-26', NULL, '2021-01-27 02:43:16', '2021-01-27 02:43:16'),
-(176, 1, 'Jovenes', 5000, '2021-01-26', NULL, '2021-01-27 02:43:16', '2021-01-27 02:43:16'),
-(177, 1, 'Ninos', 5000, '2021-01-26', NULL, '2021-01-27 02:43:16', '2021-01-27 02:43:16'),
-(178, 1, 'DLD', 5000, '2021-01-26', NULL, '2021-01-27 02:43:16', '2021-01-27 02:43:16'),
-(179, 1, 'Caballeros', 5000, '2021-01-26', NULL, '2021-01-27 02:43:16', '2021-01-27 02:43:16'),
-(180, 1, 'Patrimonio_Historico', 5000, '2021-01-26', NULL, '2021-01-27 02:43:16', '2021-01-27 02:43:16'),
-(181, 1, 'Fondo_Local', 13000, '2021-01-26', NULL, '2021-01-27 02:43:16', '2021-01-27 02:43:16'),
-(182, 1, 'Diezmo_Restante', 13600, '2021-01-26', NULL, '2021-01-27 02:43:16', '2021-01-27 02:43:16'),
-(184, 3, 'Jovenes', 1000, NULL, 1, '2021-01-27 02:59:46', '2021-01-27 02:59:46'),
-(185, 3, 'Ninos', 1000, NULL, 1, '2021-01-27 02:59:46', '2021-01-27 02:59:46'),
-(186, 3, 'DLD', 1000, NULL, 1, '2021-01-27 02:59:46', '2021-01-27 02:59:46'),
-(187, 3, 'Caballeros', 1000, NULL, 1, '2021-01-27 02:59:46', '2021-01-27 02:59:46'),
-(188, 3, 'Patrimonio_Historico', 1000, NULL, 1, '2021-01-27 02:59:47', '2021-01-27 02:59:47'),
-(189, 3, 'Fondo_Local', 1000, NULL, 1, '2021-01-27 02:59:47', '2021-01-27 02:59:47'),
-(203, 3, 'Diezmo_Restante', 5550, '2020-12-31', NULL, '2021-01-28 17:31:31', '2021-01-28 17:31:31'),
-(204, 3, 'Diezmo_Restante', 6100, '2021-01-28', NULL, '2021-01-28 17:31:49', '2021-01-28 17:31:49');
+(1, 3, 'Damas', 10000, '2021-02-04', 1, '2021-02-04 06:25:27', '2021-02-04 06:25:27'),
+(2, 3, 'Jovenes', 10000, '2021-02-04', 1, '2021-02-04 06:25:27', '2021-02-04 06:25:27'),
+(3, 3, 'Ninos', 10000, '2021-02-04', 1, '2021-02-04 06:25:27', '2021-02-04 06:25:27'),
+(4, 3, 'DLD', 10000, '2021-02-04', 1, '2021-02-04 06:25:27', '2021-02-04 06:25:27'),
+(5, 3, 'Caballeros', 10000, '2021-02-04', 1, '2021-02-04 06:25:27', '2021-02-04 06:25:27'),
+(6, 3, 'Patrimonio_Historico', 10000, '2021-02-04', 1, '2021-02-04 06:25:27', '2021-02-04 06:25:27'),
+(7, 3, 'Fondo_Local', 10000, '2021-02-04', 1, '2021-02-04 06:25:27', '2021-02-04 06:25:27'),
+(8, 3, 'Diezmo_Restante', 10000, '2021-02-04', 1, '2021-02-04 06:25:27', '2021-02-04 06:25:27'),
+(137, 3, 'Damas', 10500, '2021-02-05', NULL, '2021-02-05 07:56:00', '2021-02-05 07:56:00'),
+(138, 3, 'Jovenes', 10500, '2021-02-05', NULL, '2021-02-05 07:56:00', '2021-02-05 07:56:00'),
+(139, 3, 'Ninos', 10500, '2021-02-05', NULL, '2021-02-05 07:56:00', '2021-02-05 07:56:00'),
+(140, 3, 'DLD', 10500, '2021-02-05', NULL, '2021-02-05 07:56:00', '2021-02-05 07:56:00'),
+(141, 3, 'Caballeros', 10500, '2021-02-05', NULL, '2021-02-05 07:56:00', '2021-02-05 07:56:00'),
+(142, 3, 'Patrimonio_Historico', 10500, '2021-02-05', NULL, '2021-02-05 07:56:00', '2021-02-05 07:56:00'),
+(143, 3, 'Fondo_Local', 18000, '2021-02-05', NULL, '2021-02-05 07:56:00', '2021-02-05 07:56:00'),
+(144, 3, 'Diezmo_Restante', 11550, '2021-02-05', NULL, '2021-02-05 07:56:00', '2021-02-05 07:56:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `diezmos`
+--
+
+CREATE TABLE `diezmos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `iglesia_id` bigint(20) UNSIGNED NOT NULL,
+  `monto` int(10) UNSIGNED NOT NULL,
+  `referencia` int(10) UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `diezmos`
+--
+
+INSERT INTO `diezmos` (`id`, `user_id`, `iglesia_id`, `monto`, `referencia`, `fecha`, `created_at`, `updated_at`) VALUES
+(2, 10, 3, 132123132, 123456, '2021-02-05', '2021-02-05 02:28:02', '2021-02-05 02:28:02'),
+(3, 10, 3, 1321564, 123457, '2021-02-04', '2021-02-05 02:28:59', '2021-02-05 02:28:59'),
+(4, 10, 3, 2121631, 124579, '2021-02-04', '2021-02-05 02:53:53', '2021-02-05 02:53:53'),
+(5, 10, 3, 121321, 132132, '2021-02-05', '2021-02-05 02:55:44', '2021-02-05 02:55:44'),
+(6, 10, 3, 4567891, 123456, '2021-02-05', '2021-02-05 03:05:25', '2021-02-05 03:05:25');
 
 -- --------------------------------------------------------
 
@@ -114,34 +126,56 @@ CREATE TABLE `finanzas` (
 --
 
 INSERT INTO `finanzas` (`id`, `iglesia_id`, `categoria`, `monto`, `fecha`, `descripcion`, `tipo`, `created_at`, `updated_at`) VALUES
-(47, 1, 'Damas', 4000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(48, 1, 'Jovenes', 4000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(49, 1, 'Ninos', 4000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(50, 1, 'DLD', 4000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(51, 1, 'Caballeros', 4000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(52, 1, 'Patrimonio_Historico', 4000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(53, 1, 'Diezmo_Total', 8000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(54, 1, 'Diezmo_Pastor', 2000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(55, 1, 'Diezmo_Ministros', 2000, '2020-12-01', NULL, 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(56, 1, 'Domingo_2', 2000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(57, 1, 'Domingo_3', 2000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:06', '2021-01-24 21:10:06'),
-(58, 1, 'Domingo_4', 2000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:07', '2021-01-24 21:10:07'),
-(59, 1, 'Impulso_Mundial', 2000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:07', '2021-01-24 21:10:07'),
-(60, 1, 'Impulso_Nacional', 2000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:07', '2021-01-24 21:10:07'),
-(61, 1, 'Tabernaculo_Nacional', 2000, '2020-12-01', 'prueba', 'Activo', '2021-01-24 21:10:07', '2021-01-24 21:10:07'),
-(62, 1, 'Pago_Prestamos', 2000, '2020-12-01', 'prueba', 'Activo', '2021-01-13 04:10:31', '2021-01-24 21:10:07'),
-(63, 1, 'Otros_Propositos', 2000, '2020-12-01', 'prueba', 'Activo', '2021-01-13 21:10:07', '2021-01-24 21:10:07'),
-(64, 1, 'Fondo_Local', 1000, '2020-12-01', 'prueba', 'Pasivo', '2021-01-24 21:11:39', '2021-01-24 21:11:39'),
-(65, 1, 'Diezmo_Restante', 1000, '2020-12-01', 'prueba', 'Pasivo', '2021-01-24 21:11:39', '2021-01-24 21:11:39'),
-(66, 1, 'Damas', 1000, '2020-12-01', 'prueba', 'Pasivo', '2021-01-24 21:11:39', '2021-01-24 21:11:39'),
-(67, 1, 'Jovenes', 1000, '2020-12-01', 'prueba', 'Pasivo', '2021-01-24 21:11:39', '2021-01-24 21:11:39'),
-(68, 1, 'Ninos', 1000, '2020-12-01', 'prueba', 'Pasivo', '2021-01-24 21:11:39', '2021-01-24 21:11:39'),
-(69, 1, 'DLD', 1000, '2020-12-01', 'prueba', 'Pasivo', '2021-01-24 21:11:39', '2021-01-24 21:11:39'),
-(70, 1, 'Caballeros', 1000, '2020-12-01', 'prueba', 'Pasivo', '2021-01-24 21:11:40', '2021-01-24 21:11:40'),
-(71, 1, 'Patrimonio_Historico', 1000, '2020-12-01', 'prueba', 'Pasivo', '2021-01-13 04:10:18', '2020-02-01 21:11:40'),
-(72, 3, 'Damas', 2000, '2020-12-30', 'asdasd', 'Activo', '2021-01-27 04:39:58', '2021-01-27 04:39:58'),
-(73, 3, 'Caballeros', 2000, '2021-01-01', 'adasd', 'Activo', '2021-01-27 04:39:58', '2021-01-27 04:39:58'),
-(74, 3, 'Diezmo_Restante', 2000, '2021-01-26', '1213', 'Pasivo', '2021-01-27 04:45:02', '2021-01-27 04:45:02');
+(1, 3, 'Fondo_Local', 1000, '2021-02-04', 'prueba', 'Pasivo', '2021-02-04 06:27:34', '2021-02-04 06:27:34'),
+(2, 3, 'Diezmo_Restante', 1000, '2021-02-04', 'preuba', 'Pasivo', '2021-02-04 06:27:34', '2021-02-04 06:27:34'),
+(3, 3, 'Damas', 1000, '2021-02-04', 'prueba', 'Pasivo', '2021-02-04 06:27:34', '2021-02-04 06:27:34'),
+(4, 3, 'Jovenes', 1000, '2021-02-04', 'prueba', 'Pasivo', '2021-02-04 06:27:34', '2021-02-04 06:27:34'),
+(5, 3, 'Ninos', 1000, '2021-02-04', 'prueba', 'Pasivo', '2021-02-04 06:27:35', '2021-02-04 06:27:35'),
+(6, 3, 'DLD', 1000, '2021-02-04', 'prueba', 'Pasivo', '2021-02-04 06:27:35', '2021-02-04 06:27:35'),
+(7, 3, 'Caballeros', 1000, '2021-02-04', 'prueba', 'Pasivo', '2021-02-04 06:27:35', '2021-02-04 06:27:35'),
+(8, 3, 'Patrimonio_Historico', 1000, '2021-02-04', 'prueba', 'Pasivo', '2021-02-04 06:27:35', '2021-02-04 06:27:35'),
+(9, 3, 'Damas', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(10, 3, 'Jovenes', 3000, '2021-02-04', 'pruebna', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(11, 3, 'Ninos', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(12, 3, 'DLD', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(13, 3, 'Caballeros', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(14, 3, 'Patrimonio_Historico', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(15, 3, 'Diezmo_Total', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(16, 3, 'Diezmo_Pastor', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(17, 3, 'Diezmo_Ministros', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(18, 3, 'Domingo_2', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(19, 3, 'Domingo_3', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(20, 3, 'Domingo_4', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(21, 3, 'Impulso_Mundial', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(22, 3, 'Impulso_Nacional', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(23, 3, 'Tabernaculo_Nacional', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(24, 3, 'Pago_Prestamos', 3000, '2021-02-04', 'preuba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(25, 3, 'Otros_Propositos', 3000, '2021-02-04', 'prueba', 'Activo', '2021-02-04 06:30:21', '2021-02-04 06:30:21'),
+(26, 3, 'Fondo_Local', 1000, '2021-03-04', 'prueba', 'Pasivo', '2021-02-04 06:34:38', '2021-02-04 06:34:38'),
+(27, 3, 'Diezmo_Restante', 1000, '2021-03-04', 'preuba', 'Pasivo', '2021-02-04 06:34:38', '2021-02-04 06:34:38'),
+(28, 3, 'Damas', 1000, '2021-03-04', 'prueba', 'Pasivo', '2021-02-04 06:34:38', '2021-02-04 06:34:38'),
+(29, 3, 'Jovenes', 1000, '2021-03-04', 'prueba', 'Pasivo', '2021-02-04 06:34:38', '2021-02-04 06:34:38'),
+(30, 3, 'Ninos', 1000, '2021-03-04', 'prueba', 'Pasivo', '2021-02-04 06:34:38', '2021-02-04 06:34:38'),
+(31, 3, 'DLD', 1000, '2021-03-04', 'prueba', 'Pasivo', '2021-02-04 06:34:38', '2021-02-04 06:34:38'),
+(32, 3, 'Caballeros', 1000, '2021-03-04', 'prueba', 'Pasivo', '2021-02-04 06:34:38', '2021-02-04 06:34:38'),
+(33, 3, 'Patrimonio_Historico', 1000, '2021-03-04', 'prueba', 'Pasivo', '2021-02-04 06:34:38', '2021-02-04 06:34:38'),
+(34, 3, 'Damas', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:04', '2021-02-04 06:38:04'),
+(35, 3, 'Jovenes', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:04', '2021-02-04 06:38:04'),
+(36, 3, 'Ninos', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:04', '2021-02-04 06:38:04'),
+(37, 3, 'DLD', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:04', '2021-02-04 06:38:04'),
+(38, 3, 'Caballeros', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:04', '2021-02-04 06:38:04'),
+(39, 3, 'Patrimonio_Historico', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:04', '2021-02-04 06:38:04'),
+(40, 3, 'Diezmo_Total', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:04', '2021-02-04 06:38:04'),
+(41, 3, 'Diezmo_Pastor', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05'),
+(42, 3, 'Diezmo_Ministros', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05'),
+(43, 3, 'Domingo_2', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05'),
+(44, 3, 'Domingo_3', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05'),
+(45, 3, 'Domingo_4', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05'),
+(46, 3, 'Impulso_Mundial', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05'),
+(47, 3, 'Impulso_Nacional', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05'),
+(48, 3, 'Tabernaculo_Nacional', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05'),
+(49, 3, 'Pago_Prestamos', 2000, '2021-03-04', 'preuba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05'),
+(50, 3, 'Otros_Propositos', 2000, '2021-03-04', 'prueba', 'Activo', '2021-02-04 06:38:05', '2021-02-04 06:38:05');
 
 -- --------------------------------------------------------
 
@@ -164,7 +198,7 @@ CREATE TABLE `iglesias` (
 INSERT INTO `iglesias` (`id`, `name`, `direccion`, `created_at`, `updated_at`) VALUES
 (1, 'Prueba', 'Prueba', NULL, '2020-12-21 11:24:39'),
 (2, 'Makro', 'Makros', '2020-12-20 13:23:02', '2020-12-24 09:30:24'),
-(3, 'Paseo', 'Paseo', '2020-12-20 13:25:24', '2020-12-20 13:25:24');
+(3, 'Paseo', 'Paseos', '2020-12-20 13:25:24', '2021-02-04 15:26:10');
 
 -- --------------------------------------------------------
 
@@ -186,7 +220,9 @@ CREATE TABLE `iglesia_user` (
 
 INSERT INTO `iglesia_user` (`id`, `iglesia_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 3, 10, '2020-12-22 05:37:29', '2020-12-22 05:37:29'),
-(2, 1, 16, '2020-12-24 08:28:15', '2020-12-24 08:28:15');
+(2, 1, 16, '2020-12-24 08:28:15', '2020-12-24 08:28:15'),
+(5, 3, 19, '2021-02-05 07:53:23', '2021-02-05 07:53:23'),
+(6, 3, 20, '2021-02-05 07:53:50', '2021-02-05 07:53:50');
 
 -- --------------------------------------------------------
 
@@ -218,7 +254,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2020_12_16_052638_create_iglesias', 1),
 (12, '2020_12_16_052739_create_iglesia_user', 1),
 (13, '2020_12_24_085123_create_finanzas', 1),
-(14, '2021_01_13_090743_create_balance', 1);
+(14, '2021_01_13_090743_create_balance', 1),
+(16, '2021_02_04_205452_create_diezmo', 2);
 
 -- --------------------------------------------------------
 
@@ -252,41 +289,47 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `slug`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Navegar usuarios', 'users.index', 'Lista y navega todos los usuarios del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(2, 'Ver detalles de usuario', 'users.show', 'Ver en detalle cada usuario del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(3, 'Creación de datos de usuario', 'users.create', 'Registrar datos de un usuario', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(4, 'Edicion de usuarios', 'users.edit', 'Editar cualquier dato de un usuario del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(5, 'Eliminar usuario', 'users.destroy', 'Eliminar cualquier usuario del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(6, 'Navegar roles', 'roles.index', 'Lista y navega todos los roles del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(7, 'Ver detalles de rol', 'roles.show', 'Ver en detalle cada rol del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(8, 'Creación de roles', 'roles.create', 'Crear un rol en el sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(9, 'Edición de roles', 'roles.edit', 'Editar cualquier dato de un rol del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(10, 'Eliminar rol', 'roles.destroy', 'Eliminar cualquier rol del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(11, 'Navegar iglesias', 'iglesias.index', 'Lista y navega todas las iglesias del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(12, 'Ver detalles de iglesia', 'iglesias.show', 'Ver en detalle cada iglesia del sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(13, 'Creación de iglesias', 'iglesias.create', 'Crear una iglesia en el sistema', '2020-12-18 10:30:40', '2020-12-18 10:30:40'),
-(14, 'Edición de iglesias', 'iglesias.edit', 'Editar cualquier dato de una iglesia del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(15, 'Eliminar iglesia', 'iglesias.destroy', 'Eliminar cualquier iglesia del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(16, 'Navegar Finanzas', 'finanzas.index', 'Lista y navega todas las Finanzas del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(17, 'Ver detalles de finanza', 'finanzas.show', 'Ver en detalle cada finanza del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(18, 'Creación de Finanzas', 'finanzas.create', 'Crear una finanza en el sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(19, 'Edición de Finanzas', 'finanzas.edit', 'Editar cualquier dato de una finanza del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(20, 'Eliminar finanza', 'finanzas.destroy', 'Eliminar cualquier finanza del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(21, 'Navegar noticias', 'noticias.index', 'Lista y navega todas las noticias del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(22, 'Ver detalles de noticia', 'noticias.show', 'Ver en detalle cada noticia del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(23, 'Creación de noticias', 'noticias.create', 'Crear una noticia en el sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(24, 'Edición de noticias', 'noticias.edit', 'Editar cualquier dato de una noticia del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(25, 'Eliminar noticia', 'noticias.destroy', 'Eliminar cualquier noticia del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(26, 'Navegar eventos', 'eventos.index', 'Lista y navega todos los eventos del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(27, 'Ver detalles de evento', 'eventos.show', 'Ver en detalle cada evento del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(28, 'Creación de eventos', 'eventos.create', 'Crear un evento en el sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(29, 'Edición de eventos', 'eventos.edit', 'Editar cualquier dato de un evento del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(30, 'Eliminar evento', 'eventos.destroy', 'Eliminar cualquier evento del sistema', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(31, 'Navegar ', 'admin.index', 'Lista y navega ', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(32, 'Ver detalles ', 'admin.show', 'Ver en detalle ', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(33, 'Creación ', 'admin.create', 'Crear ', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(34, 'Edición ', 'admin.edit', 'Editar ', '2020-12-18 10:30:41', '2020-12-18 10:30:41'),
-(35, 'Eliminar', 'admin.destroy', 'Eliminar ', '2020-12-18 10:30:41', '2020-12-18 10:30:41');
+(1, 'Navegar usuarios', 'users.index', 'Lista y navega todos los usuarios del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(2, 'Ver detalles de usuario', 'users.show', 'Ver en detalle cada usuario del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(3, 'Creación de datos de usuario', 'users.create', 'Registrar datos de un usuario', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(4, 'Edicion de usuarios', 'users.edit', 'Editar cualquier dato de un usuario del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(5, 'Eliminar usuario', 'users.destroy', 'Eliminar cualquier usuario del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(6, 'Navegar roles', 'roles.index', 'Lista y navega todos los roles del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(7, 'Ver detalles de rol', 'roles.show', 'Ver en detalle cada rol del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(8, 'Creación de roles', 'roles.create', 'Crear un rol en el sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(9, 'Edición de roles', 'roles.edit', 'Editar cualquier dato de un rol del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(10, 'Eliminar rol', 'roles.destroy', 'Eliminar cualquier rol del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(11, 'Navegar iglesias', 'iglesias.index', 'Lista y navega todas las iglesias del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(12, 'Ver detalles de iglesia', 'iglesias.show', 'Ver en detalle cada iglesia del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(13, 'Creación de iglesias', 'iglesias.create', 'Crear una iglesia en el sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(14, 'Edición de iglesias', 'iglesias.edit', 'Editar cualquier dato de una iglesia del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(15, 'Eliminar iglesia', 'iglesias.destroy', 'Eliminar cualquier iglesia del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(16, 'Navegar Finanzas', 'finanzas.index', 'Lista y navega todas las Finanzas del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(17, 'Ver detalles de finanza', 'finanzas.show', 'Ver en detalle cada finanza del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(18, 'Creación de Finanzas', 'finanzas.create', 'Crear una finanza en el sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(19, 'Edición de Finanzas', 'finanzas.edit', 'Editar cualquier dato de una finanza del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(20, 'Eliminar finanza', 'finanzas.destroy', 'Eliminar cualquier finanza del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(21, 'Navegar noticias', 'noticias.index', 'Lista y navega todas las noticias del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(22, 'Ver detalles de noticia', 'noticias.show', 'Ver en detalle cada noticia del sistema', '2021-02-04 22:58:49', '2021-02-04 22:58:49'),
+(23, 'Creación de noticias', 'noticias.create', 'Crear una noticia en el sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(24, 'Edición de noticias', 'noticias.edit', 'Editar cualquier dato de una noticia del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(25, 'Eliminar noticia', 'noticias.destroy', 'Eliminar cualquier noticia del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(26, 'Navegar eventos', 'eventos.index', 'Lista y navega todos los eventos del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(27, 'Ver detalles de evento', 'eventos.show', 'Ver en detalle cada evento del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(28, 'Creación de eventos', 'eventos.create', 'Crear un evento en el sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(29, 'Edición de eventos', 'eventos.edit', 'Editar cualquier dato de un evento del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(30, 'Eliminar evento', 'eventos.destroy', 'Eliminar cualquier evento del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(31, 'Navegar diezmos', 'diezmos.index', 'Lista y navega todos los diezmos del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(32, 'Ver detalles de diezmo', 'diezmos.show', 'Ver en detalle cada diezmo del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(33, 'Creación de diezmos', 'diezmos.create', 'Crear un diezmo en el sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(34, 'Edición de diezmos', 'diezmos.edit', 'Editar cualquier dato de un diezmo del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(35, 'Eliminar diezmo', 'diezmos.destroy', 'Eliminar cualquier diezmo del sistema', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(36, 'Navegar ', 'admin.index', 'Lista y navega ', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(37, 'Ver detalles ', 'admin.show', 'Ver en detalle ', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(38, 'Creación ', 'admin.create', 'Crear ', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(39, 'Edición ', 'admin.edit', 'Editar ', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(40, 'Eliminar', 'admin.destroy', 'Eliminar ', '2021-02-04 22:58:50', '2021-02-04 22:58:50'),
+(41, 'Crear un nuevo miembro', 'users.createMiembro', 'Crea un nuevo miembro dentro de la iglesia', '2021-02-05 06:47:15', '2021-02-05 06:47:15');
 
 -- --------------------------------------------------------
 
@@ -347,7 +390,23 @@ INSERT INTO `permission_role` (`id`, `permission_id`, `role_id`, `created_at`, `
 (46, 21, 5, '2021-01-28 20:08:08', '2021-01-28 20:08:08'),
 (47, 22, 5, '2021-01-28 20:08:08', '2021-01-28 20:08:08'),
 (48, 26, 5, '2021-01-28 20:08:08', '2021-01-28 20:08:08'),
-(49, 27, 5, '2021-01-28 20:08:08', '2021-01-28 20:08:08');
+(49, 27, 5, '2021-01-28 20:08:08', '2021-01-28 20:08:08'),
+(50, 32, 2, '2021-02-04 23:04:42', '2021-02-04 23:04:42'),
+(51, 33, 2, '2021-02-04 23:04:42', '2021-02-04 23:04:42'),
+(52, 34, 2, '2021-02-04 23:04:42', '2021-02-04 23:04:42'),
+(54, 32, 4, '2021-02-04 23:05:13', '2021-02-04 23:05:13'),
+(55, 33, 4, '2021-02-04 23:05:13', '2021-02-04 23:05:13'),
+(56, 34, 4, '2021-02-04 23:05:13', '2021-02-04 23:05:13'),
+(57, 31, 4, '2021-02-04 23:06:06', '2021-02-04 23:06:06'),
+(58, 32, 5, '2021-02-04 23:06:27', '2021-02-04 23:06:27'),
+(59, 33, 5, '2021-02-04 23:06:27', '2021-02-04 23:06:27'),
+(60, 34, 5, '2021-02-04 23:06:27', '2021-02-04 23:06:27'),
+(61, 31, 3, '2021-02-04 23:06:41', '2021-02-04 23:06:41'),
+(62, 32, 3, '2021-02-04 23:06:41', '2021-02-04 23:06:41'),
+(63, 33, 3, '2021-02-04 23:06:42', '2021-02-04 23:06:42'),
+(64, 34, 3, '2021-02-04 23:06:42', '2021-02-04 23:06:42'),
+(65, 41, 3, '2021-02-05 07:57:18', '2021-02-05 07:57:18'),
+(66, 41, 5, '2021-02-05 08:01:24', '2021-02-05 08:01:24');
 
 -- --------------------------------------------------------
 
@@ -412,7 +471,9 @@ INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`)
 (3, 1, 10, '2020-12-18 06:13:18', '2020-12-18 06:13:18'),
 (15, 4, 14, '2020-12-22 12:51:51', '2020-12-22 12:51:51'),
 (17, 3, 16, '2021-01-09 04:26:12', '2021-01-09 04:26:12'),
-(18, 2, 15, '2021-01-26 18:32:53', '2021-01-26 18:32:53');
+(18, 2, 15, '2021-01-26 18:32:53', '2021-01-26 18:32:53'),
+(21, 2, 19, '2021-02-05 07:53:23', '2021-02-05 07:53:23'),
+(22, 2, 20, '2021-02-05 07:53:50', '2021-02-05 07:53:50');
 
 -- --------------------------------------------------------
 
@@ -442,7 +503,9 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `email_verified_at`, `i
 (11, 'Ismael rodarte', 'Daniela olmos', 'yceballos@example.net', '2020-12-20 07:53:20', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6irimfiGzA', '2020-12-20 07:53:20', '2020-12-20 07:53:20'),
 (14, 'Ainara', 'De la cruz', 'montalvo.omar@example.org', '2020-12-20 08:04:21', 'default.png', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'lvSeWoaRO4', '2020-12-20 08:04:22', '2020-12-20 08:04:22'),
 (15, 'Miguel', 'Robles', 'asisneros@example.net', '2020-12-20 08:04:21', NULL, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '6jYUGVFln8', '2020-12-20 08:04:22', '2020-12-20 08:04:22'),
-(16, 'Eduardoo', 'Fonsecaaa', 'eduardo@mail.com', NULL, 'default.png', '$2y$10$VsTPFxXF3AbmoogszUoePeW0z/9zIzXdGJ.thT2lnlyjSKN.uo1EO', 'GOxtBTbkA4F2ykL9DWPZf7YiPaRW7KZbd6oZCaNWh722ZCnEvoghcB0xjYAf', '2020-12-24 08:27:25', '2020-12-24 10:13:29');
+(16, 'Eduardoo', 'Fonsecaaa', 'eduardo@mail.com', NULL, 'default.png', '$2y$10$VsTPFxXF3AbmoogszUoePeW0z/9zIzXdGJ.thT2lnlyjSKN.uo1EO', 'Ti6OeQGIrD9VG1tRZ0cSIvHAk6Fj0ZsT75muDspid9wyfaa4fRUEUZqNWNeV', '2020-12-24 08:27:25', '2020-12-24 10:13:29'),
+(19, 'Negro', 'Clouse', 'negro@mail.com', NULL, 'default.png', '$2y$10$aOZ4Yn1tU/f336JJewcVTOvbjxMJRcG22U5pwxm3Xkbc7.9tPUp0G', NULL, '2021-02-05 07:53:23', '2021-02-05 07:53:23'),
+(20, 'Negrito', 'Menoses', 'negros@mail.com', NULL, 'default.png', '$2y$10$J47J5bKPTqE23aBw3oMH6ul1smzQhQeTUx1XKWUXs9pL7kn9VdEgm', NULL, '2021-02-05 07:53:50', '2021-02-05 07:53:50');
 
 -- --------------------------------------------------------
 
@@ -484,6 +547,14 @@ INSERT INTO `users_date` (`user_id`, `fecha_nacimiento`, `lugar_nacimiento`, `te
 ALTER TABLE `balances`
   ADD PRIMARY KEY (`id`),
   ADD KEY `balance_iglesia_id_foreign` (`iglesia_id`);
+
+--
+-- Indices de la tabla `diezmos`
+--
+ALTER TABLE `diezmos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `diezmos_user_id_foreign` (`user_id`),
+  ADD KEY `diezmos_iglesia_id_foreign` (`iglesia_id`);
 
 --
 -- Indices de la tabla `failed_jobs`
@@ -585,7 +656,13 @@ ALTER TABLE `users_date`
 -- AUTO_INCREMENT de la tabla `balances`
 --
 ALTER TABLE `balances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+
+--
+-- AUTO_INCREMENT de la tabla `diezmos`
+--
+ALTER TABLE `diezmos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -597,7 +674,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `finanzas`
 --
 ALTER TABLE `finanzas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `iglesias`
@@ -609,25 +686,25 @@ ALTER TABLE `iglesias`
 -- AUTO_INCREMENT de la tabla `iglesia_user`
 --
 ALTER TABLE `iglesia_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `permission_role`
 --
 ALTER TABLE `permission_role`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de la tabla `permission_user`
@@ -645,13 +722,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
@@ -662,6 +739,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `balances`
   ADD CONSTRAINT `balance_iglesia_id_foreign` FOREIGN KEY (`iglesia_id`) REFERENCES `iglesias` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `diezmos`
+--
+ALTER TABLE `diezmos`
+  ADD CONSTRAINT `diezmos_iglesia_id_foreign` FOREIGN KEY (`iglesia_id`) REFERENCES `iglesias` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `diezmos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `finanzas`
