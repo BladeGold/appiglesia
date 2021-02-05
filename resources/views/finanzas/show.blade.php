@@ -72,7 +72,7 @@
                             "previous": "Anterior"
                         },
                     },
-                    "order": [[ 3, "desc" ]]
+                    "order": [[ 2, "desc" ]]
                 });
 
                 $('.btn-delete').click(function(){

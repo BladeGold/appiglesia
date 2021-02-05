@@ -44,8 +44,8 @@ class BalanceController extends Controller
         $keys = "Domingo_".$i;
         $categorias= $this->categorias;
         $iglesia = $this->getUserIglesia();
-        $datee = CarbonImmutable::now();
-        $date = CarbonImmutable::create(2021,01,28);
+        $date = CarbonImmutable::now();
+        $datee = CarbonImmutable::create(2021,04,28);
                 
                     
                 
@@ -100,7 +100,7 @@ class BalanceController extends Controller
         $ultimoPasivo = $iglesia->Finanzas()->where('tipo','=','pasivo')->latest()->get('fecha')->first()->fecha;
         $retrasoPasivo = $date->diffInMonths($ultimoPasivo);
         $datePasivo = $date->subMonth($retrasoPasivo);
-        dd($ultimoBalance);
+        
         if( ($retrasoActivo > 1) && ($retrasoPasivo > 1) ){            
             $msg=[
                 'text' => "Posee un retraso con sus finanzas ¡Por Favor Actualizarlas!",
@@ -141,9 +141,9 @@ class BalanceController extends Controller
 
         switch ($request->tipo) {
             case 'mensual':
-            
-                    if( $retrasoBalance >= 1 ){
-
+                
+                    if( ($retrasoBalance > 1)  && ($date > $ultimoBalance )){
+                        
                         if($activos=$iglesia->Finanzas()->where('tipo','=','activo')->whereBetween('fecha',[$dateActivo->startOfMonth(), $dateActivo->endOfMonth()])->pluck('monto','categoria')->toArray());
                             else{
                                 $msg=[
@@ -175,7 +175,7 @@ class BalanceController extends Controller
                             ($balances=$iglesia->Balances->where('inicial','=',NULL)->whereBetween('fecha',[$ultimoBalance->startOfMonth(),$ultimoBalance->endOfMonth()])
                             ->pluck('monto','categoria')->toArray());
                             
-                            
+                           
                             foreach ($categorias as $key => $value) {
                                 if($key==='Diezmo_Total' && array_key_exists($key,$activos)){
                                     $activos[$key]=$activos[$key]*0.85;                                
@@ -213,7 +213,7 @@ class BalanceController extends Controller
                                         
                                         if(array_key_exists($key, array_intersect_key($pasivos, $balanceInicial))){
                                             $total[$key] = $balanceInicial[$key] - $pasivos[$key];
-                                            dd('stop');
+                                            
                                            if (!$iglesia->Balances()->create([
                                                 'monto'=>$total[$key],
                                                 'categoria' =>$key,
@@ -245,11 +245,11 @@ class BalanceController extends Controller
                                         
                                         if(array_key_exists($key, array_intersect_key($pasivos, $balances))){
                                             $total[$key] = $balances[$key] - $pasivos[$key];
-                                        dd('stop');
+                                       
                                            if (!$iglesia->Balances()->create([
                                                 'monto'=>$total[$key],
                                                 'categoria' =>$key,
-                                                'fecha' => $ultimoBalance->endOfMonth(),                                        
+                                                'fecha' => $ultimoBalance->addMonth(1)->endOfMonth(),                                        
                                             ])); 
                                         } 
                                     }                              
@@ -257,6 +257,7 @@ class BalanceController extends Controller
                                 
 
                             }
+                            if(empty($balances)){  
                                 $msg=[
                                     'text' => "Se a generado el balacance para la fecha ".$ultimoBalance->endOfMonth()->format('Y-m-d') ,
                                     'title' => "¡Exitoso!",
@@ -267,6 +268,19 @@ class BalanceController extends Controller
                                     return response()->Json($msg);
                                     
                                 }
+                            }else{
+                                $msg=[
+                                    'text' => "Se a generado el balacance para la fecha ".$ultimoBalance->addMonth(1)->endOfMonth()->format('Y-m-d') ,
+                                    'title' => "¡Exitoso!",
+                                    'icon' => "success"
+                                ];
+                                if($request->ajax()){
+                                
+                                    return response()->Json($msg);
+                                    
+                                }
+
+                            }
                     }else{
                     
                         $msg=[
@@ -286,8 +300,8 @@ class BalanceController extends Controller
             */
             
             case 'ahora':
-          
-                        if($ultimoBalance->format('Y-m-d') !== $date->format('Y-m-d')){
+         
+                        if(($ultimoBalance->format('Y-m-d') !== $date->format('Y-m-d')) && ($retrasoBalance < 1)){
                             
                             if($activos=$iglesia->Finanzas()->where('tipo','=','activo')->whereBetween('fecha',[$dateActivo->startOfMonth(), $date])->pluck('monto','categoria')->toArray());
                             else{
@@ -413,6 +427,17 @@ class BalanceController extends Controller
                                     
                                 }
                             
+                        }elseif($retrasoBalance > 1){
+                            $msg=[
+                                'text' => "Posee un retraso con sus balances mensuales, accion no completada",
+                                'title' => "¡Atención!",
+                                'icon' => "info"
+                            ];
+                            if($request->ajax()){
+                            
+                                return response()->Json($msg,404);
+                                
+                            }
                         }else{
                             $msg=[
                                 'text' => "Sus Balances estan actualizados",
@@ -437,7 +462,7 @@ class BalanceController extends Controller
         $iglesia = $this->getUserIglesia();
     
         $categorias = $this->categorias;
-        $balances = $iglesia->Balances()->latest()->take(8)->get();
+        $balances = $iglesia->Balances;
 
      
 

@@ -55,16 +55,19 @@ Route::middleware(['auth'])->group(function(){
     Route::post('users/store', 'UserController@store')->name('users.store')
         ->middleware('can:users.create');
 
+    Route::post('users/storemiembro', 'UserController@storeMiembro')->name('users.storeMiembro')
+        ->middleware('can:users.createMiembro');
+
     Route::get('users', 'UserController@index')->name('users.index')
         ->middleware('can:users.index');
 
     Route::get('users/registerdate', 'UserController@create')->name('users.create')
         ->middleware('can:users.create');    
+    Route::get('users/nuevomiembro', 'UserController@createMiembro')->name('users.miembro')
+        ->middleware('can:users.createMiembro');    
 
     Route::put('users/{user}', 'UserController@update')->name('users.update')
-        ->middleware('can:users.edit');
-    
-    
+        ->middleware('can:users.edit');        
   
     Route::get('users/{user}', 'UserController@show')->name('users.show')
         ->middleware('can:users.show');
@@ -220,6 +223,30 @@ Route::middleware(['auth'])->group(function(){
 
     //Respaldo
     Route::get('backup', 'AdminController@backup_database')->name('backup')->middleware('can:admin');
+
+    //Diezmo
+    Route::post('diezmo/store', 'DiezmoController@store')->name('diezmos.store')
+    ->middleware('can:diezmos.create');
+
+    Route::get('diezmos', 'DiezmoController@index')->name('diezmos.index')
+    ->middleware('can:diezmos.index');
+
+    Route::get('diezmos/create', 'DiezmoController@create')->name('diezmos.create')
+    ->middleware('can:diezmos.create');
+
+
+    Route::put('diezmos/{diezmo}', 'DiezmoController@update')->name('diezmos.update')
+    ->middleware('can:diezmos.edit');
+
+    Route::POST('diezmos/{diezmo}', 'DiezmoController@show')->name('diezmos.show')
+    ->middleware('can:diezmos.show');
+
+    Route::delete('diezmos/{diezmo}', 'DiezmoController@destroy')->name('diezmos.destroy')
+    ->middleware('can:diezmos.destroy');
+
+    Route::get('diezmos/{diezmo}/edit', 'DiezmoController@edit')->name('diezmos.edit')
+    ->middleware('can:diezmos.edit');
+
     
 
 

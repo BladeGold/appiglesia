@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\UserCreateFormRequest;
+use App\Http\Requests\MiembroCreateFormRequest;
 use App\Http\Requests\UserUpdateFormRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,7 @@ class UserController extends Controller
        
        return view('users.registerdate',compact('esMiembro','iglesias'));
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -58,11 +59,32 @@ class UserController extends Controller
      */
     public function store(UserCreateFormRequest $request)
     {
-        //$date= UserDate::create($request->all());
-        //User::find(Auth::user()->id)->asignarIglesia($request->get('iglesia'));
+        $date= UserDate::create($request->all());
+        User::find(Auth::user()->id)->asignarIglesia($request->get('iglesia'));
         
         if($request->ajax()){
-            $msg= '¡Registro de datos exitoso!';
+            $msg= ['¡Registro de datos exitoso!'];
+
+            return response()->Json($msg);            
+        }
+        
+    }
+    public function storeMiembro(MiembroCreateFormRequest $request)
+    {
+        $user= User::create([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'imagen' => "default.png",
+        ])->assignRoles('user');
+        $user->asignarIglesia(Auth::user()->Pertenece->last()->id);
+        
+        if($request->ajax()){
+            $msg= [
+                'title'=>'¡Registro de datos exitoso!',
+                'icon' => 'success',    
+                ];
 
             return response()->Json($msg);            
         }
@@ -76,7 +98,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
         $user = User::findOrFail(Auth::user()->id);
         $user_date = UserDate::findOrFail(Auth::user()->id);
         $rol= auth()->user()->roles->flatten()->pluck('name')->last();

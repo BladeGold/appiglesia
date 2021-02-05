@@ -76,4 +76,7 @@ class User extends Authenticatable
     public function Datos(){
         return $this->hasOne(UserDate::class);
     }
+    public function Diezmo(){
+        return $this->hasOne(Diezmo::class);
+    }
 }

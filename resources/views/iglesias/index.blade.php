@@ -37,7 +37,7 @@
     </div>
 
 
-
+@endsection
 @push('scripts')
     <script>
       
@@ -47,6 +47,7 @@
             $('#table_iglesias').DataTable({
                     "language": {
                         "search": "Buscar:",
+                        "lengthMenu": "Muestra _MENU_ registros por página",
                         "zeroRecords": "No se encontraron datos",
                         "infoEmpty": "No hay datos para mostrar",
                         "info": "Mostrando del _START_ al _END_, de un total de _TOTAL_ entradas",
@@ -91,4 +92,4 @@
         });
     </script>
 @endpush
-@endsection
+

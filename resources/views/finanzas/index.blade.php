@@ -14,7 +14,7 @@
                             <!-- small box -->
                             <div class="small-box bg">
                                 <div class="inner">
-                                    <p>Finanazas Totales</p>
+                                   
                                     <canvas id="total" width="200" height="200"></canvas>
                                 </div>  
                             </div>
@@ -25,7 +25,7 @@
                             <!-- small box -->
                             <div class="small-box bg">
                                 <div class="inner">
-                                    <p>Finanazas del Mes</p>
+                                    
                                     <canvas id="mes" width="200" height="200"></canvas>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                             <!-- small box -->
                             <div class="small-box bg">
                                 <div class="inner">
-                                    <p>Finanazas del Mes anterior</p>
+                                    
                                     <canvas id="mesanterior" width="200" height="200"></canvas>
                                 </div>
                             </div>
@@ -43,7 +43,8 @@
                     
                     </div>
             <hr>
-            <div class="row justify-content-center">
+           
+            {{-- <div class="row justify-content-center">
                 <div class="col-sm-3 col-4">
                     <!-- small box -->
                     <div class="small-box bg">
@@ -78,7 +79,7 @@
             </div>
              </div>
             </div>
-        </div>
+        </div> --}}
 
             
             <!-- /.row -->
@@ -95,7 +96,8 @@
 
 @push('scripts')
 <script>
-
+var mesActual = "{{$mesActual}}"
+var mesAnterior = "{{$mesAnterior}}"
 var activos = "{{$activos}}";
 var pasivos = "{{$pasivos}}";
 var activosmes="{{$activosmes}}"
@@ -130,6 +132,18 @@ var myChart = new Chart(ctx, {
         }]
     },
     options: {
+                 responsive: true,
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Finanzas Totales ',
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				},
         scales: {
             yAxes: [{
                 ticks: {
@@ -167,6 +181,18 @@ var myChart = new Chart(ct, {
         }]
     },
     options: {
+                 responsive: true,
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Finanzas del Mes '+mesActual
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				},
         scales: {
             yAxes: [{
                 ticks: {
@@ -204,6 +230,18 @@ var myChart = new Chart(cx, {
         }]
     },
     options: {
+                 responsive: true,
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Finanzas del mes Anterior '+mesAnterior
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				},
         scales: {
             yAxes: [{
                 ticks: {

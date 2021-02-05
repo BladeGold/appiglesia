@@ -176,6 +176,33 @@ class PermissionsTableSeeder extends Seeder
             'description'   =>  'Eliminar cualquier evento del sistema',
         ]);
 
+        //Diezmos
+        Permission::create([
+            'name'          =>  'Navegar diezmos',
+            'slug'          =>  'diezmos.index',
+            'description'   =>  'Lista y navega todos los diezmos del sistema',
+        ]);
+        Permission::create([
+            'name'          =>  'Ver detalles de diezmo',
+            'slug'          =>  'diezmos.show',
+            'description'   =>  'Ver en detalle cada diezmo del sistema',
+        ]);
+        Permission::create([
+            'name'          =>  'Creación de diezmos',
+            'slug'          =>  'diezmos.create',
+            'description'   =>  'Crear un diezmo en el sistema',
+        ]);
+        Permission::create([
+            'name'          =>  'Edición de diezmos',
+            'slug'          =>  'diezmos.edit',
+            'description'   =>  'Editar cualquier dato de un diezmo del sistema',
+        ]);
+        Permission::create([
+            'name'          =>  'Eliminar diezmo',
+            'slug'          =>  'diezmos.destroy',
+            'description'   =>  'Eliminar cualquier diezmo del sistema',
+        ]);
+
         //Administrador
         Permission::create([
             'name'          =>  'Navegar ',
@@ -205,11 +232,7 @@ class PermissionsTableSeeder extends Seeder
 
 
         //Creando Rol Administrador
-        Role::create([
-            'name'          => 'Administrador',
-            'slug'          => 'admin',
-            'special'   => 'all-access',
-        ]);
+        
 
     }
 }

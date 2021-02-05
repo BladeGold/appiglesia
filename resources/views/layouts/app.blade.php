@@ -51,6 +51,7 @@
     <!-- Styles -->
 
     <link rel="stylesheet" type="text/css" href="{{asset('chartjs/Chart.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('fontawesome/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('sweetalert2/dist/sweetalert2.min.css')}}">
     <link href="{{ asset('dist/css/adminlte.css') }}" rel="stylesheet">
@@ -228,6 +229,39 @@
                                 </a>
                             </li>
                         @endcan
+                        @can('user')
+                        <li class="nav-item has-treeviem"> 
+                            <!--  -->                           
+                            <a  href="" class="nav-link ">
+                                <i class="nav-icon fa fa-hand-holding-usd"></i>
+                                <p>
+                                    Diezmos
+                                    <i class="fas fa-angle-left right"></i>
+                                    
+                                </p>
+                            </a>
+                            
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                  <a href="#" class="nav-link"    data-toggle="modal" data-target="#registra">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Registar Diezmo</p>
+                                  </a>
+                                </li>
+                               
+                                <li class="nav-item">
+                                  <a href="#" class="nav-link" data-toggle="modal" data-target="#ver" id="verDiezmo">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver Diezmos</p>
+                                  </a>
+                                </li>
+                                
+                               
+                                
+                            </ul>
+                              
+                        </li>
+                        @endcan
                        
                        @if(Auth::user()->Pertenece->pluck('id')->last())
                         <li class="nav-item has-treeviem"> 
@@ -344,7 +378,7 @@
             
             @yield('content')
             @include('script')
-            @include('sweet::alert')
+            @include('diezmos.modals')
             <!-- /.card -->
           </div>
         </div>

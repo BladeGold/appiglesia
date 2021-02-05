@@ -37,10 +37,12 @@ class FinanzaController extends Controller
         $pasivos= Finanza::Where('tipo','=','pasivo')->count();
         $pasivosmes= Finanza::Where('tipo','=','pasivo')->whereBetween('fecha',[$date->startOfMonth(),$date])->count();
         $pasivosanterior= Finanza::Where('tipo','=','pasivo')->whereBetween('fecha',[$mes->startOfMonth(),$mes->endOfMonth()])->count();
+        $mesActual= $date->isoFormat('MMMM');
+        $mesAnterior= $date->subMonth(1)->isoFormat('MMMM');
         
        
         return view('finanzas.index', compact('activos','pasivos','activosmes','pasivosmes','activosanterior',
-        'pasivosanterior'));
+        'pasivosanterior','mesActual','mesAnterior'));
     }
 
     
@@ -81,6 +83,7 @@ class FinanzaController extends Controller
                         "monto" => $request->get("monto_".$categoria),
                         "categoria" => $categoria,
                         "inicial" => '01',
+                        "fecha" => Carbon::now(),
                         
                     ]);
 

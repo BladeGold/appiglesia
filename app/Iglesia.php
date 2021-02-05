@@ -37,6 +37,9 @@ class Iglesia extends Model
         $this->Miembros()->detach($id);
 
     }
+    public function Diezmo(){
+        return $this->hasOne(Diezmo::class);
+    }
 
     
     
