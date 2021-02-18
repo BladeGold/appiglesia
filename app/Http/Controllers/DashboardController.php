@@ -33,7 +33,7 @@ class DashboardController extends Controller
     public function index()
     {   
         
-       
+        
         
         if(auth()->user()->hasRole('admin')){
             
@@ -60,7 +60,10 @@ class DashboardController extends Controller
                 $pasivosanterior= $iglesia->Finanzas()->Where('tipo','=','pasivo')->whereBetween('fecha',[$mes->startOfMonth(),$mes->endOfMonth()])->count();
                 $mesActual= $date->isoFormat('MMMM');
                 $mesAnterior= $date->subMonth(1)->isoFormat('MMMM');
+                return view('dashboard.general', compact('pastor','iglesia','miembros_count','activos','pasivos','activosmes','pasivosmes','activosanterior',
+            'pasivosanterior','mesActual','mesAnterior'));
             }elseif(auth()->user()->hasRole('tesorera')){
+              
                 $iglesia= $this->getUserIglesia();
                 $date= CarbonImmutable::now();
                 $mes= $date->subMonth(1);
@@ -72,6 +75,8 @@ class DashboardController extends Controller
                 $pasivosanterior= $iglesia->Finanzas()->Where('tipo','=','pasivo')->whereBetween('fecha',[$mes->startOfMonth(),$mes->endOfMonth()])->count();
                 $mesActual= $date->isoFormat('MMMM');
                 $mesAnterior= $date->subMonth(1)->isoFormat('MMMM');
+                return view('dashboard.general', compact('pastor','iglesia','miembros_count','activos','pasivos','activosmes','pasivosmes','activosanterior',
+            'pasivosanterior','mesActual','mesAnterior'));
             }
             
             $iglesia=Auth::user()->Pertenece->last();
@@ -84,9 +89,8 @@ class DashboardController extends Controller
                 
                  $miembros_count=Iglesia::findOrFail($iglesia->id)->Miembros->count();
              
-
-            return view('dashboard.general', compact('pastor','iglesia','miembros_count','activos','pasivos','activosmes','pasivosmes','activosanterior',
-            'pasivosanterior','mesActual','mesAnterior'));
+                 
+                 return view('dashboard.general', compact('pastor','iglesia','miembros_count',));
         }
     }
 }

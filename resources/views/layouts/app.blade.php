@@ -25,7 +25,7 @@
     <script src="{{asset('sweetalert2/dist/sweetalert2.min.js')}}"></script>
     <script src="{{asset('chartjs/Chart.js')}}"></script>
     
-   
+    @yield('scripts')
    
     <!-- Scripts online -->
     

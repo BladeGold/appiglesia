@@ -91,6 +91,7 @@
                     
                 </div>
             </div>
+        @if((auth()->user()->hasRole('pastor')) || (auth()->user()->hasRole('tesorera')))
             <div class="card border-primary mb-3" >
                 <div class="card-header">Estadisticas Financieras <strong> Iglesia de Dios de la Profecía Bolívar-Sur  </strong></div>
                     <div class="card-body text-primary">        
@@ -128,7 +129,9 @@
                         
                         </div>
                     </div>
-            
+                </div>
+            </div>
+          @endif  
         
 
      
@@ -172,6 +175,13 @@
 <!-- AdminLTE for demo purposes -->
 
 @endsection
+
+@section('scripts')
+<link href='{{asset('fullcalendar/lib/main.css')}}' rel='stylesheet' />
+<script src='{{asset('fullcalendar/lib/main.js')}}'></script>
+
+@endsection
+@isset($activos)
 @push('scripts')
 <script>
 var mesActual = "{{$mesActual}}"
@@ -331,3 +341,4 @@ var myChart = new Chart(cx, {
 });
 </script>    
 @endpush
+@endisset
