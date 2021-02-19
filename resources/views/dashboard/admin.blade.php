@@ -104,7 +104,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="staticBackdropLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrar"></button>
         </div>
         <div class="modal-body">
             <div class="form-row">
@@ -151,10 +151,7 @@
                         <span class=""> <strong class="descripcion text-danger fs-6 fst-italic"> </strong> </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="color" class="form-control" name="color" id="color">
-
-                </div>
+                
         </div>
 
             </div>
@@ -236,7 +233,15 @@
         
 
         eventClick: function(info){
-           
+            
+            $('#id').val(info.event.id);
+            $('#fecha').val(info.event.startStr);
+            $('#titulo').val(info.event.title);
+            $('#hora').val(info.event.start);
+            $('#fechaend').val(info.event.end);
+            $('#horaend').val(info.event.end);
+            $('#descripcion').val(info.event.extendedProps.descripcion);
+           $('#calendarModal').modal('toggle');
         },
         
         
@@ -253,7 +258,7 @@
           nuevoEvento={
             id:$('#id').val(),
             titulo:$('#titulo').val(),
-            descripcion:$('#fecha').val(),
+            descripcion:$('#descripcion').val(),
             fecha:$('#fecha').val(),
             hora:$('#hora').val(),
             fechaend:$('#fechaend').val(),
@@ -276,6 +281,10 @@
                           'X-CSRF-Token':token, 
                                  },
                success: function(result){
+                $('#cerrar').click();
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+                   calendar.refetchEvents();
                 Swal.fire({
                     title : result.title,
                     icon: result.icon,
