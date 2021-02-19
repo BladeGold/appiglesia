@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Traits\IglesiaTrait;
+use App\Http\Requests\EventosFormRequest;
+use App\Evento;
 
 class EventoController extends Controller
-{
+{   use IglesiaTrait;
     /**
      * Display a listing of the resource.
      *
@@ -32,9 +35,46 @@ class EventoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(EventosFormRequest $request)
+    {   $iglesia = $this->getUserIglesia();
+        
+       if(auth()->user()->hasRole('admin')){
+            Evento::create([
+                'start' => $request->fecha." ".$request->hora,
+                'end' => $request->fechaend." ".$request->horaend,
+                'descripcion' => $request->descripcion,
+                'title' => $request->titulo,
+                'color' => "#07ed8a",
+                'textColor' => $request->textColor,
+            ]);
+
+            if($request->ajax()){
+                $msg =[
+                    'title' => 'Evento Agregado con Exito',
+                    'icon' => 'success',
+                ];
+                return response()->json($msg);
+            }
+            
+        }if((auth()->user()->hasRole('pastor')) || auth()->user()->hasRole('secretaria')){
+            $iglesia->Evento()->create([
+                'start' => $request->fecha." ".$request->hora,
+                'end' => $request->fechaend." ".$request->horaend,
+                'descripcion' => $request->descripcion,
+                'title' => $request->titulo,
+                'color' => "#d9bc02",
+                'textColor' => $request->textColor,
+            ]);
+
+            if($request->ajax()){
+                $msg =[
+                    'title' => 'Evento Agregado con Exito',
+                    'icon' => 'success',
+                ];
+                return response()->json($msg);
+        }
+        }
+        
     }
 
     /**
@@ -43,9 +83,19 @@ class EventoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show()
+    {   $iglesia= $this->getUserIglesia();
+        $data['eventoRegional']= Evento::where('iglesia_id','=',NULL)->get();
+        $data['eventoLocal']= Evento::where('iglesia_id','=',$iglesia->id)->get();
+
+        return response()->json($data['eventoLocal']);
+    }
+    public function evento()
+    {   
+        $data['eventoRegional']= Evento::where('iglesia_id','=',NULL)->get();
+        
+
+        return response()->json($data['eventoRegional']);
     }
 
     /**

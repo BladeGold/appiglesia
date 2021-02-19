@@ -95,6 +95,82 @@
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
                 
 </div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="calendarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="id" id="id">
+                    
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="fecha" id="fecha">
+
+                </div>
+                <div class="form-group col-8">
+                    <label>Titulo:</label>
+                    <input type="text" class="form-control" name="titulo" id="titulo">
+                    <div class="input-group">
+                        <span class=""> <strong class="titulo text-danger fs-6 fst-italic"> </strong> </span>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label>Hora:</label>
+                    <input type="time" class="form-control" name="hora" id="hora">
+                    <div class="input-group">
+                        <span class=""> <strong class="hora text-danger fs-6 fst-italic"> </strong> </span>
+                    </div>
+                </div>
+                <div class="form-group col-8">
+                    <label> Fecha de culminación: </label>
+                    <input type="date" class="form-control" name="fechaend" id="fechaend">
+                    <div class="input-group">
+                        <span class=""> <strong class="fechaend text-danger fs-6 fst-italic"> </strong> </span>
+                    </div>
+                </div>
+                <div class="form-group col-4">
+                    <label> Hora de culminación: </label>
+                    <input type="time" class="form-control" name="horaend" id="horaend">
+                    <div class="input-group">
+                        <span class=""> <strong class="horaend text-danger fs-6 fst-italic"> </strong> </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Descripción:</label>
+                    <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+                    <div class="input-group">
+                        <span class=""> <strong class="descripcion text-danger fs-6 fst-italic"> </strong> </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="color" class="form-control" name="color" id="color">
+
+                </div>
+        </div>
+
+            </div>
+          
+        <div class="modal-footer">
+            <button type="button" id="btnAgregar" class="btn btn-success" id="btnAgredar">Agregar</button>
+            <button type="button" id="btnModificar" class="btn btn-warning" id="btnModificar">Modificar</button>
+            <button type="button" id="btnEliminar" class="btn btn-danger" id="btnEliminar">Eliminar</button>
+            <button type="button" id="btnCancelar" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 
 <!-- jQuery -->
@@ -141,16 +217,114 @@
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
+        
         headerToolbar:{
             start: 'prev,next today',
             center:'title',
             end:'dayGridMonth,timeGridWeek,timeGridDay',
         },
+        
         locale: 'es',
-        initialView: 'dayGridMonth'
+        dateClick: function(info){
+            $('#fecha').val(info.dateStr);
+            $('#calendarModal').modal('toggle');
+        },
+        eventSources: [
+            "{{url('/eventos/show')}}",
+            "{{url('/eventos/regional/1')}}",
+        ],
+        
+
+        eventClick: function(info){
+           
+        },
+        
+        
+       
       });
-      calendar.setOption('locale', 'es');
       calendar.render();
+      $('#btnAgregar').click(function(){
+        objEvento= recolertarDatos('POST');
+        enviarInfo(' ',objEvento);
+
+      });
+
+      function recolertarDatos(method){
+          nuevoEvento={
+            id:$('#id').val(),
+            titulo:$('#titulo').val(),
+            descripcion:$('#fecha').val(),
+            fecha:$('#fecha').val(),
+            hora:$('#hora').val(),
+            fechaend:$('#fechaend').val(),
+            horaend:$('#horaend').val(),
+            color:$('#color').val(),
+            textColor:'#FFFFFF',
+           
+          };
+          return(nuevoEvento);           
+      };
+      function enviarInfo(accion,objEvento){
+          url= "{{url('/eventos')}}";
+          token= $("meta[name='csrf-token']").attr('content'),
+       $.ajax(
+           {
+               type:"POST",
+               url: url+accion,
+               data:objEvento,
+               headers: {
+                          'X-CSRF-Token':token, 
+                                 },
+               success: function(result){
+                Swal.fire({
+                    title : result.title,
+                    icon: result.icon,
+                });
+               },
+               error: function(error){
+                var errors = error.responseJSON.errors;
+                console.log(error);
+                    $(':input').removeClass('is-invalid');
+                    if(!errors.hasOwnProperty('titulo')){
+                        
+                        $('.titulo').html(' ');
+                    }
+                    if(!errors.hasOwnProperty('hora')){
+                        
+                        $('.hora').html(' ');
+                    }
+                    if(!errors.hasOwnProperty('fechaend')){
+                        
+                        $('.fechaend').html(' ');
+                    }
+                    if(!errors.hasOwnProperty('horaend')){
+                        
+                        $('.horaend').html(' ');
+                    }
+                    if(!errors.hasOwnProperty('descripcion')){
+                        
+                        $('.descripcion').html(' ');
+                    }
+                  
+                    for(var i in errors){
+                    if(errors.hasOwnProperty(i)){
+                        $(`input[name=${[i]}]`).addClass('is-invalid')
+                        $(`textarea[name=${[i]}]`).addClass('is-invalid')
+                        $(`.${i}`).html(`${errors[i]}`);
+                        
+                    }
+                }
+               },
+           }
+       );
+       
+
+        }
+
+      
+
+
+    
     });
 
   </script>

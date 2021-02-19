@@ -149,7 +149,7 @@ Route::middleware(['auth'])->group(function(){
     
     
     //Eventos
-    Route::post('eventos/store', 'EventoController@store')->name('eventos.store')
+    Route::post('eventos/', 'EventoController@store')->name('eventos.store')
            ->middleware('can:eventos.create');
 
     Route::get('eventos', 'EventoController@index')->name('eventos.index')
@@ -164,8 +164,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('eventos/{evento}', 'EventoController@show')->name('eventos.show')
         ->middleware('can:eventos.show');
 
+    Route::get('eventos/regional/{evento}', 'EventoController@evento')->name('eventos.evento')
+        ->middleware('can:eventos.show');
+
     Route::delete('eventos/{evento}', 'EventoController@destroy')->name('eventos.destroy')
-        ->middleware('can:eventos.destroy');
+        ->middleware('can:admin.destroy');
 
     Route::get('eventos/{evento}/edit', 'EventoController@edit')->name('eventos.edit')
         ->middleware('can:eventos.edit');

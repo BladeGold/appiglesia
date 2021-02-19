@@ -40,6 +40,9 @@ class Iglesia extends Model
     public function Diezmo(){
         return $this->hasOne(Diezmo::class);
     }
+    public function Evento(){
+        return $this->hasMany(Evento::class);
+    }
 
     
     

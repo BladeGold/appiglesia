@@ -5,7 +5,7 @@
     <div class="container-fluid">
      
         <a type="button" class="btn btn-sm btn-success float-right" href="{{route('iglesias.create')}}">Crear una nueva iglesia</a>
-            <h2>Lista de usuarios registrados</h2> 
+            <h2>Lista de Iglesias Registradas</h2> 
 
       
             <div class="row justify-content-center">
