@@ -60,7 +60,7 @@ class DashboardController extends Controller
                 $pasivosanterior= $iglesia->Finanzas()->Where('tipo','=','pasivo')->whereBetween('fecha',[$mes->startOfMonth(),$mes->endOfMonth()])->count();
                 $mesActual= $date->isoFormat('MMMM');
                 $mesAnterior= $date->subMonth(1)->isoFormat('MMMM');
-                return view('dashboard.general', compact('pastor','iglesia','miembros_count','activos','pasivos','activosmes','pasivosmes','activosanterior',
+                return view('dashboard.general', compact('iglesia','activos','pasivos','activosmes','pasivosmes','activosanterior',
             'pasivosanterior','mesActual','mesAnterior'));
             }elseif(auth()->user()->hasRole('tesorera')){
               
@@ -75,7 +75,7 @@ class DashboardController extends Controller
                 $pasivosanterior= $iglesia->Finanzas()->Where('tipo','=','pasivo')->whereBetween('fecha',[$mes->startOfMonth(),$mes->endOfMonth()])->count();
                 $mesActual= $date->isoFormat('MMMM');
                 $mesAnterior= $date->subMonth(1)->isoFormat('MMMM');
-                return view('dashboard.general', compact('pastor','iglesia','miembros_count','activos','pasivos','activosmes','pasivosmes','activosanterior',
+                return view('dashboard.general', compact('iglesia','activos','pasivos','activosmes','pasivosmes','activosanterior',
             'pasivosanterior','mesActual','mesAnterior'));
             }
             
@@ -90,7 +90,7 @@ class DashboardController extends Controller
                  $miembros_count=Iglesia::findOrFail($iglesia->id)->Miembros->count();
              
                  
-                 return view('dashboard.general', compact('pastor','iglesia','miembros_count',));
+                 return view('dashboard.general', compact('pastor','miembros_count',));
         }
     }
 }

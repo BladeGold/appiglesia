@@ -117,8 +117,43 @@ class EventoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {       $evento = Evento::where('id','=',$id);
+        if(auth()->user()->hasRole('admin')){
+            $evento->update([
+                'start' => $request->fecha." ".$request->hora,
+                'end' => $request->fechaend." ".$request->horaend,
+                'descripcion' => $request->descripcion,
+                'title' => $request->titulo,
+                'color' => "#07ed8a",
+                'textColor' => $request->textColor,
+            ]);
+
+            if($request->ajax()){
+                $msg =[
+                    'title' => 'Evento Actualizado con Exito',
+                    'icon' => 'success',
+                ];
+                return response()->json($msg);
+            }
+            
+        }if((auth()->user()->hasRole('pastor')) || auth()->user()->hasRole('secretaria')){
+            $evento->update([
+                'start' => $request->fecha." ".$request->hora,
+                'end' => $request->fechaend." ".$request->horaend,
+                'descripcion' => $request->descripcion,
+                'title' => $request->titulo,
+                'color' => "#d9bc02",
+                'textColor' => $request->textColor,
+            ]);
+
+            if($request->ajax()){
+                $msg =[
+                    'title' => 'Evento Actualizado con Exito',
+                    'icon' => 'success',
+                ];
+                return response()->json($msg);
+        }
+        }
     }
 
     /**
@@ -127,8 +162,17 @@ class EventoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $evento= Evento::findOrFail($id);
+        $evento->delete();
+        
+        
+            $msg =[
+                'title' => 'Evento Eliminado con Exito',
+                'icon' => 'success',
+            ];
+            return response()->json($msg);
+    
     }
 }

@@ -103,50 +103,47 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel"></h5>
+          <h5 class="modal-title" id="title"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrar"></button>
         </div>
         <div class="modal-body">
-            <div class="form-row">
-                <div class="form-group">
+            <div class="d-none">
                     <input type="text" class="form-control" name="id" id="id">
-                    
-                </div>
-                <div class="form-group">
+                 
                     <input type="text" class="form-control" name="fecha" id="fecha">
-
-                </div>
-                <div class="form-group col-8">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-8">
                     <label>Titulo:</label>
                     <input type="text" class="form-control" name="titulo" id="titulo">
                     <div class="input-group">
                         <span class=""> <strong class="titulo text-danger fs-6 fst-italic"> </strong> </span>
                     </div>
                 </div>
-                <div class="form-group col-4">
+                <div class="form-group col-sm-4">
                     <label>Hora:</label>
-                    <input type="time" class="form-control" name="hora" id="hora">
+                    <input type="time" min="07:00" max="19:00" step="600" class="form-control" name="hora" id="hora">
                     <div class="input-group">
                         <span class=""> <strong class="hora text-danger fs-6 fst-italic"> </strong> </span>
                     </div>
                 </div>
-                <div class="form-group col-8">
-                    <label> Fecha de culminación: </label>
+                <div class="form-group col-sm-8">
+                    <label> Fecha de Fin: </label>
                     <input type="date" class="form-control" name="fechaend" id="fechaend">
                     <div class="input-group">
                         <span class=""> <strong class="fechaend text-danger fs-6 fst-italic"> </strong> </span>
                     </div>
                 </div>
-                <div class="form-group col-4">
-                    <label> Hora de culminación: </label>
+                <div class="form-group col-sm-4">
+                    <label> Hora de Fin: </label>
                     <input type="time" class="form-control" name="horaend" id="horaend">
                     <div class="input-group">
                         <span class=""> <strong class="horaend text-danger fs-6 fst-italic"> </strong> </span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-sm-12">
                     <label>Descripción:</label>
-                    <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+                    <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="3"></textarea>
                     <div class="input-group">
                         <span class=""> <strong class="descripcion text-danger fs-6 fst-italic"> </strong> </span>
                     </div>
@@ -157,51 +154,23 @@
             </div>
           
         <div class="modal-footer">
+        @can('eventos.create')
             <button type="button" id="btnAgregar" class="btn btn-success" id="btnAgredar">Agregar</button>
+        @endcan
+        @can('eventos.edit')
             <button type="button" id="btnModificar" class="btn btn-warning" id="btnModificar">Modificar</button>
+        @endcan
+        @can('admin')   
             <button type="button" id="btnEliminar" class="btn btn-danger" id="btnEliminar">Eliminar</button>
-            <button type="button" id="btnCancelar" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
-         
+        @endcan
+        @can('eventos.create')
+            <button type="button" data-bs-dismiss="modal" id="btnCancelar" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
+        @endcan
         </div>
       </div>
     </div>
   </div>
 
-
-
-
-<!-- jQuery -->
-
-<!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-
-<!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
 
 @endsection
 @section('scripts')
@@ -223,7 +192,20 @@
         
         locale: 'es',
         dateClick: function(info){
+            limpiarFormulario();
+            $('#title').html(info.dateStr);
+
             $('#fecha').val(info.dateStr);
+
+            $('#btnAgregar').prop("disabled",false);
+            $('#btnAgregar').prop("hidden",false);
+
+            $('#btnModificar').prop("disabled",true);
+            $('#btnModificar').prop("hidden",true);
+
+            $('#btnEliminar').prop("disabled",true);
+            $('#btnEliminar').prop("hidden",true);
+
             $('#calendarModal').modal('toggle');
         },
         eventSources: [
@@ -233,14 +215,56 @@
         
 
         eventClick: function(info){
+            $('#title').html('');
             
+            mes = (info.event.start.getMonth()+1);
+            dia = (info.event.start.getDate());
+            anio = (info.event.start.getFullYear());
+
+            mesend = (info.event.end.getMonth()+1);
+            diaend = (info.event.end.getDate());
+            anioend = (info.event.end.getFullYear());
+            
+            mes=(mes<10)?"0"+mes:mes;
+            dia=(dia<10)?"0"+dia:dia;
+            
+            mesend=(mes<10)?"0"+mesend:mesend;
+            diaend=(dia<10)?"0"+diaend:diaend;
+
+            hora=info.event.start.getHours();
+            minuto=info.event.start.getMinutes();
+
+            hora=(hora<10)?"0"+hora:hora;
+            minuto=(minuto<10)?"0"+minuto:minuto;
+
+            horario= (hora+":"+minuto);
+            
+            horaend=info.event.end.getHours();
+            minutoend=info.event.end.getMinutes();
+            
+            horaend=(horaend<10)?"0"+horaend:horaend;
+            minutoend=(minutoend<10)?"0"+minutoend:minutoend;
+
+            horarioend= (horaend+":"+minutoend);
+
             $('#id').val(info.event.id);
-            $('#fecha').val(info.event.startStr);
+            $('#fecha').val(anio+"-"+mes+"-"+dia);
             $('#titulo').val(info.event.title);
-            $('#hora').val(info.event.start);
-            $('#fechaend').val(info.event.end);
-            $('#horaend').val(info.event.end);
+            $('#hora').val(horario);
+            $('#fechaend').val(anioend+"-"+mesend+"-"+diaend);
+            $('#horaend').val(horarioend);
             $('#descripcion').val(info.event.extendedProps.descripcion);
+
+
+            $('#btnAgregar').prop("disabled",true);
+            $('#btnAgregar').prop("hidden",true);
+
+            $('#btnModificar').prop("disabled",false);
+            $('#btnModificar').prop("hidden",false);
+
+            $('#btnEliminar').prop("disabled",false);
+            $('#btnEliminar').prop("hidden",false);
+
            $('#calendarModal').modal('toggle');
         },
         
@@ -252,6 +276,15 @@
         objEvento= recolertarDatos('POST');
         enviarInfo(' ',objEvento);
 
+      });
+      $('#btnEliminar').click(function(){
+        objEvento= recolertarDatos('DELETE');
+        enviarInfo('/'+$('#id').val(),objEvento);
+      });
+      $('#btnModificar').click(function(){
+          alert('hola');
+        objEvento= recolertarDatos('PUT');
+        enviarInfo('/'+$('#id').val(),objEvento);
       });
 
       function recolertarDatos(method){
@@ -265,6 +298,7 @@
             horaend:$('#horaend').val(),
             color:$('#color').val(),
             textColor:'#FFFFFF',
+            '_method':method,
            
           };
           return(nuevoEvento);           
@@ -272,63 +306,72 @@
       function enviarInfo(accion,objEvento){
           url= "{{url('/eventos')}}";
           token= $("meta[name='csrf-token']").attr('content'),
-       $.ajax(
-           {
-               type:"POST",
-               url: url+accion,
-               data:objEvento,
-               headers: {
-                          'X-CSRF-Token':token, 
-                                 },
-               success: function(result){
-                $('#cerrar').click();
-                $('body').removeClass('modal-open');
-                $('.modal-backdrop').remove();
-                   calendar.refetchEvents();
-                Swal.fire({
-                    title : result.title,
-                    icon: result.icon,
-                });
-               },
-               error: function(error){
-                var errors = error.responseJSON.errors;
-                console.log(error);
-                    $(':input').removeClass('is-invalid');
-                    if(!errors.hasOwnProperty('titulo')){
+            $.ajax(
+                {
+                    type:"POST",
+                    url: url+accion,
+                    data:objEvento,
+                    headers: {
+                                'X-CSRF-Token':token, 
+                                        },
+                    success: function(result){
+                        $('#cerrar').click();
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                        calendar.refetchEvents();
+                        Swal.fire({
+                            title : result.title,
+                            icon: result.icon,
+                        });
+                    },
+                    error: function(error){
+                            var errors = error.responseJSON.errors;
+                            $(':input').removeClass('is-invalid');
+                            if(!errors.hasOwnProperty('titulo')){
+                                
+                                $('.titulo').html(' ');
+                            }
+                            if(!errors.hasOwnProperty('hora')){
+                                
+                                $('.hora').html(' ');
+                            }
+                            if(!errors.hasOwnProperty('fechaend')){
+                                
+                                $('.fechaend').html(' ');
+                            }
+                            if(!errors.hasOwnProperty('horaend')){
+                                
+                                $('.horaend').html(' ');
+                            }
+                            if(!errors.hasOwnProperty('descripcion')){
+                                
+                                $('.descripcion').html(' ');
+                            }
                         
-                        $('.titulo').html(' ');
-                    }
-                    if(!errors.hasOwnProperty('hora')){
-                        
-                        $('.hora').html(' ');
-                    }
-                    if(!errors.hasOwnProperty('fechaend')){
-                        
-                        $('.fechaend').html(' ');
-                    }
-                    if(!errors.hasOwnProperty('horaend')){
-                        
-                        $('.horaend').html(' ');
-                    }
-                    if(!errors.hasOwnProperty('descripcion')){
-                        
-                        $('.descripcion').html(' ');
-                    }
-                  
-                    for(var i in errors){
-                    if(errors.hasOwnProperty(i)){
-                        $(`input[name=${[i]}]`).addClass('is-invalid')
-                        $(`textarea[name=${[i]}]`).addClass('is-invalid')
-                        $(`.${i}`).html(`${errors[i]}`);
-                        
-                    }
+                            for(var i in errors){
+                                if(errors.hasOwnProperty(i)){
+                                    $(`input[name=${[i]}]`).addClass('is-invalid')
+                                    $(`textarea[name=${[i]}]`).addClass('is-invalid')
+                                    $(`.${i}`).html(`${errors[i]}`);
+                                    
+                                }
+                            }
+                    },
                 }
-               },
-           }
-       );
+            );
        
 
-        }
+        };
+
+        function limpiarFormulario(){
+            $('#id').val('');
+            $('#fecha').val('');
+            $('#titulo').val('');
+            $('#hora').val('');
+            $('#fechaend').val('');
+            $('#horaend').val('');
+            $('#descripcion').val('');
+        };
 
       
 
