@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use UxWeb\SweetAlert\SweetAlert;
+use PDF;
 
 
 class FinanzaController extends Controller
@@ -187,5 +188,56 @@ class FinanzaController extends Controller
          if($request->ajax()){
              return response()->Json($finanza);
          }
+    }
+
+    public function reporte(){
+        //$date = CarbonImmutable::now();
+        $date = CarbonImmutable::create(2021,03,25);
+        $fecha = $date->subMonth(1);
+        $categorias = $this->categorias;
+        
+        
+        $iglesia = $this->getUserIglesia();
+        $ruta=public_path('reportes/').$iglesia->name;
+        $finanzas = $iglesia->Finanzas()->where('tipo','=','activo')->whereBetween('fecha',[$fecha->startOfMonth(), $fecha->endOfMonth()])->get(['categoria','monto']);
+      
+        $pdf= PDF::loadView('pdf.reporte', compact('categorias','iglesia','finanzas','fecha'))
+                ->setOptions([
+                    'defaultFont' => 'sans-serif',
+                    'images' => true,
+                    'chroot' => 'C:/laragon/www/appiglesia/public',
+                ]); 
+        $nombreArchivo= "reporte_".$iglesia->name."_mes-".$fecha->isoFormat('MMMM').".pdf";
+        $datos=$pdf->stream();
+        
+            if(file_exists($ruta)){
+                 if(file_exists($ruta."/".$nombreArchivo)){
+                     
+                 }
+            }
+            else{
+                mkdir($ruta);
+               
+            }
+           
+            
+           file_put_contents($ruta."/".$nombreArchivo,$datos);
+        
+           return $pdf->stream($nombreArchivo);
+        
+      //return view('pdf.reporte', compact('categorias','iglesia','finanzas'));
+    }
+
+    public function ver_reporte(){
+         //$date = CarbonImmutable::now();
+         $date = CarbonImmutable::create(2021,03,25);
+         $fecha = $date->subMonth(1);
+        $iglesia = $this->getUserIglesia();
+         $ruta=public_path('reportes/').$iglesia->name;
+         $nombreArchivo= "reporte_".$iglesia->name."_mes-".$fecha->isoFormat('MMMM').".pdf";
+        header("Content-type: application/pdf");
+      
+        readfile($ruta."/".$nombreArchivo);
+
     }
 }

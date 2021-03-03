@@ -99,7 +99,9 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('iglesias/{iglesia}/edit', 'IglesiaController@edit')->name('iglesias.edit')
         ->middleware('can:iglesias.edit');
-    
+
+        
+            
     
     //Finanzas
     Route::post('finanzas/store', 'FinanzaController@store')->name('finanzas.store')
@@ -123,6 +125,12 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('finanzas/{finanza}/edit', 'FinanzaController@edit')->name('finanzas.edit')
         ->middleware('can:finanzas.edit');
+
+    Route::get('finanzas/{iglesia}/reporte', 'FinanzaController@reporte')->name('finanzas.reporte')
+        ->middleware('can:finanzas.create');
+
+    Route::get('reporte/', 'FinanzaController@ver_reporte')->name('finanzas.ver_reporte')
+        ->middleware('can:finanzas.create');
     
     
     //Noticias

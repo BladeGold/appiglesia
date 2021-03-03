@@ -32,7 +32,14 @@ class DashboardController extends Controller
      */
     public function index()
     {   
-        
+        $activos=null;
+                $activosmes=null;
+                $activosanterior=null;
+                $pasivos=null;
+                $pasivosmes=null;
+                $pasivosanterior=null;
+                $mesActual=null;
+                $mesAnterior=null;
         
         
         if(auth()->user()->hasRole('admin')){
@@ -40,10 +47,6 @@ class DashboardController extends Controller
             $users_count=User::count();
             $iglesias_count= Iglesia::count();
             $miembros_registrados= DB::table('iglesia_user')->count();
-
-           
-
-                
 
             return view('dashboard.admin', compact('users_count','iglesias_count','miembros_registrados'));
         }
@@ -60,9 +63,9 @@ class DashboardController extends Controller
                 $pasivosanterior= $iglesia->Finanzas()->Where('tipo','=','pasivo')->whereBetween('fecha',[$mes->startOfMonth(),$mes->endOfMonth()])->count();
                 $mesActual= $date->isoFormat('MMMM');
                 $mesAnterior= $date->subMonth(1)->isoFormat('MMMM');
-                return view('dashboard.general', compact('iglesia','activos','pasivos','activosmes','pasivosmes','activosanterior',
-            'pasivosanterior','mesActual','mesAnterior'));
-            }elseif(auth()->user()->hasRole('tesorera')){
+                
+            }
+            if(auth()->user()->hasRole('tesorera')){
               
                 $iglesia= $this->getUserIglesia();
                 $date= CarbonImmutable::now();
@@ -75,8 +78,7 @@ class DashboardController extends Controller
                 $pasivosanterior= $iglesia->Finanzas()->Where('tipo','=','pasivo')->whereBetween('fecha',[$mes->startOfMonth(),$mes->endOfMonth()])->count();
                 $mesActual= $date->isoFormat('MMMM');
                 $mesAnterior= $date->subMonth(1)->isoFormat('MMMM');
-                return view('dashboard.general', compact('iglesia','activos','pasivos','activosmes','pasivosmes','activosanterior',
-            'pasivosanterior','mesActual','mesAnterior'));
+                
             }
             
             $iglesia=Auth::user()->Pertenece->last();
@@ -88,9 +90,10 @@ class DashboardController extends Controller
                  })->get()->last();
                 
                  $miembros_count=Iglesia::findOrFail($iglesia->id)->Miembros->count();
-             
+               
                  
-                 return view('dashboard.general', compact('pastor','miembros_count',));
+                 return view('dashboard.general', compact('pastor','miembros_count','iglesia','activos','pasivos','activosmes','pasivosmes','activosanterior',
+                 'pasivosanterior','mesActual','mesAnterior'));
         }
     }
 }

@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -50,13 +51,14 @@
 
     <!-- Styles -->
 
-    <link rel="stylesheet" type="text/css" href="{{asset('chartjs/Chart.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('chartjs/Chart.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('fontawesome/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('sweetalert2/dist/sweetalert2.min.css')}}">
     <link href="{{ asset('dist/css/adminlte.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
-    <link rel="shortcut icon" href="{{asset('dist/img/favicon/favicon.png')}}" />
+    <link rel="shortcut icon" href="{{asset('img/favicon/favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('dist/css/jquery.dataTables.min.css')}}" >
     <link rel="stylesheet" href="{{asset('dist/css/responsive.dataTables.min.css')}}">
     <link rel="stylesheet" href="{{asset('dist/css/buttons.dataTables.min.css')}}">
@@ -81,7 +83,7 @@
                     <i class="fa fa-bars"></i>
                 </a>
                 <a href="{{ url('/') }}" class="navbar-brand">
-                    <img src="{{ asset('dist/img/logo1.png') }}" alt=" Logo" class="brand-image img-circle elevation-3"
+                    <img src="{{asset('img/favicon/favicon.png')}}" alt=" Logo" class="brand-image img-circle elevation-3"
                          style="opacity: .8">
                     <span class="brand-text font-weight-light text-white">{{ config('app.name') }}</span>
                 </a>
@@ -144,9 +146,10 @@
     @auth()
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4 position-fixed">
+            
             <!-- Brand Logo -->
             <a href="{{ url('/') }}" class="brand-link">
-            <img src="{{ asset('dist/img/logo1.png') }}"
+            <img src="{{asset('img/favicon/favicon.png')}}"
                  alt="logo1.png"
                  class="brand-image img-circle elevation-3"
                  style="opacity: .8">
@@ -370,18 +373,17 @@
     <!-- Main content -->
     <section class="content">
 
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
+      <div class="container">
+       
+          
             
-            
+      
             @yield('content')
             @include('script')
             @include('diezmos.modals')
             <!-- /.card -->
-          </div>
-        </div>
+          
+        
       </div>
     </section>
     <!-- /.content -->

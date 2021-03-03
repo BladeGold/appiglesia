@@ -494,6 +494,7 @@ mark,
   font-size: 1.125rem;
 }
 
+
 .blockquote-footer {
   display: block;
   font-size: 80%;
@@ -624,6 +625,10 @@ pre code {
   .container {
     max-width: 1140px;
   }
+}
+
+.reporte{
+  position: relative;
 }
 
 .row {

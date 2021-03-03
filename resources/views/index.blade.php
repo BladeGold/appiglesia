@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('content')
-    
+   <style>
+       aside p {
+	color: white;
+}
+
+aside ul li{
+    font-size: 7px
+}
+   </style>
 
 
     
@@ -70,14 +78,14 @@
     <!-- End Banner -->
     <div class="section">
         <hr color="gray" size="10" width="88%">
-    </div
+    </div>
 	<!-- section -->
     <div class="section">
         <div class="container">
             <div class="row" style="background-image: url('img/banners/banner_fondo.png'); background-size: cover; box-shadow:10px -10px #e90808ce">
                 <div class="col-md-6">
                     <div class="full text_align_center_img" style="margin-top: 150px">
-                        <img src="img/logo iglesia.png" alt="#"  height="450px" class=""/>
+                        <img src="img/logo_iglesia.png" alt="#"  height="450px" class=""/>
                     </div>
                 </div>
                 <div class="col-md-6 layout_padding" >
@@ -125,7 +133,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="full services_blog">
                         <img class="img-responsive" src="img/banners/banner_s3.png" alt="#" />
-                        <h4> <a href="#"/> Contáctanos</h4>
+                        <h4> <a href="#"> Contáctanos</h4>
                     </div>
                 </div>
                
@@ -187,104 +195,7 @@
 	<script>
 	/* counter js */
 
-(function ($) {
-	$.fn.countTo = function (options) {
-		options = options || {};
-		
-		return $(this).each(function () {
-			// set options for current element
-			var settings = $.extend({}, $.fn.countTo.defaults, {
-				from:            $(this).data('from'),
-				to:              $(this).data('to'),
-				speed:           $(this).data('speed'),
-				refreshInterval: $(this).data('refresh-interval'),
-				decimals:        $(this).data('decimals')
-			}, options);
-			
-			// how many times to update the value, and how much to increment the value on each update
-			var loops = Math.ceil(settings.speed / settings.refreshInterval),
-				increment = (settings.to - settings.from) / loops;
-			
-			// references & variables that will change with each update
-			var self = this,
-				$self = $(this),
-				loopCount = 0,
-				value = settings.from,
-				data = $self.data('countTo') || {};
-			
-			$self.data('countTo', data);
-			
-			// if an existing interval can be found, clear it first
-			if (data.interval) {
-				clearInterval(data.interval);
-			}
-			data.interval = setInterval(updateTimer, settings.refreshInterval);
-			
-			// initialize the element with the starting value
-			render(value);
-			
-			function updateTimer() {
-				value += increment;
-				loopCount++;
-				
-				render(value);
-				
-				if (typeof(settings.onUpdate) == 'function') {
-					settings.onUpdate.call(self, value);
-				}
-				
-				if (loopCount >= loops) {
-					// remove the interval
-					$self.removeData('countTo');
-					clearInterval(data.interval);
-					value = settings.to;
-					
-					if (typeof(settings.onComplete) == 'function') {
-						settings.onComplete.call(self, value);
-					}
-				}
-			}
-			
-			function render(value) {
-				var formattedValue = settings.formatter.call(self, value, settings);
-				$self.html(formattedValue);
-			}
-		});
-	};
-	
-	$.fn.countTo.defaults = {
-		from: 0,               // the number the element should start at
-		to: 0,                 // the number the element should end at
-		speed: 1000,           // how long it should take to count between the target numbers
-		refreshInterval: 100,  // how often the element should be updated
-		decimals: 0,           // the number of decimal places to show
-		formatter: formatter,  // handler for formatting the value before rendering
-		onUpdate: null,        // callback method for every time the element is updated
-		onComplete: null       // callback method for when the element finishes updating
-	};
-	
-	function formatter(value, settings) {
-		return value.toFixed(settings.decimals);
-	}
-}(jQuery));
 
-jQuery(function ($) {
-  // custom formatting example
-  $('.count-number').data('countToOptions', {
-	formatter: function (value, options) {
-	  return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
-	}
-  });
-  
-  // start all the timers
-  $('.timer').each(count);  
-  
-  function count(options) {
-	var $this = $(this);
-	options = $.extend({}, options || {}, $this.data('countToOptions') || {});
-	$this.countTo(options);
-  }
-});
 	</script>
 
 

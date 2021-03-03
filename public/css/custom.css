@@ -1,1 +1,56 @@
 /** ADD YOUR AWESOME CODES HERE **/
+body {
+    text-align: justify;
+  }
+ 
+table, th, td{
+    width: max-content;
+    padding-top: 15px;
+    border: black 1px solid;
+    border-collapse: collapse;
+}
+img{
+    position: relative;
+}
+
+.p{
+    font-size: 12px;
+}
+
+.calendario{
+    position: relative;
+    display: flex;
+    float: right;
+   
+}
+
+.bandera{
+    float: right;
+    margin-top: 15px;
+    
+    
+}
+.body{
+    padding-top: 15px;
+}
+.logo{
+    float: left;
+  
+    
+  
+ 
+  
+}
+.text-center{
+    position: relative;
+    text-align: center;
+}
+
+
+.text{
+    font-size: 12px;
+}
+.text-title{
+    font-size: 16px;
+}
+

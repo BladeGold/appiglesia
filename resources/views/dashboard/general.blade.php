@@ -56,21 +56,24 @@
                             
                             </div>
                         </div>
-                        <!-- ./col -->
+                        <!-- ./col -->@can('finanzas.create')
+                        @php
+                          if($archivo=file_exists(public_path('reportes/').$iglesia->name."/reporte_".$iglesia->name."_mes-".$mesAnterior.".pdf" )){
+                                $ruta= public_path('reportes/').$iglesia->name."/reporte_".$iglesia->name."_mes-".$mesAnterior.".pdf";
+                          }  
+                        @endphp
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>44</h3>
-
-                                    <p>Notificaciones</p>
+                                    <h6> {{ $archivo ? "Ver Reporte del mes ".$mesAnterior : "Generar Reporte del mes ".$mesAnterior}}</h6>
+                                    
+                                    
                                 </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                               
+                                <a @if($archivo) href="{{route('finanzas.ver_reporte')}}" target="_blank" @else href="{{ route('finanzas.reporte',$iglesia->id) }}" target="_blank" @endif class="small-box-footer">{{ $archivo ? "Ver" : "Generar" }} <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                        </div>
+                        </div>@endcan
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
@@ -93,7 +96,7 @@
             </div>
         @if((auth()->user()->hasRole('pastor')) || (auth()->user()->hasRole('tesorera')))
             <div class="card border-primary mb-3" >
-                <div class="card-header">Estadisticas Financieras <strong> Iglesia de Dios de la Profecía Bolívar-Sur  </strong></div>
+                <div class="card-header">Estadisticas Financieras <strong> Iglesia de Dios de la Profecía  en  {{$iglesia->name}}  </strong></div>
                     <div class="card-body text-primary">        
                         <div class="row justify-content-center">
                             <div class="col-sm-3 col-4">
@@ -133,15 +136,15 @@
             </div>
           @endif  
         </div><!-- /.container-fluid -->
-        <div class="row">
+        <div class="row col-sm-5 " style="margin-left: 50%;">
                 <!-- Left col -->
-                <section class="col-lg-7 connectedSortable ui-sortable">
-                    <div id='calendar'></div>
-                </section>
+                
+                    <div id='calendar' class="" ></div>
+
                 <!-- /.Left col -->
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                
-</div>
+        </div>     
+
     </section>
 </div>
 <!-- Modal -->
@@ -388,11 +391,22 @@ var myChart = new Chart(cx, {
 <script src='{{asset('fullcalendar/lib/main.js')}}'></script>
 <script src='{{asset('fullcalendar/lib/locales/es.js')}}'></script>
 
+<link href='https://bootswatch.com/4/slate/bootstrap.min.csss' rel='stylesheet' />
+<link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
+
 <script>
 
     document.addEventListener('DOMContentLoaded', function() {
+        rol="{{auth()->user()->roles[0]->name}}";
+        
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
+          aspectRatio: 2,
+          locale: 'es',
+          height: 500,
+          contentHeight: 450,
+          expandRows: true,
+          
         
         headerToolbar:{
             start: 'prev,next today',
@@ -400,23 +414,25 @@ var myChart = new Chart(cx, {
             end:'dayGridMonth,timeGridWeek,timeGridDay',
         },
         
-        locale: 'es',
+        
         dateClick: function(info){
-            limpiarFormulario();
-            $('#title').html(info.dateStr);
+            if((rol == 'Pastor') || (rol == 'Secretaria') ){
+                limpiarFormulario();
+                $('#title').html(info.dateStr);
 
-            $('#fecha').val(info.dateStr);
+                $('#fecha').val(info.dateStr);
 
-            $('#btnAgregar').prop("disabled",false);
-            $('#btnAgregar').prop("hidden",false);
+                $('#btnAgregar').prop("disabled",false);
+                $('#btnAgregar').prop("hidden",false);
 
-            $('#btnModificar').prop("disabled",true);
-            $('#btnModificar').prop("hidden",true);
+                $('#btnModificar').prop("disabled",true);
+                $('#btnModificar').prop("hidden",true);
 
-            $('#btnEliminar').prop("disabled",true);
-            $('#btnEliminar').prop("hidden",true);
+                $('#btnEliminar').prop("disabled",true);
+                $('#btnEliminar').prop("hidden",true);
 
-            $('#calendarModal').modal('toggle');
+                $('#calendarModal').modal('toggle');
+            };
         },
         eventSources: [
             "{{url('/eventos/show')}}",
@@ -425,6 +441,7 @@ var myChart = new Chart(cx, {
         
 
         eventClick: function(info){
+
             $('#title').html('');
             
             mes = (info.event.start.getMonth()+1);
@@ -456,6 +473,33 @@ var myChart = new Chart(cx, {
             minutoend=(minutoend<10)?"0"+minutoend:minutoend;
 
             horarioend= (horaend+":"+minutoend);
+            if((rol == 'Usuario') || (rol == 'Tesorera') ){
+                $('#id').prop("disabled",true);
+                $('#fecha').prop("disabled",true);
+                $('#titulo').prop("disabled",true);
+                $('#hora').prop("disabled",true);
+                $('#fechaend').prop("disabled",true);
+                $('#horaend').prop("disabled",true);
+                $('#descripcion').prop("disabled",true);
+            }
+            if(info.event.extendedProps.iglesia_id == null ){
+                $('#id').prop("disabled",true);
+                $('#fecha').prop("disabled",true);
+                $('#titulo').prop("disabled",true);
+                $('#hora').prop("disabled",true);
+                $('#fechaend').prop("disabled",true);
+                $('#horaend').prop("disabled",true);
+                $('#descripcion').prop("disabled",true);
+            }else{
+                $('#id').prop("disabled",false);
+                $('#fecha').prop("disabled",false);
+                $('#titulo').prop("disabled",false);
+                $('#hora').prop("disabled",false);
+                $('#fechaend').prop("disabled",false);
+                $('#horaend').prop("disabled",false);
+                $('#descripcion').prop("disabled",false);
+            }
+
 
             $('#id').val(info.event.id);
             $('#fecha').val(anio+"-"+mes+"-"+dia);
@@ -469,8 +513,16 @@ var myChart = new Chart(cx, {
             $('#btnAgregar').prop("disabled",true);
             $('#btnAgregar').prop("hidden",true);
 
-            $('#btnModificar').prop("disabled",false);
-            $('#btnModificar').prop("hidden",false);
+            esto = info.event.extendedProps.iglesia_id; 
+            if(info.event.extendedProps.iglesia_id == null ){
+                $('#btnModificar').prop("disabled",true);
+                $('#btnModificar').prop("hidden",true);
+            }else{
+                $('#btnModificar').prop("disabled",false);
+                $('#btnModificar').prop("hidden",false);
+            }
+            
+            
 
             $('#btnEliminar').prop("disabled",false);
             $('#btnEliminar').prop("hidden",false);
@@ -481,7 +533,9 @@ var myChart = new Chart(cx, {
         
        
       });
+      
       calendar.render();
+      
       $('#btnAgregar').click(function(){
         objEvento= recolertarDatos('POST');
         enviarInfo(' ',objEvento);
@@ -492,7 +546,6 @@ var myChart = new Chart(cx, {
         enviarInfo('/'+$('#id').val(),objEvento);
       });
       $('#btnModificar').click(function(){
-          alert('hola');
         objEvento= recolertarDatos('PUT');
         enviarInfo('/'+$('#id').val(),objEvento);
       });
@@ -587,6 +640,21 @@ var myChart = new Chart(cx, {
 
 
     
+    });
+
+    $(document).ready(function(){
+      var public_path = "{{public_path('reportes')}}";
+      fs.stat(public_path, (err, stats) => {
+    if (err) {
+      if (err.code === 'ENOENT') {
+        return cb(null, false);
+      } else { // en caso de otro error
+        return cb(err);
+      }
+    }
+    // devolvemos el resultado de `isFile`.
+    return cb(null, stats.isFile());
+  });
     });
 
   </script>

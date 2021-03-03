@@ -2,33 +2,18 @@
     IMPORT FONTS 
 -------------------------------------------------------------------*/
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
-@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i');
-@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
-@import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
-@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
 
 /*------------------------------------------------------------------ 
     IMPORT FILES 
 -------------------------------------------------------------------*/
 
-@import url(animate.css);
-@import url(font-awesome.min.css);
-@import url(magnific-popup.css);
-@import url(responsiveslides.css);
-@import url(timeline.css);
-@import url(flaticon.css);
+
 
 /*------------------------------------------------------------------ 
     SKELETON
 -------------------------------------------------------------------*/
 
-body {
-	color: #666666;
-	font-size: 15px;
-	font-family: 'Roboto', sans-serif;
-	line-height: 1.80857;
-}
+
 
 * {
 	font-family: 'Roboto', sans-serif;
@@ -154,13 +139,7 @@ blockquote {
 	padding: 30px;
 }
 
-ul,
-li,
-ol {
-	list-style: none;
-	margin: 0px;
-	padding: 0px;
-}
+
 
 button:focus {
 	outline: none;
@@ -355,44 +334,13 @@ a:hover,a:focus {
     padding: 21px 0;
 }
 
-a.join_bt {
-    background: #ff880e;
-    width: 180px;
-    text-align: center;
-    height: 38px;
-    line-height: 38px;
-    border-radius: 75px;
-    color: #fff;
-    font-weight: 300;
-}
-
-a.join_bt:hover,
-a.join_bt:focus {
-	background: #222;
-	color: #fff !important;
-}
 
 .site_information {
     float: left;
     width: 66.66%;
 }
 
-.site_information ul {
-    list-style: none;
-}
 
-.site_information ul li {
-    float: left;
-    width: 33.33%;
-    display: flex;
-    justify-content: center;
-    font-size: 17px;
-    font-weight: 300;
-}
-
-.site_information ul li img {
-    margin-right: 10px;
-}
 
 .logo_section {
     width: 33.33%;
@@ -430,16 +378,6 @@ a.join_bt:focus {
     width: 100%;
 }
 
-.top-header .navbar .navbar-collapse ul li a {
-    text-transform: none;
-    font-size: 17px;
-    padding: 10px 25px;
-    font-weight: 400;
-    overflow: hidden;
-    color: #000;
-    position: relative;
-    z-index: 2;
-}
 
 
 
@@ -458,9 +396,6 @@ a.join_bt:focus {
 	width: 25px;
 }
 
-.top-header .navbar .navbar-collapse ul li {
-	margin: 0 2px;
-}
 
 .top-header.fixed-menu {
 	width: 100%;
@@ -494,18 +429,6 @@ a.join_bt:focus {
     top: 0;
 }
 
-.navbar-toggler {
-    border: 2px solid #fff;
-    border-radius: 0;
-    margin: 15px 0;
-    padding: 8px 8px;
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    transition: all 0.2s linear;
-    z-index: 9;
-    position: relative;
-}
 
 .navbar-toggler span {
 	background: #fff;
