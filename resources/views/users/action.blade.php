@@ -1,6 +1,6 @@
 
    @isset($user->Datos)
-    <a href="{{ route('users.show', ['users', $user->id]) }}">
+    <a href="{{ route('users.show', $user->id) }}">
         <button type="button" class="btn btn-sm btn-secondary "><i class="far fa-eye"></i></button>
     </a>
     @endisset

@@ -116,13 +116,20 @@
                                     });
 
                                 },
-                                error: function (result){
-                                    
-                                        Swal.fire({
-                                            icon: result.responseJSON.icon,
-                                            title: result.responseJSON.title,
-                                            text: result.responseJSON.text,
-                                        });
+                                error: function (error){
+                                    alert('error');
+                                    console.log(error)
+                                        if(error.responseJSON.title){
+                                            Swal.fire({
+                                                icon: error.responseJSON.icon,
+                                                title: error.responseJSON.title,
+                                                text: error.responseJSON.text,
+                                            });
+                                    } else {
+                                        Swal.fire(
+                                          'Ocurrio Un Error',
+                                        );
+                                    }
                                     
                                    
                                 }

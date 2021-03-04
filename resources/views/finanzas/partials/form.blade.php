@@ -20,7 +20,7 @@
             Ofrendas ministerio de Jovenes <sub>(50%) </sub>
         </label>
         <label class="pasivo finanza form-check-label col-sm-6 " hidden>
-            <input   type="checkbox" class="form-check-input " name="categorias[]" id="Niños_check" value="Niños" >
+            <input   type="checkbox" class="form-check-input " name="categorias[]" id="Niños_check" value="Ninos" >
             Ofrenda ministerio de Niños <sub>(50%)</sub>
         </label>
         <label class="pasivo finanza form-check-label col-sm-offset-6 " hidden>
@@ -215,25 +215,25 @@
             </div>
         </li>
         <!-- Ofrenda ministerio de Niños <sub>(50%)</sub>-->
-        <li class="list-group-item Niños" id="" hidden>
+        <li class="list-group-item Niños Ninos " id="" hidden>
             <div class="row">
                 <label class="col-sm-12"><u> Ofrenda ministerio de Niños <sub>(50%)</sub> </u></label>
                 <div class="col-sm-4">
                     <p>Fecha</p>
                     <div class="form-group">
-                        <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->fecha }}"  @endif @endforeach @endisset type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control Niños" name="fecha_Niños">
+                        <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->fecha }}"  @endif @endforeach @endisset type="date" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" class="form-control Niños Ninos" name="fecha_Ninos">
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <p>Monto</p>
                     <div class="form-group">
-                        <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->monto }}"  @endif @endforeach @endisset type="number" class="form-control Niños" name="monto_Niños">
+                        <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->monto }}"  @endif @endforeach @endisset type="number" class="form-control Niños Ninos" name="monto_Ninos">
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <p>Descripción</p>
                     <div class="form-group">
-                        <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->descripcion ?? 'Sin Descripción'}}"  @endif @endforeach @endisset type="text" class="form-control Niños" name="descripcion_Niños">
+                        <input disabled required @isset($categorias) @foreach( $categorias as $categoria => $cate) @if($finanzas->categoria == $categoria) value="{{ $finanzas->descripcion ?? 'Sin Descripción'}}"  @endif @endforeach @endisset type="text" class="form-control Niños Ninos" name="descripcion_Ninos">
                     </div>
                 </div>
             </div>

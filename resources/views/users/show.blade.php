@@ -43,11 +43,21 @@
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h3 class="card-title">Otros Datos</h3>
-                                <div class="col-sm-3 float-left"> <a href="{{route('users.edit', Auth::id() )}} "><button type="button" class="btn btn-block btn-warning btn-sm">Editar</button></a></div>
-                                
+                                @can('admin')
+                                    
+                                <div class="col-sm-3 float-left"> <a href=" {{route('admin.edit', ['users', $user->id]) }} "><button type="button" class="btn btn-block btn-warning btn-sm">Editar</button></a></div>
+                                @endcan
+                                @if($user->id == Auth::id())
                                     <div class="form-group" >
                                         <button type="button" class="btn btn-sm btn-secondary float-right" data-toggle="modal" data-target="#modalPassword">Cambiar contraseña</button>
                                     </div>
+                                @endif
+                                @cannot('admin')
+                                <div class="form-group" >
+                                    <a href="{{route('users.edit', Auth::id() )}} "><button type="button" class="btn btn-block btn-warning btn-sm">Editar</button></a>
+                                    <button type="button" class="btn btn-sm btn-secondary float-right" data-toggle="modal" data-target="#modalPassword">Cambiar contraseña</button>
+                                </div>
+                                @endcannot
                                 
                             </div>
                             <!-- /.card-header -->

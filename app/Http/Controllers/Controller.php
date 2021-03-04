@@ -11,7 +11,7 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    public $categorias = [
+    public  $categorias = [
         "Diezmo_Total" => "Total de diezmos recibidos en la iglesia local",
         "Diezmo_Pastor" => "Diezmo pastor local",
         "Diezmo_Ministros" => "Diezmo otros ministros licenciados",

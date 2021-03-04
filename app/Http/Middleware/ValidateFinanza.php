@@ -20,6 +20,8 @@ class ValidateFinanza
      */
     public function handle($request, Closure $next)
     {
+        
+        
         if(Auth::user()->hasRole('pastor')){
             $iglesia = User::find(Auth::id())->Pertenece->last();
 
@@ -37,9 +39,9 @@ class ValidateFinanza
                 return $next($request);
             }            
         }
-        elseif(Auth::user()->hasRole('admin')){
+        elseif(Auth::user()->hasRole('tesorera')){
             $iglesia = User::find(Auth::id())->Pertenece->last();
-
+            
             $BalanceIni = Balance::WhereHas('iglesia', function($query) use($iglesia){
                 $query->where('iglesia_id', $iglesia->id);
             })->where('inicial','=','1')->get()->last();

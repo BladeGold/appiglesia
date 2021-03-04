@@ -25,7 +25,7 @@ class FinanzaController extends Controller
     
     public function __construct()
     {
-        $this->middleware('ValidateFinanza')->except('inicial','store');
+        $this->middleware('ValidateFinanza')->except('inicial','store','index');
         
     }
 
@@ -62,10 +62,10 @@ class FinanzaController extends Controller
         foreach ($request->get('categorias') as  $categoria) {
             
             
+            echo $categoria;
             if(empty($request->get('descripcion_'.$categoria))==false){
                 
                 $finanzas= $iglesia->Finanzas()->create([
-            
                     "fecha" => $request->get("fecha_".$categoria),
                     "monto" => $request->get("monto_".$categoria),
                     "descripcion" => $request->get("descripcion_".$categoria),
@@ -147,7 +147,7 @@ class FinanzaController extends Controller
 
     
     public function update(Request $request, $id)
-    {
+    {  
         $iglesia= $this->getUserIglesia();
         $categoria= $request->categoria;
         $finanzas = Finanza::where('id','=', $id);

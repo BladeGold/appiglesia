@@ -98,13 +98,23 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {   if(Auth::user()->hasRole('admin')){
+        $user = User::findOrFail($id);
+        $user_date = UserDate::findOrFail($id);
+        $rol= $user->roles->flatten()->pluck('name')->last();
+        
+        
+        return view('users.show', compact('user','user_date','rol'));
+    }else{
         $user = User::findOrFail(Auth::user()->id);
         $user_date = UserDate::findOrFail(Auth::user()->id);
         $rol= auth()->user()->roles->flatten()->pluck('name')->last();
         
         
         return view('users.show', compact('user','user_date','rol'));
+
+    }
+
     }
 
     /**

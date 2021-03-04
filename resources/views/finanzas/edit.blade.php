@@ -14,12 +14,12 @@
                                <p> Editando Registro de tipo {{$finanzas->tipo}} en la categoria {{$categorias[$finanzas->categoria]}}  </p>
                             </div>
                             <div class="card-body box-profile">
-                                <form method="POST" action="{{ route('finanzas.update', $iglesia->id) }}">
+                                <form method="POST" action="{{ route('finanzas.update', $finanzas->id) }}">
                                     @method('PUT')
                                     @csrf
 
                                         <input type="hidden" value="{{$finanzas->categoria}}" name="categoria">
-                                    
+
                                         @include('finanzas.partials.form')                                  
 
                                 </form>
@@ -39,9 +39,11 @@
     <script>
         $('document').ready(function(){
             var categoria = '{{$finanzas->categoria}}'
-
-            $('.'+categoria).removeAttr('hidden');
-            $('.'+categoria).removeAttr('disabled');
+            console.log(`.${categoria}`);
+            
+            $(`.${categoria}`).removeAttr('hidden');
+            $(`.${categoria}`).removeAttr('disabled');
+            $(`.${categoria}`).prop('disabled',false);
             $('#boton').removeAttr('hidden');
 
         });
