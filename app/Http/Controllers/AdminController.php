@@ -67,7 +67,41 @@ class AdminController extends Controller
                     })->get()->last();
 
                 $miembros=Iglesia::findOrFail($id)->Miembros;
-    
+                /* $result = [];
+                $ruta= public_path('reportes\Paseo');
+                   
+                if($dirs = \File::directories(public_path('reportes/'))){
+                    foreach($dirs as $dir){
+                       
+                        if($dir == $ruta){
+                           //actually string: /home/mylinuxiser/myproject/public"
+                            $files = \File::files($dir);
+                            foreach($files as $reporte){
+                             //actually object SplFileInfo
+                            //object(Symfony\Component\Finder\SplFileInfo)#628 (4) {
+                            //["relativePath":"Symfony\Component\Finder\SplFileInfo":private]=>
+                            //string(0) ""
+                            //["relativePathname":"Symfony\Component\Finder\SplFileInfo":private]=>
+                            //string(14) "text1_logo.png"
+                            //["pathName":"SplFileInfo":private]=>
+                            //string(82) "/home/mylinuxiser/myproject/public/img/text1_logo.png"
+                            //["fileName":"SplFileInfo":private]=>
+                            //string(14) "text1_logo.png"
+                            //}
+                    
+                            if(\str_ends_with($reporte, ['.pdf'])){
+                                $result[] = $reporte->getRelativePathname(); //prefix your public folder here if you want
+                            }
+                            }
+                        }else{
+                            dd('aca1');
+                        }
+                    
+                    
+                    }
+                }
+               */
+              
 
             return view('iglesias.show', compact('iglesia','pastor','miembros'));
             break;

@@ -77,8 +77,10 @@ class IglesiaController extends Controller
                  })->get()->last();
 
         $miembros=Iglesia::findOrFail($id)->Miembros;
-        
-        
+
+       
+
+           
 
       return view('iglesias.show', compact('iglesia','pastor','miembros'));
     }
