@@ -78,7 +78,7 @@
                         $.post(url,data, function(result){
                             row.fadeOut();
                             Swal.fire({
-                                title: "¡El iglesia "+result.name+" ha sido eliminado con exito!",
+                                title: "¡La iglesia "+result.name+" ha sido eliminado con exito!",
                                 icon: "success",
                                 button: true,
                            })

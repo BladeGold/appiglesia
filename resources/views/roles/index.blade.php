@@ -64,7 +64,7 @@
                 var row= $(this).parents('tr');
                 var id= row.data('id');
                 var form= $('#form-delete');
-                var url= form.attr('action').replace(':IGLESIA-ID', id);
+                var url= form.attr('action').replace(':ROLE-ID', id);
                 var data= form.serialize();
 
                Swal.fire({
@@ -78,7 +78,7 @@
                         $.post(url,data, function(result){
                             row.fadeOut();
                             Swal.fire({
-                                title: "¡El iglesia "+result.name+" ha sido eliminado con exito!",
+                                title: "¡El rol "+result.name+" ha sido eliminado con exito!",
                                 icon: "success",
                                 button: true,
                            })
