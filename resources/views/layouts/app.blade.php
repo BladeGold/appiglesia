@@ -362,7 +362,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              
+              <a href="{{route('ayuda')}}" target="_blank" class="btn btn-info">Ayuda</a>
               
             </ol>
           </div>

@@ -16,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 })->name('index');
-
+Route::get('/ayuda', function(){
+    $ruta=public_path();
+         $nombreArchivo= "Manual_Usuario.pdf";
+        header("Content-type: application/pdf");
+      
+        readfile($ruta."/".$nombreArchivo);
+})->name('ayuda');
 Auth::routes();
 
 
