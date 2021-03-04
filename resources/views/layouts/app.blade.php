@@ -101,7 +101,7 @@
                                </li>
                                <li class="p-1">
                                </li>
-                               <li class="nav-item ">
+                               <li class="nav-item " hidden>
                                    <a href="#" class="nav-link  text-white border elevation-2 "  style="border-radius: 10px;">Contacto</a>
                                </li>
                           @endguest

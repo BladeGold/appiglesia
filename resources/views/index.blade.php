@@ -100,10 +100,10 @@ aside ul li{
         </div>
     </div>
     <!-- end section -->
-    
     <div class="section">
         <hr color="gray" size="10" width="88%">
     </div>
+    <div hidden>
 
     <!-- section -->
     <div class="section layout_padding">
@@ -175,7 +175,7 @@ aside ul li{
     <!-- end section -->
     
   
-    
+</div>
 
     
 
