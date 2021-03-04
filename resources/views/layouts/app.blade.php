@@ -125,7 +125,7 @@
                    @endauth
                        @guest
                            <li class="nav-item">
-                               <a class="nav-link  text-white border elevation-2" id="login" style="border-radius: 10px" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
+                               <a class="nav-link  text-white border elevation-2" id="login" style="width: 115px; border-radius: 10px" href="{{ route('login') }}">Iniciar sesión</a>
                            </li>
                            <li class="p-1">
 
@@ -232,7 +232,7 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('user')
+                        @can('diezmos.create')
                         <li class="nav-item has-treeviem"> 
                             <!--  -->                           
                             <a  href="" class="nav-link ">
@@ -248,7 +248,7 @@
                                 <li class="nav-item">
                                   <a href="#" class="nav-link"    data-toggle="modal" data-target="#registra">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Registar Diezmo</p>
+                                    <p>Registrar Diezmo</p>
                                   </a>
                                 </li>
                                
