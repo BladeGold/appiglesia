@@ -230,6 +230,12 @@ class PermissionsTableSeeder extends Seeder
             'description'   =>  'Eliminar ',
         ]);
 
+        Permission::create([
+            'name'          =>  'Crear un nuevo miembro',
+            'slug'          =>  'users.createMiembro',
+            'description'   =>  'Crea un nuevo miembro dentro de la iglesia ',
+        ]);
+
 
         //Creando Rol Administrador
         
